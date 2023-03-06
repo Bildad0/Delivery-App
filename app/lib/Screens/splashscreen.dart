@@ -18,7 +18,9 @@ class _SplashScreenState extends State<SplashScreen> {
     return const Scaffold(
       body: Center(
         child: Text("Delivery App"),
+        Navigator.pushNamed(context, '/login');
       ),
+  
     );
   }
 }

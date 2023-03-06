@@ -17,6 +17,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const SplashScreen(),
+        routes: {
+        '/login': (context) => LoginScreen(), // Add LoginScreen to routes
+        '/cart': (context) => CartScreen(), // Add CartScreen to routes
+      },
     );
   }
 }
