@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'Screens/splashscreen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -7,14 +9,14 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Delivery App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+<<<<<<< HEAD
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -67,6 +69,9 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+=======
+      home: const SplashScreen(),
+>>>>>>> 56c1d6c6a081686da0d4253723e39d615b7dfdf3
     );
   }
 }
