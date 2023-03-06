@@ -1,14 +1,19 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
+
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: const Text('Home'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(16),
             child: Text(
               'Featured',
@@ -24,16 +29,19 @@ class HomeScreen extends StatelessWidget {
               options: CarouselOptions(
                 autoPlay: true,
                 enlargeCenterPage: true,
-                aspectRatio: 16/9,
+                aspectRatio: 16 / 9,
               ),
               items: [
-                Image.network('https://example.com/image1.jpg', fit: BoxFit.cover),
-                Image.network('https://example.com/image2.jpg', fit: BoxFit.cover),
-                Image.network('https://example.com/image3.jpg', fit: BoxFit.cover),
+                Image.network('https://example.com/image1.jpg',
+                    fit: BoxFit.cover),
+                Image.network('https://example.com/image2.jpg',
+                    fit: BoxFit.cover),
+                Image.network('https://example.com/image3.jpg',
+                    fit: BoxFit.cover),
               ],
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(16),
             child: Text(
               'Categories',
@@ -47,22 +55,22 @@ class HomeScreen extends StatelessWidget {
             child: ListView(
               children: [
                 ListTile(
-                  title: Text('Category 1'),
-                  leading: Icon(Icons.category),
+                  title: const Text('Category 1'),
+                  leading: const Icon(Icons.category),
                   onTap: () {
                     // TODO: Navigate to category screen
                   },
                 ),
                 ListTile(
-                  title: Text('Category 2'),
-                  leading: Icon(Icons.category),
+                  title: const Text('Category 2'),
+                  leading: const Icon(Icons.category),
                   onTap: () {
                     // TODO: Navigate to category screen
                   },
                 ),
                 ListTile(
-                  title: Text('Category 3'),
-                  leading: Icon(Icons.category),
+                  title: const Text('Category 3'),
+                  leading: const Icon(Icons.category),
                   onTap: () {
                     // TODO: Navigate to category screen
                   },
@@ -76,4 +84,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-

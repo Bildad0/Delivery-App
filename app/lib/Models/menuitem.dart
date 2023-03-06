@@ -2,11 +2,11 @@ class MenuItem {
   final String name;
   final String description;
   final double price;
-  final String imageUrl;
-  MenuItem({
+  final String image;
+  const MenuItem({
     required this.name,
     required this.description,
     required this.price,
-    required this.imageUrl,
+    required this.image,
   });
 }

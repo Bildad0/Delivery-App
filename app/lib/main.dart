@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'Screens/cart.dart';
+import 'Screens/loginorsignup.dart';
 import 'Screens/splashscreen.dart';
 
 void main() {
@@ -14,12 +16,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Delivery App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red)
+            .copyWith(background: Colors.blueAccent, onPrimary: Colors.red),
       ),
-      home: const SplashScreen(),
-        routes: {
-        '/login': (context) => LoginScreen(), // Add LoginScreen to routes
-        '/cart': (context) => CartScreen(), // Add CartScreen to routes
+      initialRoute: "/",
+      routes: {
+        '/': (context) => const SplashScreen(),
+        LoginScreen.routeName: (context) => const LoginScreen(),
+        CartScreen.routeName: (context) => const CartScreen(),
       },
     );
   }

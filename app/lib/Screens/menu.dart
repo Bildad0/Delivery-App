@@ -1,47 +1,24 @@
+import 'package:flutter/material.dart';
+
+import '../Models/menuitem.dart';
+import '../Resources/dummydatat.dart';
+
 class MenuScreen extends StatelessWidget {
-  final List<MenuItem> menuItems = [
-    MenuItem(
-      name: 'Cheeseburger',
-      description: 'A classic cheeseburger with all the fixings',
-      price: 9.99,
-      image: 'assets/images/cheeseburger.jpg',
-    ),
-    MenuItem(
-      name: 'Pizza',
-      description: 'A delicious pizza with your choice of toppings',
-      price: 12.99,
-      image: 'assets/images/pizza.jpg',
-    ),
-    MenuItem(
-      name: 'Fried Chicken',
-      description: 'Crispy fried chicken with your choice of sides',
-      price: 8.99,
-      image: 'assets/images/fried_chicken.jpg',
-    ),
-    MenuItem(
-      name: 'Taco Salad',
-      description: 'A healthy and delicious taco salad',
-      price: 7.99,
-      image: 'assets/images/taco_salad.jpg',
-    ),
-    MenuItem(
-      name: 'Fish and Chips',
-      description: 'Fresh fish served with crispy chips',
-      price: 10.99,
-      image: 'assets/images/fish_and_chips.jpg',
-    ),
-  ];
+  final List<MenuItem> menuItems = DUMMY_MENU_ITEMS;
+
+  const MenuScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Menu'),
+        elevation: 0,
+        title: const Text('Menu'),
       ),
       body: GridView.builder(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         itemCount: menuItems.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 1,
           mainAxisSpacing: 16,
@@ -67,26 +44,26 @@ class MenuScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   item.name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Text(
                   item.description,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.grey,
                     fontSize: 12,
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   '\$${item.price}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
@@ -98,18 +75,4 @@ class MenuScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-class MenuItem {
-  final String name;
-  final String description;
-  final double price;
-  final String image;
-
-  MenuItem({
-    required this.name,
-    required this.description,
-    required this.price,
-    required this.image,
-  });
 }

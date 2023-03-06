@@ -1,28 +1,16 @@
 import 'package:flutter/material.dart';
-
-
-class CartItem {
-  final String name;
-  final double price;
-  int quantity;
-
-  CartItem({
-    required this.name,
-    required this.price,
-    this.quantity = 1,
-  });
-}
-
+import 'package:provider/provider.dart';
+import '../Models/cartitem.dart';
 
 class Cart extends ChangeNotifier {
-  List<CartItem> _items = [];
+  final List<CartItem> _items = [];
 
   List<CartItem> get items => _items;
 
   int get itemCount => _items.length;
 
-  double get totalPrice =>
-      _items.fold(0, (total, current) => total + current.price * current.quantity);
+  double get totalPrice => _items.fold(
+      0, (total, current) => total + current.price * current.quantity);
 
   void add(CartItem item) {
     int index = _items.indexWhere((i) => i.name == item.name);
@@ -45,14 +33,16 @@ class Cart extends ChangeNotifier {
   }
 }
 
-
 class CartScreen extends StatelessWidget {
+  const CartScreen({super.key});
+  static const routeName = "/cart";
+
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cart'),
+        title: const Text('Cart'),
       ),
       body: ListView.builder(
         itemCount: cart.itemCount,
@@ -62,15 +52,15 @@ class CartScreen extends StatelessWidget {
             title: Text(item.name),
             subtitle: Text('\$${item.price} x ${item.quantity}'),
             trailing: IconButton(
-              icon: Icon(Icons.delete),
+              icon: const Icon(Icons.delete),
               onPressed: () => cart.remove(item),
             ),
           );
         },
       ),
       bottomNavigationBar: Container(
-        padding: EdgeInsets.all(16),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.all(16),
+        decoration: const BoxDecoration(
           color: Colors.white,
           boxShadow: [
             BoxShadow(
@@ -85,13 +75,13 @@ class CartScreen extends StatelessWidget {
           children: [
             Text(
               'Total: \$${cart.totalPrice}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
             ElevatedButton(
-              child: Text('Checkout'),
+              child: const Text('Checkout'),
               onPressed: () {
                 // TODO: Implement checkout logic
               },
