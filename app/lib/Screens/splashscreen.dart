@@ -16,79 +16,97 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Widget buildCarouselPages(
-    ImageProvider image,
+    AssetImage image,
     String title,
     String description,
   ) {
-    return Container(
-      margin: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        image: DecorationImage(image: image, fit: BoxFit.cover),
-      ),
-      child: Column(
-        children: [
-          Text(
-            title,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Container(
+          height: 120,
+          width: 120,
+          padding: const EdgeInsets.all(5),
+          margin: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(10.0),
+            image: DecorationImage(image: image, scale: 3),
           ),
-          Text(
-            description,
-            style: const TextStyle(
-              color: Colors.grey,
-              fontStyle: FontStyle.italic,
+        ),
+        Column(
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 28,
+              ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: (() => {
-                  Navigator.of(context)
-                      .pushReplacementNamed(LoginScreen.routeName)
-                }),
-            child: const Text(
-              'Get Stated',
-              style: TextStyle(color: Colors.white),
+            const SizedBox(
+              height: 10,
             ),
-          ),
-        ],
-      ),
+            Text(
+              description,
+              style: const TextStyle(
+                color: Colors.grey,
+                fontStyle: FontStyle.italic,
+                fontSize: 15,
+              ),
+            ),
+            ElevatedButton(
+              onPressed: (() => {
+                    Navigator.of(context)
+                        .pushReplacementNamed(LoginScreen.routeName)
+                  }),
+              child: const Text(
+                'Get Stated',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [
-          CarouselSlider(
-            items: [
-              buildCarouselPages(
-                const NetworkImage(
-                    'https://www.flaticon.com/free-icons/map'), //TODO: work on Image loader for both network and asset images.
-                "Discover restaurants near you",
-                "The best restaurants in the world are just next to you",
-              ),
-              buildCarouselPages(
-                const NetworkImage(
-                    'https://www.flaticon.com/free-icons/map'), //TODO: add more images
-                "A collection of different cuisines",
-                "We have variety of cuisines in our menu you can't miss what you like",
-              ),
-              buildCarouselPages(
-                const NetworkImage(
-                    'https://www.flaticon.com/free-icons/map'), //TODO: add more images
-                "Delivered Quickly at your place",
-                "Our professional riders will get you your meal on time.",
-              ),
-            ],
-            options: CarouselOptions(
-              autoPlay: true,
-              enableInfiniteScroll: true,
-              enlargeCenterPage: true,
-              autoPlayAnimationDuration: const Duration(milliseconds: 500),
+        body: ListView(
+      children: [
+        CarouselSlider(
+          items: [
+            buildCarouselPages(
+              const AssetImage('assets/Images/map.png'),
+              "Discover restaurants near you",
+              "The best restaurants in the world are just next to you",
             ),
-          )
-        ],
-      ),
-    );
+            buildCarouselPages(
+              const AssetImage('assets/Images/pizza.png'),
+              "A collection of different cuisines",
+              "We have variety of cuisines in our menu you can't miss what you like",
+            ),
+            buildCarouselPages(
+              const AssetImage('assets/Images/deliverybike.png'),
+              "Delivered Quickly at your place",
+              "Our professional riders will get you your meal on time.",
+            ),
+          ],
+          options: CarouselOptions(
+            pauseAutoPlayOnManualNavigate: true,
+            pauseAutoPlayInFiniteScroll: true,
+            autoPlay: true,
+            height: 700, //TODO: get the device hieght - 20 px
+            enableInfiniteScroll: true,
+            enlargeCenterPage: true,
+            initialPage: 1,
+            padEnds: true,
+            autoPlayAnimationDuration: const Duration(milliseconds: 500),
+          ),
+        )
+      ],
+    ));
   }
 }
