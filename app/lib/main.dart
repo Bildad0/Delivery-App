@@ -1,3 +1,4 @@
+import 'Screens/meallist.dart';
 import 'package:flutter/material.dart';
 import 'Screens/cart.dart';
 import 'Screens/loginorsignup.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       routes: {
         '/': (context) => const SplashScreen(),
+        MealListScreen.routeName: (context) => const MealListScreen(),
         HomeScreen.routeName: (context) => const HomeScreen(),
         LoginScreen.routeName: (context) => const LoginScreen(),
         CartScreen.routeName: (context) => const CartScreen(),

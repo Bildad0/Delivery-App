@@ -1,23 +1,24 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../Models/foodcategories.dart';
 import '../Resources/dummydatat.dart';
+import '../Widgets/main_drawer.dart';
+import 'meallist.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   static const routeName = '/home';
 
-  Widget buildingCtegoryListTile(String title) {
+  Widget buildingCtegoryListTile(context, String title) {
     return ListTile(
       title: Text(title),
       leading: const Icon(Icons.category),
       onTap: () {
-        // TODO: Navigate to category screen
+        Navigator.of(context).pushNamed(MealListScreen.routeName);
       },
     );
   }
@@ -31,6 +32,7 @@ class HomeScreen extends StatelessWidget {
         foregroundColor: Colors.white,
         title: const Text('Home'),
       ),
+      drawer: const MainDrawer(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -75,7 +77,7 @@ class HomeScreen extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               itemBuilder: (ctx, index) {
-                return buildingCtegoryListTile(_categories[index].title);
+                return buildingCtegoryListTile(ctx, _categories[index].title);
               },
               itemCount: _categories.length,
             ),
