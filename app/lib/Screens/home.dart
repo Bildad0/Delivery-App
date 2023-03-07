@@ -1,13 +1,34 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+import '../Models/foodcategories.dart';
+import '../Resources/dummydatat.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
+  static const routeName = '/home';
+
+  Widget buildingCtegoryListTile(String title) {
+    return ListTile(
+      title: Text(title),
+      leading: const Icon(Icons.category),
+      onTap: () {
+        // TODO: Navigate to category screen
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    const List<category> _categories = DUMMY_CATEGORIES;
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        foregroundColor: Colors.white,
         title: const Text('Home'),
       ),
       body: Column(
@@ -52,31 +73,11 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: ListView(
-              children: [
-                ListTile(
-                  title: const Text('Category 1'),
-                  leading: const Icon(Icons.category),
-                  onTap: () {
-                    // TODO: Navigate to category screen
-                  },
-                ),
-                ListTile(
-                  title: const Text('Category 2'),
-                  leading: const Icon(Icons.category),
-                  onTap: () {
-                    // TODO: Navigate to category screen
-                  },
-                ),
-                ListTile(
-                  title: const Text('Category 3'),
-                  leading: const Icon(Icons.category),
-                  onTap: () {
-                    // TODO: Navigate to category screen
-                  },
-                ),
-                // ...
-              ],
+            child: ListView.builder(
+              itemBuilder: (ctx, index) {
+                return buildingCtegoryListTile(_categories[index].title);
+              },
+              itemCount: _categories.length,
             ),
           ),
         ],

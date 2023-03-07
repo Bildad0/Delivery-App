@@ -13,4 +13,8 @@ class Order {
     required this.totalCost,
     required this.deliveryAddress,
   });
+
+  get orderNumber => null;
+
+  get totalPrice => null;
 }

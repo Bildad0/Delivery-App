@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'home.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -46,7 +48,8 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
-                  // Handle login logic here
+                  Navigator.of(context)
+                      .pushReplacementNamed(HomeScreen.routeName);
                 },
                 child: const Text("Login"),
               ),

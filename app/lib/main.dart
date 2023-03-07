@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'Screens/cart.dart';
 import 'Screens/loginorsignup.dart';
 import 'Screens/splashscreen.dart';
+import 'Screens/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       routes: {
         '/': (context) => const SplashScreen(),
+        HomeScreen.routeName: (context) => const HomeScreen(),
         LoginScreen.routeName: (context) => const LoginScreen(),
         CartScreen.routeName: (context) => const CartScreen(),
       },

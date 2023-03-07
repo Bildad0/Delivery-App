@@ -8,4 +8,6 @@ class CartItem {
     required this.price,
     this.quantity = 1,
   });
+
+  get product => null;
 }

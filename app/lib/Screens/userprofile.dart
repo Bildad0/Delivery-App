@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
+import '../Models/user.dart';
 
 class ProfileScreen extends StatelessWidget {
   @override
@@ -9,7 +9,7 @@ class ProfileScreen extends StatelessWidget {
     final user = Provider.of<User>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
+        title: const Text('Profile'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -18,16 +18,16 @@ class ProfileScreen extends StatelessWidget {
           children: [
             Text(
               'Name: ${user.name}',
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 16),
             Text(
               'Email: ${user.email}',
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              child: Text('Sign Out'),
+              child: const Text('Sign Out'),
               onPressed: () {
                 // TODO: Implement sign out logic
               },
