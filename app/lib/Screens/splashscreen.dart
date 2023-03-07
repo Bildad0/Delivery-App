@@ -37,28 +37,35 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
         Column(
           children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 28,
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              description,
-              style: const TextStyle(
-                color: Colors.grey,
-                fontStyle: FontStyle.italic,
-                fontSize: 15,
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 28,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    description,
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontStyle: FontStyle.italic,
+                      fontSize: 15,
+                    ),
+                  ),
+                ],
               ),
             ),
             ElevatedButton(
               onPressed: (() => {
                     Navigator.of(context)
-                        .pushReplacementNamed(LoginScreen.routeName)
+                        .pushReplacementNamed(SignUpScreen.routeName)
                   }),
               child: const Text(
                 'Get Stated',

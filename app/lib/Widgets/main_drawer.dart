@@ -1,3 +1,4 @@
+import '../Resources/types.dart';
 import '/Screens/home.dart';
 import 'package:flutter/material.dart';
 
@@ -6,17 +7,25 @@ class MainDrawer extends StatelessWidget {
 
   Widget buildTop(context, IconData icon, String title) {
     return Container(
-      color: Colors.red,
-      height: 120,
+      color: headerBackGround,
+      height: 110,
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       alignment: Alignment.bottomLeft,
       child: Row(children: [
-        Icon(icon),
+        Icon(
+          icon,
+          color: headerTextColor,
+        ),
         const SizedBox(
           width: 10,
         ),
-        Text(title),
+        Text(
+          title,
+          style: const TextStyle(
+            color: headerTextColor,
+          ),
+        ),
       ]),
     );
   }
@@ -29,9 +38,21 @@ class MainDrawer extends StatelessWidget {
     String route,
   ) {
     return ListTile(
-      leading: Icon(icon),
-      title: Text(title),
-      subtitle: Text(description),
+      leading: Icon(
+        icon,
+        color: headerTextColor,
+      ),
+      title: Text(
+        title,
+        style: const TextStyle(color: headerTextColor),
+      ),
+      subtitle: Text(
+        description,
+        style: TextStyle(
+          color: headerTextColor.withOpacity(0.6),
+          fontStyle: FontStyle.italic,
+        ),
+      ),
       onTap: () {
         Navigator.of(context).push(route as Route);
       },
@@ -41,7 +62,6 @@ class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      width: 250,
       elevation: 0,
       child: Column(
         children: [

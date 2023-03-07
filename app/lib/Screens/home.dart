@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../Models/foodcategories.dart';
 import '../Resources/dummydatat.dart';
+import '../Resources/types.dart';
 import '../Widgets/main_drawer.dart';
 import 'meallist.dart';
 
@@ -28,8 +29,9 @@ class HomeScreen extends StatelessWidget {
     const List<category> _categories = DUMMY_CATEGORIES;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: headerBackGround,
         elevation: 0,
-        foregroundColor: Colors.white,
+        foregroundColor: headerTextColor,
         title: const Text('Home'),
       ),
       drawer: const MainDrawer(),
@@ -55,12 +57,15 @@ class HomeScreen extends StatelessWidget {
                 aspectRatio: 16 / 9,
               ),
               items: [
-                Image.network('https://example.com/image1.jpg',
-                    fit: BoxFit.cover),
-                Image.network('https://example.com/image2.jpg',
-                    fit: BoxFit.cover),
-                Image.network('https://example.com/image3.jpg',
-                    fit: BoxFit.cover),
+                Image.network(
+                    'https://anestisxasapotaverna.gr/wp-content/uploads/2021/12/ARTICLE-1.jpg',
+                    fit: BoxFit.fill),
+                Image.network(
+                    'https://anestisxasapotaverna.gr/wp-content/uploads/2021/12/ARTICLE-3-1536x1024.jpg',
+                    fit: BoxFit.fill),
+                Image.network(
+                    'https://anestisxasapotaverna.gr/wp-content/uploads/2021/12/ARTICLE-2.jpg',
+                    fit: BoxFit.fill),
               ],
             ),
           ),
