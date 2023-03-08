@@ -43,7 +43,7 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.red,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         title: const Text('Cart'),
       ),
       body: ListView.builder(

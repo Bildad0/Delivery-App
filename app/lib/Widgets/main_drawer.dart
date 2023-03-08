@@ -1,5 +1,6 @@
 import 'package:app/Resources/dummydatat.dart';
 
+import '../Models/menuitem.dart';
 import '../Models/user.dart';
 import '../Resources/types.dart';
 import '/Screens/home.dart';
@@ -9,7 +10,8 @@ class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
 
   Widget buildTop(context, IconData icon, String title) {
-    final List<User> user = DUMMY_USER;
+    List<User> user = DUMMY_USER;
+
 //!TODO: get the current user then display the name where there is String Bildad.
 
     return Container(

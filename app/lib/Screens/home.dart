@@ -14,12 +14,18 @@ class HomeScreen extends StatelessWidget {
 
   static const routeName = '/home';
 
-  Widget buildingCtegoryListTile(context, String title) {
+  Widget buildingCtegoryListTile(context, String title, String id) {
     return ListTile(
       title: Text(title),
       leading: const Icon(Icons.category),
       onTap: () {
-        Navigator.of(context).pushNamed(MenuScreen.routeName);
+        Navigator.of(context).pushNamed(
+          MenuScreen.routeName,
+          arguments: {
+            'id': id,
+            'title': title,
+          },
+        );
       },
     );
   }
@@ -89,7 +95,8 @@ class HomeScreen extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               itemBuilder: (ctx, index) {
-                return buildingCtegoryListTile(ctx, _categories[index].title);
+                return buildingCtegoryListTile(
+                    ctx, _categories[index].title, _categories[index].id);
               },
               itemCount: _categories.length,
             ),

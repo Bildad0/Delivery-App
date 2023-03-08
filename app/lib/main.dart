@@ -1,3 +1,5 @@
+import 'Models/menuitem.dart';
+import 'Resources/dummydatat.dart';
 import 'Screens/menu.dart';
 import 'package:flutter/material.dart';
 import 'Screens/cart.dart';
@@ -14,6 +16,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<MenuItem> menu = DUMMY_MENU_ITEMS;
     return MaterialApp(
       title: 'Delivery App',
       theme: ThemeData(
@@ -27,7 +30,7 @@ class MyApp extends StatelessWidget {
         HomeScreen.routeName: (context) => const HomeScreen(),
         LoginScreen.routeName: (context) => const LoginScreen(),
         CartScreen.routeName: (context) => const CartScreen(),
-        MenuScreen.routeName: (context) => const MenuScreen(),
+        MenuScreen.routeName: (context) => MenuScreen(menu: menu),
       },
     );
   }
