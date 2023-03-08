@@ -19,7 +19,7 @@ const DUMMY_MENU_ITEMS = [
   MenuItem(
     name: 'Pizza',
     description: 'A delicious pizza with your choice of toppings',
-    price: 12.99,
+    price: 450,
     image: 'assets/Images/pizza.jpg',
     category: [
       "1",
@@ -29,7 +29,7 @@ const DUMMY_MENU_ITEMS = [
   MenuItem(
     name: 'Fried Chicken',
     description: 'Crispy fried chicken with your choice of sides',
-    price: 8.99,
+    price: 300,
     image: 'assets/Images/fried_chicken.jpeg',
     category: [
       "3",
@@ -39,7 +39,7 @@ const DUMMY_MENU_ITEMS = [
   MenuItem(
     name: 'Taco Salad',
     description: 'A healthy and delicious taco salad',
-    price: 7.99,
+    price: 750,
     image: 'assets/Images/taco_salad.jpeg',
     category: [
       "2",
@@ -49,7 +49,7 @@ const DUMMY_MENU_ITEMS = [
   MenuItem(
     name: 'Fish and Chips',
     description: 'Fresh fish served with crispy chips',
-    price: 10.99,
+    price: 1100,
     image: 'assets/Images/fish_and_chips.jpeg',
     category: [
       "5",
@@ -108,7 +108,7 @@ const DUMMY_USER = [
   ),
 ];
 
-//!connect user Address with the zip code because its the unique component.
+//!connect user Address with the zip code because it's the unique component.
 
 const DUMMY_ADDRESSES = [
   Address(

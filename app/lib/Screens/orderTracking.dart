@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class OrderTrackingScreen extends StatefulWidget {
+  const OrderTrackingScreen({super.key});
+
   @override
   _OrderTrackingScreenState createState() => _OrderTrackingScreenState();
 }
@@ -11,7 +13,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Order Tracking'),
+        title: const Text('Order Tracking'),
       ),
       body: Column(
         children: [
@@ -24,45 +26,45 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
             ),
           ),
           Container(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Order Status:',
                   style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 8.0),
-                Text(
+                const SizedBox(height: 8.0),
+                const Text(
                   'Preparing',
                   style: TextStyle(fontSize: 16.0),
                 ),
-                SizedBox(height: 16.0),
-                Text(
+                const SizedBox(height: 16.0),
+                const Text(
                   'Order Items:',
                   style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 8.0),
-                Text(
+                const SizedBox(height: 8.0),
+                const Text(
                   '1. Cheeseburger - Preparing',
                   style: TextStyle(fontSize: 16.0),
                 ),
-                SizedBox(height: 8.0),
-                Text(
+                const SizedBox(height: 8.0),
+                const Text(
                   '2. French Fries - Preparing',
                   style: TextStyle(fontSize: 16.0),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextButton(
                       onPressed: () {},
-                      child: Text('Contact Driver'),
+                      child: const Text('Contact Driver'),
                     ),
                     TextButton(
                       onPressed: () {},
-                      child: Text('Contact Restaurant'),
+                      child: const Text('Contact Restaurant'),
                     ),
                   ],
                 ),

@@ -32,7 +32,14 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: headerBackGround,
         elevation: 0,
         foregroundColor: headerTextColor,
-        title: const Text('Home'),
+        title: const Text(
+            'Good Morning!'), //!TODO: get the current time and greet the user depending on the time.
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {},
+          )
+        ],
       ),
       drawer: const MainDrawer(),
       body: Column(
