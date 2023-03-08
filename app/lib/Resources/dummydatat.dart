@@ -1,20 +1,20 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
 import 'package:app/Models/address.dart';
 import 'package:flutter/material.dart';
 
 import '../Models/foodcategories.dart';
 import '../Models/menuitem.dart';
+import '../Models/order.dart';
 import '../Models/user.dart';
 
-// ignore: constant_identifier_names
 const DUMMY_MENU_ITEMS = [
   MenuItem(
     name: 'Cheeseburger',
     description: 'A classic cheeseburger with all the fixings',
     price: 9.99,
     image: 'assets/Images/cheeseburger.jpg',
-    category: [],
+    category: ["0"],
   ),
   MenuItem(
     name: 'Pizza',
@@ -22,6 +22,7 @@ const DUMMY_MENU_ITEMS = [
     price: 450,
     image: 'assets/Images/pizza.jpg',
     category: [
+      "0",
       "1",
       "3",
     ],
@@ -34,6 +35,7 @@ const DUMMY_MENU_ITEMS = [
     category: [
       "3",
       "5",
+      "0",
     ],
   ),
   MenuItem(
@@ -43,6 +45,7 @@ const DUMMY_MENU_ITEMS = [
     image: 'assets/Images/taco_salad.jpeg',
     category: [
       "2",
+      "0",
       "4",
     ],
   ),
@@ -55,11 +58,13 @@ const DUMMY_MENU_ITEMS = [
       "5",
       "6",
       "1",
+      "0",
     ],
   ),
 ];
 
 const DUMMY_CATEGORIES = [
+  category(id: '0', title: 'All', color: Colors.blue, imagUrl: ''),
   category(
     id: '1',
     title: 'Snacks',
@@ -116,5 +121,74 @@ const DUMMY_ADDRESSES = [
     city: "Nairobi",
     state: "Kenya",
     zipCode: "123",
+  ),
+];
+
+final DUMMY_ORDER = [
+  Order(
+    user: DUMMY_USER[0],
+    deliveryAddress: DUMMY_ADDRESSES[0],
+    items: [
+      const MenuItem(
+        name: 'Cheeseburger',
+        description: 'A classic cheeseburger with all the fixings',
+        price: 9.99,
+        image: 'assets/Images/cheeseburger.jpg',
+        category: ["0"],
+      ),
+      const MenuItem(
+        name: 'Pizza',
+        description: 'A delicious pizza with your choice of toppings',
+        price: 450,
+        image: 'assets/Images/pizza.jpg',
+        category: [
+          "0",
+          "1",
+          "3",
+        ],
+      ),
+      const MenuItem(
+        name: 'Fried Chicken',
+        description: 'Crispy fried chicken with your choice of sides',
+        price: 300,
+        image: 'assets/Images/fried_chicken.jpeg',
+        category: [
+          "3",
+          "5",
+          "0",
+        ],
+      ),
+    ],
+    totalCost: 4000,
+    orderDate: DateTime.now(),
+    deliveryDate: DateTime.now(),
+  ),
+  Order(
+    user: DUMMY_USER[0],
+    deliveryAddress: DUMMY_ADDRESSES[0],
+    items: [
+      const MenuItem(
+        name: 'Fish and Chips',
+        description: 'Fresh fish served with crispy chips',
+        price: 1100,
+        image: 'assets/Images/fish_and_chips.jpeg',
+        category: [
+          "5",
+          "6",
+          "1",
+          "0",
+        ],
+      ),
+      const MenuItem(
+        name: 'Cheeseburger',
+        description: 'A classic cheeseburger with all the fixings',
+        price: 9.99,
+        image: 'assets/Images/cheeseburger.jpg',
+        category: ["0"],
+      ),
+    ],
+    totalCost: 4000,
+    orderDate: DateTime.now(),
+    deliveryDate: DateTime.now(),
   ),
 ];

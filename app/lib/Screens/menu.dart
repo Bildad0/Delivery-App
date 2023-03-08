@@ -2,7 +2,6 @@ import 'package:app/Resources/types.dart';
 import 'package:flutter/material.dart';
 
 import '../Models/menuitem.dart';
-import '../Resources/dummydatat.dart';
 
 class MenuScreen extends StatefulWidget {
   final List<MenuItem> menu;

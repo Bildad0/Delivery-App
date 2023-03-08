@@ -3,6 +3,7 @@ import 'package:app/Resources/dummydatat.dart';
 import '../Models/menuitem.dart';
 import '../Models/user.dart';
 import '../Resources/types.dart';
+import '../Screens/orderhistory.dart';
 import '/Screens/home.dart';
 import 'package:flutter/material.dart';
 
@@ -69,7 +70,7 @@ class MainDrawer extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.of(context).push(route as Route);
+        Navigator.of(context).pushNamed(route, arguments: {});
       },
     );
   }
@@ -97,7 +98,7 @@ class MainDrawer extends StatelessWidget {
             "Orders",
             "My orders",
             Icons.local_shipping,
-            HomeScreen.routeName,
+            OrderHistoryScreen.routeName,
           ),
           buildListTile(
             context,
