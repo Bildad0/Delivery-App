@@ -37,7 +37,8 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
         Column(
           children: [
-            Center(
+            Container(
+              margin: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -108,7 +109,7 @@ class _SplashScreenState extends State<SplashScreen> {
             height: 700, //TODO: get the device hieght - 20 px
             enableInfiniteScroll: true,
             enlargeCenterPage: true,
-            initialPage: 1,
+            initialPage: 0,
             padEnds: true,
             autoPlayAnimationDuration: const Duration(milliseconds: 500),
           ),

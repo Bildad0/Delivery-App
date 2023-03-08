@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   labelText: "Email",
-                  border: OutlineInputBorder(),
+                  border: UnderlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16.0),
@@ -47,16 +47,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 obscureText: true,
                 decoration: const InputDecoration(
                   labelText: "Password",
-                  border: OutlineInputBorder(),
+                  border: UnderlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16.0),
               TextButton(
-                  onPressed: () {
-                    //TODO: Navigate to reset password form.
-                  },
-                  child: const Text("Forgot Password ?",
-                      style: TextStyle(color: headerTextColor))),
+                onPressed: () {
+                  //TODO: Navigate to reset password form.
+                },
+                child: const Text(
+                  "Forgot Password ?",
+                  style: TextStyle(
+                    color: headerTextColor,
+                  ),
+                ),
+              ),
               ElevatedButton(
                 style: const ButtonStyle(
                   shape: MaterialStatePropertyAll(ContinuousRectangleBorder()),
@@ -118,7 +123,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   labelText: "Email",
-                  border: OutlineInputBorder(),
+                  border: UnderlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16.0),
@@ -127,7 +132,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 obscureText: true,
                 decoration: const InputDecoration(
                   labelText: "Password",
-                  border: OutlineInputBorder(),
+                  border: UnderlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16.0),
@@ -136,13 +141,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 obscureText: true,
                 decoration: const InputDecoration(
                   labelText: "Confirm Password",
-                  border: OutlineInputBorder(),
+                  border: UnderlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16.0),
               ElevatedButton(
                 style: const ButtonStyle(
-                  shape: MaterialStatePropertyAll(ContinuousRectangleBorder()),
+                  shape: MaterialStatePropertyAll(RoundedRectangleBorder()),
                   padding: MaterialStatePropertyAll(EdgeInsets.all(10)),
                   elevation: MaterialStatePropertyAll(0),
                 ),

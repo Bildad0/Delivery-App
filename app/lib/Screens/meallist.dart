@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../Resources/types.dart';
+
 class MealListScreen extends StatefulWidget {
   const MealListScreen({super.key});
   static const routeName = "/meals";
@@ -12,7 +14,8 @@ class _MealListScreenState extends State<MealListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Colors.white,
+        backgroundColor: headerBackGround,
+        foregroundColor: headerTextColor,
         elevation: 0,
         title: const Text("Meals"),
       ),
