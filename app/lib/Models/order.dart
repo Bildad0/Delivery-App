@@ -1,10 +1,11 @@
+import 'package:app/Models/menuitem.dart';
+
 import 'address.dart';
 import 'user.dart';
-import 'item.dart';
 
 class Order {
   final User user;
-  final List<Item> items;
+  final List<MenuItem> items;
   final double totalCost;
   final Address deliveryAddress;
   Order({

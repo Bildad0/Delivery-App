@@ -1,3 +1,6 @@
+import 'package:app/Resources/dummydatat.dart';
+
+import '../Models/user.dart';
 import '../Resources/types.dart';
 import '/Screens/home.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +9,9 @@ class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
 
   Widget buildTop(context, IconData icon, String title) {
+    final List<User> user = DUMMY_USER;
+//!TODO: get the current user then display the name where there is String Bildad.
+
     return Container(
       color: headerTextColor.withOpacity(.7),
       height: 110,
@@ -75,7 +81,7 @@ class MainDrawer extends StatelessWidget {
           buildTop(
             context,
             Icons.person_outlined,
-            "Profile",
+            "Bildad",
           ),
           buildListTile(
             context,
