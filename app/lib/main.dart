@@ -1,4 +1,4 @@
-import 'Screens/meallist.dart';
+import 'Screens/menu.dart';
 import 'package:flutter/material.dart';
 import 'Screens/cart.dart';
 import 'Screens/loginorsignup.dart';
@@ -24,10 +24,10 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const SplashScreen(),
         SignUpScreen.routeName: (context) => const SignUpScreen(),
-        MealListScreen.routeName: (context) => const MealListScreen(),
         HomeScreen.routeName: (context) => const HomeScreen(),
         LoginScreen.routeName: (context) => const LoginScreen(),
         CartScreen.routeName: (context) => const CartScreen(),
+        MenuScreen.routeName: (context) => const MenuScreen(),
       },
     );
   }

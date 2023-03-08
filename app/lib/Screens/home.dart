@@ -7,7 +7,7 @@ import '../Models/foodcategories.dart';
 import '../Resources/dummydatat.dart';
 import '../Resources/types.dart';
 import '../Widgets/main_drawer.dart';
-import 'meallist.dart';
+import 'menu.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
       title: Text(title),
       leading: const Icon(Icons.category),
       onTap: () {
-        Navigator.of(context).pushNamed(MealListScreen.routeName);
+        Navigator.of(context).pushNamed(MenuScreen.routeName);
       },
     );
   }

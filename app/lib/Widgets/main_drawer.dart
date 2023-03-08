@@ -7,7 +7,7 @@ class MainDrawer extends StatelessWidget {
 
   Widget buildTop(context, IconData icon, String title) {
     return Container(
-      color: headerBackGround,
+      color: headerTextColor.withOpacity(.7),
       height: 110,
       width: double.infinity,
       padding: const EdgeInsets.all(20),
@@ -15,7 +15,7 @@ class MainDrawer extends StatelessWidget {
       child: Row(children: [
         Icon(
           icon,
-          color: headerTextColor,
+          color: backGroundColor,
           size: 20,
         ),
         const SizedBox(
@@ -24,7 +24,7 @@ class MainDrawer extends StatelessWidget {
         Text(
           title,
           style: const TextStyle(
-            color: headerTextColor,
+            color: backGroundColor,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -42,22 +42,21 @@ class MainDrawer extends StatelessWidget {
   ) {
     return ListTile(
       leading: Icon(
+        color: bodyTextColor,
         icon,
-        color: headerTextColor,
         size: 30,
       ),
       title: Text(
         title,
         style: const TextStyle(
-          color: headerTextColor,
           fontWeight: FontWeight.bold,
           fontSize: 20,
         ),
       ),
       subtitle: Text(
         description,
-        style: TextStyle(
-          color: headerTextColor.withOpacity(0.6),
+        style: const TextStyle(
+          color: descriptionColor,
           fontStyle: FontStyle.italic,
         ),
       ),

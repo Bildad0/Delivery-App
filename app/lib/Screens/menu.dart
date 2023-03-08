@@ -1,3 +1,4 @@
+import 'package:app/Resources/types.dart';
 import 'package:flutter/material.dart';
 
 import '../Models/menuitem.dart';
@@ -5,15 +6,21 @@ import '../Resources/dummydatat.dart';
 
 class MenuScreen extends StatelessWidget {
   final List<MenuItem> menuItems = DUMMY_MENU_ITEMS;
-
+  static const routeName = '/menu';
   const MenuScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: headerBackGround,
         elevation: 0,
-        title: const Text('Menu'),
+        title: const Text(
+          'Menu',
+          style: TextStyle(
+            color: headerTextColor,
+          ),
+        ),
       ),
       body: GridView.builder(
         padding: const EdgeInsets.all(16),
@@ -62,7 +69,7 @@ class MenuScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  '\$${item.price}',
+                  'Ksh ${item.price}',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
