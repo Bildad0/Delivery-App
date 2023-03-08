@@ -16,6 +16,7 @@ class MainDrawer extends StatelessWidget {
         Icon(
           icon,
           color: headerTextColor,
+          size: 20,
         ),
         const SizedBox(
           width: 10,
@@ -24,6 +25,8 @@ class MainDrawer extends StatelessWidget {
           title,
           style: const TextStyle(
             color: headerTextColor,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ]),
@@ -41,10 +44,15 @@ class MainDrawer extends StatelessWidget {
       leading: Icon(
         icon,
         color: headerTextColor,
+        size: 30,
       ),
       title: Text(
         title,
-        style: const TextStyle(color: headerTextColor),
+        style: const TextStyle(
+          color: headerTextColor,
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),
       ),
       subtitle: Text(
         description,
