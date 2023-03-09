@@ -10,13 +10,19 @@ import '../Models/user.dart';
 
 const DUMMY_MENU_ITEMS = [
   MenuItem(
+    id: "1",
     name: 'Cheeseburger',
     description: 'A classic cheeseburger with all the fixings',
-    price: 9.99,
+    price: 470,
     image: 'assets/Images/cheeseburger.jpg',
-    category: ["0"],
+    category: [
+      "0",
+      "1",
+      "3",
+    ],
   ),
   MenuItem(
+    id: "2",
     name: 'Pizza',
     description: 'A delicious pizza with your choice of toppings',
     price: 450,
@@ -28,6 +34,7 @@ const DUMMY_MENU_ITEMS = [
     ],
   ),
   MenuItem(
+    id: "3",
     name: 'Fried Chicken',
     description: 'Crispy fried chicken with your choice of sides',
     price: 300,
@@ -39,6 +46,7 @@ const DUMMY_MENU_ITEMS = [
     ],
   ),
   MenuItem(
+    id: "4",
     name: 'Taco Salad',
     description: 'A healthy and delicious taco salad',
     price: 750,
@@ -50,6 +58,7 @@ const DUMMY_MENU_ITEMS = [
     ],
   ),
   MenuItem(
+    id: "5",
     name: 'Fish and Chips',
     description: 'Fresh fish served with crispy chips',
     price: 1100,
@@ -64,7 +73,12 @@ const DUMMY_MENU_ITEMS = [
 ];
 
 const DUMMY_CATEGORIES = [
-  category(id: '0', title: 'All', color: Colors.blue, imagUrl: ''),
+  category(
+    id: '0',
+    title: 'All',
+    color: Colors.blue,
+    imagUrl: '',
+  ),
   category(
     id: '1',
     title: 'Snacks',
@@ -130,24 +144,7 @@ final DUMMY_ORDER = [
     deliveryAddress: DUMMY_ADDRESSES[0],
     items: [
       const MenuItem(
-        name: 'Cheeseburger',
-        description: 'A classic cheeseburger with all the fixings',
-        price: 9.99,
-        image: 'assets/Images/cheeseburger.jpg',
-        category: ["0"],
-      ),
-      const MenuItem(
-        name: 'Pizza',
-        description: 'A delicious pizza with your choice of toppings',
-        price: 450,
-        image: 'assets/Images/pizza.jpg',
-        category: [
-          "0",
-          "1",
-          "3",
-        ],
-      ),
-      const MenuItem(
+        id: "3",
         name: 'Fried Chicken',
         description: 'Crispy fried chicken with your choice of sides',
         price: 300,
@@ -158,16 +155,20 @@ final DUMMY_ORDER = [
           "0",
         ],
       ),
-    ],
-    totalCost: 4000,
-    orderDate: DateTime.now(),
-    deliveryDate: DateTime.now(),
-  ),
-  Order(
-    user: DUMMY_USER[0],
-    deliveryAddress: DUMMY_ADDRESSES[0],
-    items: [
       const MenuItem(
+        id: "4",
+        name: 'Taco Salad',
+        description: 'A healthy and delicious taco salad',
+        price: 750,
+        image: 'assets/Images/taco_salad.jpeg',
+        category: [
+          "2",
+          "0",
+          "4",
+        ],
+      ),
+      const MenuItem(
+        id: "5",
         name: 'Fish and Chips',
         description: 'Fresh fish served with crispy chips',
         price: 1100,
@@ -179,14 +180,15 @@ final DUMMY_ORDER = [
           "0",
         ],
       ),
-      const MenuItem(
-        name: 'Cheeseburger',
-        description: 'A classic cheeseburger with all the fixings',
-        price: 9.99,
-        image: 'assets/Images/cheeseburger.jpg',
-        category: ["0"],
-      ),
     ],
+    totalCost: 4000,
+    orderDate: DateTime.now(),
+    deliveryDate: DateTime.now(),
+  ),
+  Order(
+    user: DUMMY_USER[0],
+    deliveryAddress: DUMMY_ADDRESSES[0],
+    items: [],
     totalCost: 4000,
     orderDate: DateTime.now(),
     deliveryDate: DateTime.now(),

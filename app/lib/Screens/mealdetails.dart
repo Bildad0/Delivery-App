@@ -1,5 +1,9 @@
+import 'dart:math';
+
+import 'package:app/Resources/dummydatat.dart';
 import 'package:flutter/material.dart';
 
+import '../Models/menuitem.dart';
 import 'allmeal.dart';
 import 'cart.dart';
 
@@ -17,7 +21,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
     return ClipPath(
       clipper: CurveImage(),
       child: Container(
-        height: 180,
+        height: MediaQuery.of(context).size.height * 0.25,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           color: Colors.red,
@@ -28,7 +32,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
         child: Image(
           height: BorderSide.strokeAlignInside,
           image: backGroundImage,
-          fit: BoxFit.fill,
+          fit: BoxFit.fitWidth,
         ),
       ),
     );
@@ -79,11 +83,13 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
                 Colors.red,
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              //!TODO:impliment cart
+            },
             child: Container(
               padding: const EdgeInsets.all(5),
               child: const Text(
-                "Book Table",
+                "Order now",
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -157,11 +163,100 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
     );
   }
 
+  Widget builRecommendedMeals(String mealCategoryId) {
+    print("$mealCategoryId");
+    final categoryId = mealCategoryId;
+    const List<MenuItem> menu = DUMMY_MENU_ITEMS;
+
+    //!TODO: get category name not number.
+    final category =
+        DUMMY_CATEGORIES.where((category) => category.id == categoryId);
+    final mealsWithSameCategory = menu.where((meal) {
+      return meal.category.contains(category.first.id);
+    });
+    //!TODO: get single meal details using  categoryId
+
+    final mealitem = menu.firstWhere((meal) {
+      return meal.category.contains(categoryId);
+    });
+
+    return GridView.builder(
+      padding: const EdgeInsets.all(16),
+      itemCount: mealsWithSameCategory.length,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 1,
+        mainAxisSpacing: 16,
+        crossAxisSpacing: 16,
+      ),
+      itemBuilder: (context, index) {
+        final item = mealitem;
+        return InkWell(
+          onTap: () {
+            Navigator.of(context)
+                .pushNamed(MealDetailsScreen.routeName, arguments: item.id);
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    image: DecorationImage(
+                      image: AssetImage(item.image),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                item.name,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                item.description,
+                style: const TextStyle(
+                  color: Colors.grey,
+                  fontSize: 12,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Ksh ${item.price}',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final itemId = ModalRoute.of(context)?.settings.arguments as String;
+    final selectedMeal =
+        DUMMY_MENU_ITEMS.firstWhere((meal) => meal.id == itemId);
+
+    final priceForTwo = selectedMeal.price + 500;
+
+    final mealCategoryId = selectedMeal.category[0];
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        shadowColor: Colors.white,
+        scrolledUnderElevation: 8,
+        surfaceTintColor: Colors.white,
+        title: Text(selectedMeal.name),
         elevation: 0,
         backgroundColor: Colors.white.withOpacity(.6),
         actions: [
@@ -176,27 +271,42 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
           children: [
             buildTop(
               context,
-              //!TODO: get the current product Image
-              const AssetImage("assets/Images/pizza.jpg"),
+              AssetImage(selectedMeal.image),
             ),
             Container(
-              height: 90,
-              transform: Matrix4.translationValues(0.0, -60.0, 0.0),
-              child: const CircleAvatar(
-                radius: 50,
+              height: 98,
+              transform: Matrix4.translationValues(0.0, -50.0, 0.0),
+              child: CircleAvatar(
+                radius: 60,
                 backgroundColor: Colors.red,
                 child: CircleAvatar(
-                  foregroundImage: AssetImage("assets/Images/pizza.jpg"),
-                  radius: 40,
+                  foregroundImage: AssetImage(selectedMeal.image),
+                  radius: 45,
                 ),
               ),
             ),
             buildmealDetailContainer(
-                "", "", "", "", "", "", ""), //!TODO:get meal details
-
-            const RecommendedWidget(
-                mealCategoryId:
-                    ''), //!TODO : get current meal category Id to populated other recomended meals
+              context,
+              selectedMeal.name,
+              selectedMeal.category[1],
+              "Bucxton",
+              "5.0",
+              "20-30",
+              "$priceForTwo",
+            ),
+            const Text(
+              "Recommended",
+              style: TextStyle(
+                color: Colors.red,
+                fontWeight: FontWeight.w100,
+                fontSize: 24,
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              height: 400,
+              child: builRecommendedMeals(mealCategoryId),
+            ),
           ],
         ),
       ),
@@ -260,22 +370,4 @@ class CurveImage extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
-}
-
-class RecommendedWidget extends StatefulWidget {
-  final String mealCategoryId;
-  const RecommendedWidget({
-    Key? key,
-    required this.mealCategoryId,
-  }) : super(key: key);
-
-  @override
-  State<RecommendedWidget> createState() => _RecommendedWidgetState();
-}
-
-class _RecommendedWidgetState extends State<RecommendedWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
 }
