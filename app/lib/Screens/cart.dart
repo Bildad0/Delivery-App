@@ -36,12 +36,12 @@ class Cart extends ChangeNotifier {
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
   static const routeName = "/cart";
-
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context);
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         foregroundColor: Colors.red,
         backgroundColor: Colors.transparent,
         title: const Text('Cart'),
@@ -52,7 +52,7 @@ class CartScreen extends StatelessWidget {
           final item = cart.items[index];
           return ListTile(
             title: Text(item.name),
-            subtitle: Text('\$${item.price} x ${item.quantity}'),
+            subtitle: Text('Ksh ${item.price} x ${item.quantity}'),
             trailing: IconButton(
               icon: const Icon(Icons.delete),
               onPressed: () => cart.remove(item),
@@ -76,7 +76,7 @@ class CartScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Total: \$${cart.totalPrice}',
+              'Total: Ksh ${cart.totalPrice}',
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

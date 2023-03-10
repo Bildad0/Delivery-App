@@ -33,6 +33,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
               itemBuilder: (context, index) {
                 final order = orders[index];
                 final orderNumber = index + 1;
+                //!TODO: get total order price by adding MenuItem price in the order
                 return ListTile(
                   title: Text('Order $orderNumber'),
                   subtitle: Text('Total: Ksh ${order.totalCost}'),

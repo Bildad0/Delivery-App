@@ -1,4 +1,5 @@
 import 'package:app/Resources/types.dart';
+import 'package:app/Screens/mealdetails.dart';
 import 'package:flutter/material.dart';
 
 import '../Models/menuitem.dart';
@@ -62,7 +63,8 @@ class _MenuScreenState extends State<MenuScreen> {
           final item = displayedMeals[index];
           return InkWell(
             onTap: () {
-              // TODO: Navigate to item details screen
+              Navigator.of(context)
+                  .pushNamed(MealDetailsScreen.routeName, arguments: item.id);
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

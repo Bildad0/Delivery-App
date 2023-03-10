@@ -1,6 +1,9 @@
+import 'package:app/Screens/mealdetails.dart';
+
 import 'Models/menuitem.dart';
 import 'Models/order.dart';
 import 'Resources/dummydatat.dart';
+import 'Screens/allmeal.dart';
 import 'Screens/menu.dart';
 import 'package:flutter/material.dart';
 import 'Screens/cart.dart';
@@ -22,6 +25,7 @@ class MyApp extends StatelessWidget {
     List<MenuItem> menu = DUMMY_MENU_ITEMS;
     List<Order> order = DUMMY_ORDER;
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Delivery App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red)
@@ -36,9 +40,10 @@ class MyApp extends StatelessWidget {
         CartScreen.routeName: (context) => const CartScreen(),
         MenuScreen.routeName: (context) => MenuScreen(menu: menu),
         OrderHistoryScreen.routeName: (context) => const OrderHistoryScreen(),
-        OrderDetailsScreen.routeName: (context) => OrderDetailsScreen(
-              order: order,
-            ),
+        OrderDetailsScreen.routeName: (context) =>
+            OrderDetailsScreen(order: order),
+        MealDetailsScreen.routeName: (context) => const MealDetailsScreen(),
+        MealScreen.routeName: (context) => const MealScreen(),
       },
     );
   }

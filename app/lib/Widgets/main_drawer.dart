@@ -1,11 +1,11 @@
-import 'package:app/Resources/dummydatat.dart';
+import 'package:flutter/material.dart';
 
-import '../Models/menuitem.dart';
 import '../Models/user.dart';
+import '../Resources/dummydatat.dart';
 import '../Resources/types.dart';
+import '../Screens/cart.dart';
 import '../Screens/orderhistory.dart';
 import '/Screens/home.dart';
-import 'package:flutter/material.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
@@ -70,7 +70,7 @@ class MainDrawer extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.of(context).pushNamed(route, arguments: {});
+        Navigator.of(context).pushNamed(route);
       },
     );
   }
@@ -112,7 +112,7 @@ class MainDrawer extends StatelessWidget {
             "Cart",
             "My cart",
             Icons.shopping_cart,
-            HomeScreen.routeName,
+            CartScreen.routeName, //!TODO: Solve the cartscreen error.
           ),
         ],
       ),
