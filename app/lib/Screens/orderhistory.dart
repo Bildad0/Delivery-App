@@ -1,16 +1,30 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:app/Models/order.dart';
+import 'package:flutter/material.dart';
 
+import '../Resources/dummydatat.dart';
+import '../Resources/types.dart';
 import 'orderdetails.dart';
 
-class OrderHistoryScreen extends StatelessWidget {
+class OrderHistoryScreen extends StatefulWidget {
+  static const routeName = "/order-list";
+
+  const OrderHistoryScreen({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<OrderHistoryScreen> createState() => _OrderHistoryScreenState();
+}
+
+class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
   @override
   Widget build(BuildContext context) {
-    final orders = Provider.of<List<Order>>(context);
-
+    final List<Order> orders = DUMMY_ORDER;
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        foregroundColor: headerTextColor,
+        backgroundColor: headerBackGround,
         title: const Text('Order History'),
       ),
       body: orders != null
@@ -18,9 +32,10 @@ class OrderHistoryScreen extends StatelessWidget {
               itemCount: orders.length,
               itemBuilder: (context, index) {
                 final order = orders[index];
+                final orderNumber = index + 1;
                 return ListTile(
-                  title: Text('Order ${order.orderNumber}'),
-                  subtitle: Text('Total: \$${order.totalPrice}'),
+                  title: Text('Order $orderNumber'),
+                  subtitle: Text('Total: Ksh ${order.totalCost}'),
                   trailing: const Icon(Icons.arrow_forward),
                   onTap: () {
                     Navigator.push(

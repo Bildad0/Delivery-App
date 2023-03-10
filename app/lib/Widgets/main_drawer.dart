@@ -1,4 +1,9 @@
+import 'package:app/Resources/dummydatat.dart';
+
+import '../Models/menuitem.dart';
+import '../Models/user.dart';
 import '../Resources/types.dart';
+import '../Screens/orderhistory.dart';
 import '/Screens/home.dart';
 import 'package:flutter/material.dart';
 
@@ -6,8 +11,12 @@ class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
 
   Widget buildTop(context, IconData icon, String title) {
+    List<User> user = DUMMY_USER;
+
+//!TODO: get the current user then display the name where there is String Bildad.
+
     return Container(
-      color: headerBackGround,
+      color: headerTextColor.withOpacity(.7),
       height: 110,
       width: double.infinity,
       padding: const EdgeInsets.all(20),
@@ -15,7 +24,7 @@ class MainDrawer extends StatelessWidget {
       child: Row(children: [
         Icon(
           icon,
-          color: headerTextColor,
+          color: backGroundColor,
           size: 20,
         ),
         const SizedBox(
@@ -24,7 +33,7 @@ class MainDrawer extends StatelessWidget {
         Text(
           title,
           style: const TextStyle(
-            color: headerTextColor,
+            color: backGroundColor,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -42,27 +51,26 @@ class MainDrawer extends StatelessWidget {
   ) {
     return ListTile(
       leading: Icon(
+        color: bodyTextColor,
         icon,
-        color: headerTextColor,
         size: 30,
       ),
       title: Text(
         title,
         style: const TextStyle(
-          color: headerTextColor,
           fontWeight: FontWeight.bold,
           fontSize: 20,
         ),
       ),
       subtitle: Text(
         description,
-        style: TextStyle(
-          color: headerTextColor.withOpacity(0.6),
+        style: const TextStyle(
+          color: descriptionColor,
           fontStyle: FontStyle.italic,
         ),
       ),
       onTap: () {
-        Navigator.of(context).push(route as Route);
+        Navigator.of(context).pushNamed(route, arguments: {});
       },
     );
   }
@@ -76,7 +84,7 @@ class MainDrawer extends StatelessWidget {
           buildTop(
             context,
             Icons.person_outlined,
-            "Profile",
+            "Bildad",
           ),
           buildListTile(
             context,
@@ -85,32 +93,25 @@ class MainDrawer extends StatelessWidget {
             Icons.home,
             HomeScreen.routeName,
           ),
-                buildListTile(
+          buildListTile(
             context,
-            "Home",
-            "Back to meals",
-            Icons.home,
+            "Orders",
+            "My orders",
+            Icons.local_shipping,
+            OrderHistoryScreen.routeName,
+          ),
+          buildListTile(
+            context,
+            "Favourite",
+            "Frequently ordered meals",
+            Icons.favorite,
             HomeScreen.routeName,
           ),
-                buildListTile(
+          buildListTile(
             context,
-            "Home",
-            "Back to meals",
-            Icons.home,
-            HomeScreen.routeName,
-          ),
-                buildListTile(
-            context,
-            "Home",
-            "Back to meals",
-            Icons.home,
-            HomeScreen.routeName,
-          ),
-                buildListTile(
-            context,
-            "Home",
-            "Back to meals",
-            Icons.home,
+            "Cart",
+            "My cart",
+            Icons.shopping_cart,
             HomeScreen.routeName,
           ),
         ],

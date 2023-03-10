@@ -7,19 +7,25 @@ import '../Models/foodcategories.dart';
 import '../Resources/dummydatat.dart';
 import '../Resources/types.dart';
 import '../Widgets/main_drawer.dart';
-import 'meallist.dart';
+import 'menu.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   static const routeName = '/home';
 
-  Widget buildingCtegoryListTile(context, String title) {
+  Widget buildingCtegoryListTile(context, String title, String id) {
     return ListTile(
       title: Text(title),
       leading: const Icon(Icons.category),
       onTap: () {
-        Navigator.of(context).pushNamed(MealListScreen.routeName);
+        Navigator.of(context).pushNamed(
+          MenuScreen.routeName,
+          arguments: {
+            'id': id,
+            'title': title,
+          },
+        );
       },
     );
   }
@@ -32,7 +38,14 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: headerBackGround,
         elevation: 0,
         foregroundColor: headerTextColor,
-        title: const Text('Home'),
+        title: const Text(
+            'Good Morning!'), //!TODO: get the current time and greet the user depending on the time.
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {},
+          )
+        ],
       ),
       drawer: const MainDrawer(),
       body: Column(
@@ -82,7 +95,8 @@ class HomeScreen extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               itemBuilder: (ctx, index) {
-                return buildingCtegoryListTile(ctx, _categories[index].title);
+                return buildingCtegoryListTile(
+                    ctx, _categories[index].title, _categories[index].id);
               },
               itemCount: _categories.length,
             ),

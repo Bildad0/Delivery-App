@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  google_maps_flutter: ^1.1.0 #include the google_maps_flutter package
+  google_maps_flutter: ^2.2.5 #include the google_maps_flutter package
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -67,6 +67,11 @@ flutter:
     - assets/Images/deliverybike.png
     - assets/Images/pizza.png
     - assets/Images/pizzadeliver.png
+    - assets/Images/cheeseburger.jpg
+    - assets/Images/fish_and_chips.jpeg
+    - assets/Images/fried_chicken.jpeg
+    - assets/Images/pizza.jpg
+    - assets/Images/taco_salad.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

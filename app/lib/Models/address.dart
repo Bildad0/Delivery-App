@@ -3,7 +3,7 @@ class Address {
   final String city;
   final String state;
   final String zipCode;
-  Address({
+  const Address({
     required this.street,
     required this.city,
     required this.state,
