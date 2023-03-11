@@ -1,10 +1,9 @@
-import 'dart:math';
-
-import 'package:app/Resources/dummydatat.dart';
 import 'package:flutter/material.dart';
 
 import '../Models/menuitem.dart';
 import '../Widgets/main_drawer.dart';
+import '../Widgets/mealitem.dart';
+import '/Resources/dummydatat.dart';
 import 'allmeal.dart';
 import 'cart.dart';
 
@@ -176,12 +175,15 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     final itemId = ModalRoute.of(context)?.settings.arguments as String;
-    final selectedMeal =
-        DUMMY_MENU_ITEMS.firstWhere((meal) => meal.id == itemId);
-
+    final selectedMeal = DUMMY_MENU_ITEMS.firstWhere((meal) {
+      return meal.id == itemId;
+    });
     final priceForTwo = selectedMeal.price;
 
-    final mealCategoryId = selectedMeal.category;
+    final mealCategoryId = selectedMeal.category.last;
+    final categoryName = DUMMY_CATEGORIES.lastWhere((category) {
+      return category.id == mealCategoryId;
+    });
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -222,7 +224,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
             buildmealDetailContainer(
               context,
               selectedMeal.name,
-              selectedMeal.category[0], //!TODO :add cattegory name.
+              categoryName.title, //!TODO :add cattegory name.
               "Bucxton",
               "5.0",
               "20-30",
@@ -241,7 +243,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
               margin: const EdgeInsets.all(20),
               height: 400,
               child: RecommendedMeals(
-                mealCategoryId: mealCategoryId.last,
+                mealCategoryId: mealCategoryId,
               ),
             ),
           ],
@@ -365,55 +367,12 @@ class _RecommendedMealsState extends State<RecommendedMeals> {
       ),
       itemBuilder: (context, index) {
         final item = mealsWithSameCategory;
-        print("Meal Id: ${item[index].id}");
-        print("Meals Category: ${item[index].category}");
-
-        return InkWell(
-          onTap: () {
-            Navigator.of(context).pushReplacementNamed(
-                MealDetailsScreen.routeName,
-                arguments: item[index].id);
-          },
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    image: DecorationImage(
-                      image: AssetImage(item[index].image),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                item[index].name,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                item[index].description,
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Ksh ${item[index].price}',
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-            ],
-          ),
+        return MealItem(
+          mealDescription: item[index].description,
+          mealId: item[index].id,
+          mealImageUrl: item[index].image,
+          mealName: item[index].name,
+          mealPrice: item[index].price,
         );
       },
     );
