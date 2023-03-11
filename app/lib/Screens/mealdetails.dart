@@ -9,8 +9,14 @@ import 'allmeal.dart';
 import 'cart.dart';
 
 class MealDetailsScreen extends StatefulWidget {
-  const MealDetailsScreen({super.key});
   static const routeName = "/meal-details";
+  final Function toggleFavorite;
+  final Function isFavorite;
+  const MealDetailsScreen({
+    Key? key,
+    required this.toggleFavorite,
+    required this.isFavorite,
+  }) : super(key: key);
 
   @override
   State<MealDetailsScreen> createState() => _MealDetailsScreenState();
@@ -187,10 +193,24 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
         elevation: 0,
         backgroundColor: Colors.white.withOpacity(.6),
         actions: [
-          buildLeading(context, Icons.favorite_border_outlined, ""),
+          IconButton(
+            icon: Icon(
+              widget.isFavorite(selectedMeal.id)
+                  ? Icons.favorite
+                  : Icons.favorite_outline,
+              color: Colors.yellow,
+            ),
+            onPressed: () {
+              widget.toggleFavorite(selectedMeal.id);
+            },
+          ),
           buildLeading(
               context, Icons.shopping_cart_outlined, CartScreen.routeName),
-          buildLeading(context, Icons.share_sharp, "")
+          buildLeading(
+            context,
+            Icons.share_sharp,
+            "",
+          ),
         ],
       ),
       drawer: const MainDrawer(),
