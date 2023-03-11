@@ -26,7 +26,10 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
         decoration: BoxDecoration(
           color: Colors.red,
           borderRadius: BorderRadius.vertical(
-            bottom: Radius.elliptical(MediaQuery.of(context).size.width, 100),
+            bottom: Radius.elliptical(
+              MediaQuery.of(context).size.width,
+              MediaQuery.of(context).size.width * 0.001,
+            ),
           ),
         ),
         child: Image(
@@ -113,7 +116,10 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
                     )
                   ],
                 ),
-                const Divider(),
+                const Divider(
+                  thickness: 2,
+                  color: Colors.grey,
+                ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -131,7 +137,10 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
                     )
                   ],
                 ),
-                const Divider(),
+                const Divider(
+                  thickness: 2,
+                  color: Colors.grey,
+                ),
                 Column(
                   children: [
                     Text(
@@ -163,84 +172,6 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
     );
   }
 
-  Widget builRecommendedMeals(String mealCategoryId) {
-    print("$mealCategoryId");
-    final categoryId = mealCategoryId;
-    const List<MenuItem> menu = DUMMY_MENU_ITEMS;
-
-    //!TODO: get category name not number.
-    final category =
-        DUMMY_CATEGORIES.where((category) => category.id == categoryId);
-    final mealsWithSameCategory = menu.where((meal) {
-      return meal.category.contains(category.first.id);
-    });
-    //!TODO: get single meal details using  categoryId
-
-    final mealitem = menu.firstWhere((meal) {
-      return meal.category.contains(categoryId);
-    });
-
-    return GridView.builder(
-      padding: const EdgeInsets.all(16),
-      itemCount: mealsWithSameCategory.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 1,
-        mainAxisSpacing: 16,
-        crossAxisSpacing: 16,
-      ),
-      itemBuilder: (context, index) {
-        final item = mealitem;
-        return InkWell(
-          onTap: () {
-            Navigator.of(context)
-                .pushNamed(MealDetailsScreen.routeName, arguments: item.id);
-          },
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    image: DecorationImage(
-                      image: AssetImage(item.image),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                item.name,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                item.description,
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Ksh ${item.price}',
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final itemId = ModalRoute.of(context)?.settings.arguments as String;
@@ -249,7 +180,8 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
 
     final priceForTwo = selectedMeal.price + 500;
 
-    final mealCategoryId = selectedMeal.category[0];
+    final mealCategoryId = selectedMeal.category;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -288,7 +220,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
             buildmealDetailContainer(
               context,
               selectedMeal.name,
-              selectedMeal.category[1],
+              selectedMeal.category[0], //!TODO :add cattegory name.
               "Bucxton",
               "5.0",
               "20-30",
@@ -305,7 +237,9 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
             Container(
               padding: const EdgeInsets.all(10),
               height: 400,
-              child: builRecommendedMeals(mealCategoryId),
+              child: RecommendedMeals(
+                mealCategoryId: mealCategoryId.last,
+              ),
             ),
           ],
         ),
@@ -370,4 +304,115 @@ class CurveImage extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
+}
+
+class RecommendedMeals extends StatefulWidget {
+  final String mealCategoryId;
+  const RecommendedMeals({
+    Key? key,
+    required this.mealCategoryId,
+  }) : super(key: key);
+
+  @override
+  State<RecommendedMeals> createState() => _RecommendedMealsState();
+}
+
+class _RecommendedMealsState extends State<RecommendedMeals> {
+  var loadData = false;
+  late List<MenuItem> menu;
+
+  @override
+  void didChangeDependencies() {
+    if (!loadData) {
+      final categoryId = widget.mealCategoryId;
+      menu = DUMMY_MENU_ITEMS.where((meal) {
+        return meal.category.contains(categoryId);
+      }).toList();
+      loadData = true;
+    }
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final categoryId = widget.mealCategoryId;
+    //!TODO: get category name not number.
+    final mealsWithSameCategory = menu.where((meal) {
+      return meal.category.contains(categoryId);
+    }).toList();
+
+    if (mealsWithSameCategory.isEmpty) {
+      return Column(
+        children: const [
+          Center(
+            child: Text("No recommendation !"),
+          )
+        ],
+      );
+    }
+
+    return GridView.builder(
+      padding: const EdgeInsets.all(16),
+      itemCount: mealsWithSameCategory.length,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 1,
+        mainAxisSpacing: 16,
+        crossAxisSpacing: 16,
+      ),
+      itemBuilder: (context, index) {
+        final item = mealsWithSameCategory;
+        print("Meal Id: ${item[index].id}");
+        print("Meals Category: ${item[index].category}");
+
+        return InkWell(
+          onTap: () {
+            Navigator.of(context).pushReplacementNamed(
+                MealDetailsScreen.routeName,
+                arguments: item[index].id);
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    image: DecorationImage(
+                      image: AssetImage(item[index].image),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                item[index].name,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                item[index].description,
+                style: const TextStyle(
+                  color: Colors.grey,
+                  fontSize: 12,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Ksh ${item[index].price}',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 }

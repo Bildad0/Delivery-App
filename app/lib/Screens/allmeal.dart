@@ -37,7 +37,8 @@ class _MealScreenState extends State<MealScreen> {
           final item = displayedMeals[index];
           return InkWell(
             onTap: () {
-              Navigator.of(context).pushNamed(MealDetailsScreen.routeName);
+              Navigator.of(context)
+                  .pushNamed(MealDetailsScreen.routeName, arguments: item.id);
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
