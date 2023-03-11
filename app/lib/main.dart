@@ -4,6 +4,7 @@ import 'Models/menuitem.dart';
 import 'Models/order.dart';
 import 'Resources/dummydatat.dart';
 import 'Screens/allmeal.dart';
+import 'Screens/favourite.dart';
 import 'Screens/menu.dart';
 import 'package:flutter/material.dart';
 import 'Screens/cart.dart';
@@ -44,6 +45,9 @@ class MyApp extends StatelessWidget {
             OrderDetailsScreen(order: order),
         MealDetailsScreen.routeName: (context) => const MealDetailsScreen(),
         MealScreen.routeName: (context) => const MealScreen(),
+        FavoriteScreen.routeName: (context) => const FavoriteScreen(
+              favouriteMeals: [],
+            ),
       },
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../Models/menuitem.dart';
+import '../Widgets/leadings.dart';
 import '../Widgets/main_drawer.dart';
 import '../Widgets/mealitem.dart';
 import '/Resources/dummydatat.dart';
@@ -160,15 +161,6 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget buildLeading(context, IconData icon, String route) {
-    return IconButton(
-      onPressed: () {
-        Navigator.of(context).pushNamed(route);
-      },
-      icon: Icon(icon),
     );
   }
 
@@ -345,16 +337,6 @@ class _RecommendedMealsState extends State<RecommendedMeals> {
     final mealsWithSameCategory = menu.where((meal) {
       return meal.category.contains(categoryId);
     }).toList();
-
-    if (mealsWithSameCategory.isEmpty) {
-      return Column(
-        children: const [
-          Center(
-            child: Text("No recommendation !"),
-          )
-        ],
-      );
-    }
 
     return GridView.builder(
       padding: const EdgeInsets.all(16),
