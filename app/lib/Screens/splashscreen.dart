@@ -64,6 +64,14 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             ElevatedButton(
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: const BorderSide(color: Colors.red),
+                  ),
+                ),
+              ),
               onPressed: (() => {
                     Navigator.of(context)
                         .pushReplacementNamed(SignUpScreen.routeName)

@@ -52,6 +52,14 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 16.0),
               TextButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: const BorderSide(color: Colors.red),
+                    ),
+                  ),
+                ),
                 onPressed: () {
                   //TODO: Navigate to reset password form.
                 },
@@ -63,10 +71,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               ElevatedButton(
-                style: const ButtonStyle(
-                  shape: MaterialStatePropertyAll(ContinuousRectangleBorder()),
-                  padding: MaterialStatePropertyAll(EdgeInsets.all(10)),
-                  elevation: MaterialStatePropertyAll(0),
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: const BorderSide(color: Colors.red),
+                    ),
+                  ),
+                  padding: const MaterialStatePropertyAll(EdgeInsets.all(10)),
+                  elevation: const MaterialStatePropertyAll(0),
                 ),
                 onPressed: () {
                   Navigator.of(context)
@@ -146,10 +159,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               const SizedBox(height: 16.0),
               ElevatedButton(
-                style: const ButtonStyle(
-                  shape: MaterialStatePropertyAll(RoundedRectangleBorder()),
-                  padding: MaterialStatePropertyAll(EdgeInsets.all(10)),
-                  elevation: MaterialStatePropertyAll(0),
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: const BorderSide(color: Colors.red),
+                    ),
+                  ),
+                  padding: const MaterialStatePropertyAll(EdgeInsets.all(10)),
+                  elevation: const MaterialStatePropertyAll(0),
                 ),
                 onPressed: () {
                   Navigator.of(context)

@@ -4,6 +4,7 @@ import 'package:app/Resources/dummydatat.dart';
 import 'package:flutter/material.dart';
 
 import '../Models/menuitem.dart';
+import '../Widgets/main_drawer.dart';
 import 'allmeal.dart';
 import 'cart.dart';
 
@@ -148,7 +149,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     const Text(
-                      "Order For Two",
+                      "Save -100",
                       style: TextStyle(
                         color: Colors.grey,
                       ),
@@ -178,7 +179,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
     final selectedMeal =
         DUMMY_MENU_ITEMS.firstWhere((meal) => meal.id == itemId);
 
-    final priceForTwo = selectedMeal.price + 500;
+    final priceForTwo = selectedMeal.price;
 
     final mealCategoryId = selectedMeal.category;
 
@@ -198,6 +199,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
           buildLeading(context, Icons.share_sharp, "")
         ],
       ),
+      drawer: const MainDrawer(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -235,7 +237,8 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(1),
+              margin: const EdgeInsets.all(20),
               height: 400,
               child: RecommendedMeals(
                 mealCategoryId: mealCategoryId.last,

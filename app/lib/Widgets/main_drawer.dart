@@ -51,7 +51,7 @@ class MainDrawer extends StatelessWidget {
   ) {
     return ListTile(
       leading: Icon(
-        color: bodyTextColor,
+        color: headerTextColor,
         icon,
         size: 30,
       ),
@@ -88,30 +88,30 @@ class MainDrawer extends StatelessWidget {
           ),
           buildListTile(
             context,
-            "Home",
+            "Categories",
             "Back to meals",
-            Icons.home,
+            Icons.category_outlined,
             HomeScreen.routeName,
           ),
           buildListTile(
             context,
             "Orders",
             "My orders",
-            Icons.local_shipping,
+            Icons.local_shipping_outlined,
             OrderHistoryScreen.routeName,
           ),
           buildListTile(
             context,
             "Favourite",
             "Frequently ordered meals",
-            Icons.favorite,
+            Icons.favorite_outline_outlined,
             HomeScreen.routeName,
           ),
           buildListTile(
             context,
             "Cart",
             "My cart",
-            Icons.shopping_cart,
+            Icons.shopping_cart_outlined,
             CartScreen.routeName, //!TODO: Solve the cartscreen error.
           ),
         ],
