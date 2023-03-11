@@ -40,9 +40,9 @@ const DUMMY_MENU_ITEMS = [
     price: 300,
     image: 'assets/Images/fried_chicken.jpeg',
     category: [
+      "0",
       "3",
       "5",
-      "0",
     ],
   ),
   MenuItem(
@@ -64,10 +64,10 @@ const DUMMY_MENU_ITEMS = [
     price: 1100,
     image: 'assets/Images/fish_and_chips.jpeg',
     category: [
+      "0",
       "5",
       "6",
       "1",
-      "0",
     ],
   ),
 ];

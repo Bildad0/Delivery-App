@@ -4,6 +4,7 @@ import '../Models/user.dart';
 import '../Resources/dummydatat.dart';
 import '../Resources/types.dart';
 import '../Screens/cart.dart';
+import '../Screens/favourite.dart';
 import '../Screens/orderhistory.dart';
 import '/Screens/home.dart';
 
@@ -21,24 +22,36 @@ class MainDrawer extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       alignment: Alignment.bottomLeft,
-      child: Row(children: [
-        Icon(
-          icon,
-          color: backGroundColor,
-          size: 20,
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        Text(
-          title,
-          style: const TextStyle(
-            color: backGroundColor,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Icon(
+                icon,
+                color: backGroundColor,
+                size: 20,
+              ),
+              const SizedBox(
+                width: 20,
+              ),
+              Text(
+                title,
+                style: const TextStyle(
+                  color: backGroundColor,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
-        ),
-      ]),
+          const Icon(
+            Icons.notifications,
+            color: backGroundColor,
+            size: 20,
+          )
+        ],
+      ),
     );
   }
 
@@ -51,7 +64,7 @@ class MainDrawer extends StatelessWidget {
   ) {
     return ListTile(
       leading: Icon(
-        color: bodyTextColor,
+        color: headerTextColor,
         icon,
         size: 30,
       ),
@@ -70,7 +83,7 @@ class MainDrawer extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.of(context).pushReplacementNamed(route);
+        Navigator.of(context).pushNamed(route);
       },
     );
   }
@@ -90,28 +103,28 @@ class MainDrawer extends StatelessWidget {
             context,
             "Home",
             "Back to meals",
-            Icons.home,
+            Icons.category_outlined,
             HomeScreen.routeName,
           ),
           buildListTile(
             context,
             "Orders",
             "My orders",
-            Icons.local_shipping,
+            Icons.local_shipping_outlined,
             OrderHistoryScreen.routeName,
           ),
           buildListTile(
             context,
             "Favourite",
             "Frequently ordered meals",
-            Icons.favorite,
-            HomeScreen.routeName,
+            Icons.favorite_outline_outlined,
+            FavoriteScreen.routeName,
           ),
           buildListTile(
             context,
             "Cart",
             "My cart",
-            Icons.shopping_cart,
+            Icons.shopping_cart_outlined,
             CartScreen.routeName, //!TODO: Solve the cartscreen error.
           ),
         ],
