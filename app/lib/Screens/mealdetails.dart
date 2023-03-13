@@ -104,7 +104,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
             child: Container(
               padding: const EdgeInsets.all(5),
               child: const Text(
-                "Order now",
+                "Add to Cart",
                 style: TextStyle(
                   color: Colors.white,
                 ),

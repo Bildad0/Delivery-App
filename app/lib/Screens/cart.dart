@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../Models/cartitem.dart';
 import '../Models/menuitem.dart';
+import '../Widgets/alert.dart';
 
 class CartScreen extends StatefulWidget {
   final List<MenuItem> cart;
+  final Function removeItem;
   const CartScreen({
     Key? key,
     required this.cart,
+    required this.removeItem,
   }) : super(key: key);
   static const routeName = "/cart";
 
@@ -20,6 +21,11 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     final cart = widget.cart;
+    double totalCost = 0.0;
+
+    for (var item in cart) {
+      totalCost += item.price;
+    }
 
     if (cart.isEmpty) {
       return Scaffold(
@@ -47,10 +53,20 @@ class _CartScreenState extends State<CartScreen> {
           final item = cart[index];
           return ListTile(
             title: Text(item.name),
-            subtitle: Text('Ksh ${item.price} x ${index + 1}'),
+            subtitle: Text('Ksh ${item.price}'), //!TODO: add quantity
             trailing: IconButton(
               icon: const Icon(Icons.delete),
-              onPressed: () => cart.removeWhere((items) => items.id == item.id),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => alertBox(
+                    context,
+                    Icons.info_outline,
+                    "Do you want to delete ${item.name} from the list?",
+                  ),
+                );
+                widget.removeItem(item);
+              },
             ),
           );
         },
@@ -71,7 +87,7 @@ class _CartScreenState extends State<CartScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Total: Ksh ${cart.last.price}',
+              'Total: Ksh $totalCost',
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

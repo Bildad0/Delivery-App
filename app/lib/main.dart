@@ -39,6 +39,11 @@ class _MyAppState extends State<MyApp> {
     _cartItem.add(_availableMeals.firstWhere((menu) => menu.id == itemId));
   }
 
+  void _removeFromCart(MenuItem meal) {
+    final itemIndex = _cartItem.indexOf(meal);
+    _cartItem.removeAt(itemIndex);
+  }
+
   void _toggleFavorite(mealId) {
     final existingIndex =
         _favoriteMeals.indexWhere((meal) => meal.id == mealId);
@@ -82,6 +87,7 @@ class _MyAppState extends State<MyApp> {
         LoginScreen.routeName: (context) => const LoginScreen(),
         CartScreen.routeName: (context) => CartScreen(
               cart: _cartItem,
+              removeItem: _removeFromCart,
             ),
         MenuScreen.routeName: (context) => MenuScreen(menu: menu),
         OrderHistoryScreen.routeName: (context) => const OrderHistoryScreen(),
