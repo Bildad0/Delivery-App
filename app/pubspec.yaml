@@ -40,6 +40,7 @@ dependencies:
   provider: ^6.0.5
   background_app_bar: ^2.0.1
   favorite_button: ^0.0.4
+  go_router: ^6.2.0
 
 dev_dependencies:
   flutter_test:

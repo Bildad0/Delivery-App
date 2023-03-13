@@ -7,12 +7,38 @@ import '../Models/foodcategories.dart';
 import '../Resources/dummydatat.dart';
 import '../Resources/types.dart';
 import '../Widgets/main_drawer.dart';
+import '../theme/theme_manager.dart';
 import 'menu.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   static const routeName = '/home';
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+ThemeManager _themeManager = ThemeManager();
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void dispose() {
+    super.dispose();
+    _themeManager.removeListener(themeListener);
+  }
+
+  @override
+  void initState() {
+    _themeManager.addListener(themeListener);
+    super.initState();
+  }
+
+  themeListener() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
 
   Widget buildingCtegoryListTile(context, String title, String id) {
     return ListTile(
@@ -41,6 +67,11 @@ class HomeScreen extends StatelessWidget {
         title: const Text(
             'Good Morning!'), //!TODO: get the current time and greet the user depending on the time.
         actions: [
+          Switch(
+              value: _themeManager.themeMode == ThemeMode.dark,
+              onChanged: (newValue) {
+                _themeManager.toggleTheme(newValue);
+              }), //!TODO: add this toggle button on settings page to change theme.
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {},

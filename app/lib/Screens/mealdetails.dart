@@ -191,7 +191,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
         surfaceTintColor: Colors.white,
         title: Text(selectedMeal.name),
         elevation: 0,
-        backgroundColor: Colors.white.withOpacity(.6),
+        backgroundColor: Colors.white,
         actions: [
           IconButton(
             icon: Icon(
