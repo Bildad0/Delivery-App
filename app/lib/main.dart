@@ -33,6 +33,11 @@ ThemeManager _themeManager = ThemeManager();
 class _MyAppState extends State<MyApp> {
   final List<MenuItem> _availableMeals = DUMMY_MENU_ITEMS;
   final List<MenuItem> _favoriteMeals = [];
+  final List<MenuItem> _cartItem = [];
+
+  void _addToCart(String itemId) {
+    _cartItem.add(_availableMeals.firstWhere((menu) => menu.id == itemId));
+  }
 
   void _toggleFavorite(mealId) {
     final existingIndex =
@@ -75,7 +80,9 @@ class _MyAppState extends State<MyApp> {
         SignUpScreen.routeName: (context) => const SignUpScreen(),
         HomeScreen.routeName: (context) => const HomeScreen(),
         LoginScreen.routeName: (context) => const LoginScreen(),
-        CartScreen.routeName: (context) => const CartScreen(),
+        CartScreen.routeName: (context) => CartScreen(
+              cart: _cartItem,
+            ),
         MenuScreen.routeName: (context) => MenuScreen(menu: menu),
         OrderHistoryScreen.routeName: (context) => const OrderHistoryScreen(),
         OrderDetailsScreen.routeName: (context) =>
@@ -83,6 +90,7 @@ class _MyAppState extends State<MyApp> {
         MealDetailsScreen.routeName: (context) => MealDetailsScreen(
               isFavorite: _isMealFavorite,
               toggleFavorite: _toggleFavorite,
+              addToCart: _addToCart,
             ),
         MealScreen.routeName: (context) => const MealScreen(),
         FavoriteScreen.routeName: (context) => FavoriteScreen(

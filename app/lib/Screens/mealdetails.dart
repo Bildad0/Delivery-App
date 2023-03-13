@@ -12,10 +12,12 @@ class MealDetailsScreen extends StatefulWidget {
   static const routeName = "/meal-details";
   final Function toggleFavorite;
   final Function isFavorite;
+  final Function addToCart;
   const MealDetailsScreen({
     Key? key,
     required this.toggleFavorite,
     required this.isFavorite,
+    required this.addToCart,
   }) : super(key: key);
 
   @override
@@ -50,10 +52,12 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
 
   Widget buildmealDetailContainer(
     context,
+    String mealId,
     String mealTitle,
     String mealCategory,
     String hotelSelling,
     String rating,
+    Function addToCart,
     String deliveryTime,
     String mealAmountForTwo,
   ) {
@@ -94,7 +98,8 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
               ),
             ),
             onPressed: () {
-              //!TODO:impliment cart
+              addToCart(mealId);
+              print("meal added to cart " + mealId);
             },
             child: Container(
               padding: const EdgeInsets.all(5),
@@ -235,10 +240,12 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
             ),
             buildmealDetailContainer(
               context,
+              selectedMeal.id,
               selectedMeal.name,
               categoryName.title, //!TODO :add cattegory name.
               "Bucxton",
               "5.0",
+              widget.addToCart,
               "20-30",
               "$priceForTwo",
             ),

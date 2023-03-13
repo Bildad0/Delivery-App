@@ -1,44 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../Models/cartitem.dart';
+import '../Models/menuitem.dart';
 
-class Cart extends ChangeNotifier {
-  final List<CartItem> _items = [];
+class CartScreen extends StatefulWidget {
+  final List<MenuItem> cart;
+  const CartScreen({
+    Key? key,
+    required this.cart,
+  }) : super(key: key);
+  static const routeName = "/cart";
 
-  List<CartItem> get items => _items;
-
-  int get itemCount => _items.length;
-
-  double get totalPrice => _items.fold(
-      0, (total, current) => total + current.price * current.quantity);
-
-  void add(CartItem item) {
-    int index = _items.indexWhere((i) => i.name == item.name);
-    if (index != -1) {
-      _items[index].quantity++;
-    } else {
-      _items.add(item);
-    }
-    notifyListeners();
-  }
-
-  void remove(CartItem item) {
-    _items.removeWhere((i) => i.name == item.name);
-    notifyListeners();
-  }
-
-  void clear() {
-    _items.clear();
-    notifyListeners();
-  }
+  @override
+  State<CartScreen> createState() => _CartScreenState();
 }
 
-class CartScreen extends StatelessWidget {
-  const CartScreen({super.key});
-  static const routeName = "/cart";
+class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<Cart>(context);
+    final cart = widget.cart;
+
+    if (cart.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          foregroundColor: Colors.red,
+          backgroundColor: Colors.transparent,
+          title: const Text('Cart'),
+        ),
+        body: const Center(
+          child: Text("No item In Cart"),
+        ),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -47,15 +42,15 @@ class CartScreen extends StatelessWidget {
         title: const Text('Cart'),
       ),
       body: ListView.builder(
-        itemCount: cart.itemCount,
+        itemCount: cart.length,
         itemBuilder: (context, index) {
-          final item = cart.items[index];
+          final item = cart[index];
           return ListTile(
             title: Text(item.name),
-            subtitle: Text('Ksh ${item.price} x ${item.quantity}'),
+            subtitle: Text('Ksh ${item.price} x ${index + 1}'),
             trailing: IconButton(
               icon: const Icon(Icons.delete),
-              onPressed: () => cart.remove(item),
+              onPressed: () => cart.removeWhere((items) => items.id == item.id),
             ),
           );
         },
@@ -76,7 +71,7 @@ class CartScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Total: Ksh ${cart.totalPrice}',
+              'Total: Ksh ${cart.last.price}',
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
