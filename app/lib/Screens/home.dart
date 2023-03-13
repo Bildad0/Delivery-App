@@ -2,6 +2,7 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../Models/foodcategories.dart';
 import '../Resources/dummydatat.dart';
@@ -58,20 +59,34 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var greetings = "";
+    DateTime today = DateTime.now();
+    String formatedTime = DateFormat('kk:mm:a').format(today);
+    String amOrPm = formatedTime.substring(6);
+    switch (amOrPm) {
+      case 'AM':
+        greetings = "Good morning";
+        break;
+      case 'PM':
+        greetings = "Good Evening";
+        break;
+      default:
+        greetings = "Good Night";
+        break;
+    }
     const List<category> _categories = DUMMY_CATEGORIES;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: headerBackGround,
         elevation: 0,
         foregroundColor: headerTextColor,
-        title: const Text(
-            'Good Morning!'), //!TODO: get the current time and greet the user depending on the time.
+        title: Text(greetings),
         actions: [
           Switch(
               value: _themeManager.themeMode == ThemeMode.dark,
               onChanged: (newValue) {
                 _themeManager.toggleTheme(newValue);
-              }), //!TODO: add this toggle button on settings page to change theme.
+              }), //!TODO: add this toggle button on settings page for  theme changing.
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {},

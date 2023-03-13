@@ -13,11 +13,13 @@ class MealDetailsScreen extends StatefulWidget {
   final Function toggleFavorite;
   final Function isFavorite;
   final Function addToCart;
+  final Function cartQuantity;
   const MealDetailsScreen({
     Key? key,
     required this.toggleFavorite,
     required this.isFavorite,
     required this.addToCart,
+    required this.cartQuantity,
   }) : super(key: key);
 
   @override
@@ -177,6 +179,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String cartQuantity = widget.cartQuantity.toString();
     final itemId = ModalRoute.of(context)?.settings.arguments as String;
     final selectedMeal = DUMMY_MENU_ITEMS.firstWhere((meal) {
       return meal.id == itemId;
@@ -210,7 +213,10 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
             },
           ),
           buildLeading(
-              context, Icons.shopping_cart_outlined, CartScreen.routeName),
+            context,
+            Icons.shopping_cart_outlined,
+            CartScreen.routeName,
+          ),
           buildLeading(
             context,
             Icons.share_sharp,

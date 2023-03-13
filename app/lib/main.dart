@@ -1,3 +1,4 @@
+import 'package:app/Resources/cache_helper.dart';
 import 'package:flutter/material.dart';
 
 import 'Models/menuitem.dart';
@@ -18,6 +19,7 @@ import 'theme/theme_manager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 
@@ -35,8 +37,18 @@ class _MyAppState extends State<MyApp> {
   final List<MenuItem> _favoriteMeals = [];
   final List<MenuItem> _cartItem = [];
 
+  String getCart() {
+    final cartSize = _cartItem.length;
+    if (cartSize > 0) {
+      return cartSize.toString();
+    }
+    return "0";
+  }
+
   void _addToCart(String itemId) {
-    _cartItem.add(_availableMeals.firstWhere((menu) => menu.id == itemId));
+    final mealToAdd = _availableMeals.firstWhere((menu) => menu.id == itemId);
+    _cartItem.add(mealToAdd);
+    saveCartData(_cartItem);
   }
 
   void _removeFromCart(MenuItem meal) {
@@ -97,6 +109,7 @@ class _MyAppState extends State<MyApp> {
               isFavorite: _isMealFavorite,
               toggleFavorite: _toggleFavorite,
               addToCart: _addToCart,
+              cartQuantity: getCart,
             ),
         MealScreen.routeName: (context) => const MealScreen(),
         FavoriteScreen.routeName: (context) => FavoriteScreen(

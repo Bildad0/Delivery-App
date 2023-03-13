@@ -42,6 +42,7 @@ dependencies:
   favorite_button: ^0.0.4
   go_router: ^6.2.0
   shared_preferences: ^2.0.18
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:
@@ -64,7 +65,17 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
+  fonts:
+    - family: DancingScript
+      fonts:
+         - asset: assets/fonts/DancingScript-VariableFont_wght.ttf
+    - family: PatrickHand
+      fonts:
+        - asset:  assets/fonts/PatrickHand-Regular.ttf
+    - family: SawarabiGothic
+      fonts:
+        - asset:  assets/fonts/SawarabiGothic-Regular.ttf
+          
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/Images/map.png

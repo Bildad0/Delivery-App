@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../Models/menuitem.dart';
+import '../Resources/cache_helper.dart';
 import '../Widgets/alert.dart';
 
 class CartScreen extends StatefulWidget {
-  final List<MenuItem> cart;
+  final cart;
   final Function removeItem;
   const CartScreen({
     Key? key,
@@ -96,6 +96,7 @@ class _CartScreenState extends State<CartScreen> {
             ElevatedButton(
               child: const Text('Checkout'),
               onPressed: () {
+                removeCartDataFromCache();
                 // TODO: Implement checkout logic
               },
             ),

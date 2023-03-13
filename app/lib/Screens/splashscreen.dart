@@ -78,7 +78,8 @@ class _SplashScreenState extends State<SplashScreen> {
                   }),
               child: const Text(
                 'Get Stated',
-                style: TextStyle(color: Colors.white),
+                style:
+                    TextStyle(color: Colors.white, fontFamily: 'PatrickHand'),
               ),
             ),
           ],
