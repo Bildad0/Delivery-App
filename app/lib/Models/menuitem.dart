@@ -5,6 +5,7 @@ class MenuItem {
   final List<String> category;
   final double price;
   final String image;
+  final int quantity;
   const MenuItem({
     required this.id,
     required this.name,
@@ -12,5 +13,6 @@ class MenuItem {
     required this.category,
     required this.price,
     required this.image,
+    this.quantity = 1,
   });
 }

@@ -9,8 +9,18 @@ import 'allmeal.dart';
 import 'cart.dart';
 
 class MealDetailsScreen extends StatefulWidget {
-  const MealDetailsScreen({super.key});
   static const routeName = "/meal-details";
+  final Function toggleFavorite;
+  final Function isFavorite;
+  final Function addToCart;
+  final Function cartQuantity;
+  const MealDetailsScreen({
+    Key? key,
+    required this.toggleFavorite,
+    required this.isFavorite,
+    required this.addToCart,
+    required this.cartQuantity,
+  }) : super(key: key);
 
   @override
   State<MealDetailsScreen> createState() => _MealDetailsScreenState();
@@ -44,10 +54,12 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
 
   Widget buildmealDetailContainer(
     context,
+    String mealId,
     String mealTitle,
     String mealCategory,
     String hotelSelling,
     String rating,
+    Function addToCart,
     String deliveryTime,
     String mealAmountForTwo,
   ) {
@@ -88,12 +100,13 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
               ),
             ),
             onPressed: () {
-              //!TODO:impliment cart
+              addToCart(mealId);
+              print("meal added to cart " + mealId);
             },
             child: Container(
               padding: const EdgeInsets.all(5),
               child: const Text(
-                "Order now",
+                "Add to Cart",
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -166,6 +179,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String cartQuantity = widget.cartQuantity.toString();
     final itemId = ModalRoute.of(context)?.settings.arguments as String;
     final selectedMeal = DUMMY_MENU_ITEMS.firstWhere((meal) {
       return meal.id == itemId;
@@ -185,12 +199,29 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
         surfaceTintColor: Colors.white,
         title: Text(selectedMeal.name),
         elevation: 0,
-        backgroundColor: Colors.white.withOpacity(.6),
+        backgroundColor: Colors.white,
         actions: [
-          buildLeading(context, Icons.favorite_border_outlined, ""),
+          IconButton(
+            icon: Icon(
+              widget.isFavorite(selectedMeal.id)
+                  ? Icons.favorite
+                  : Icons.favorite_outline,
+              color: Colors.yellow,
+            ),
+            onPressed: () {
+              widget.toggleFavorite(selectedMeal.id);
+            },
+          ),
           buildLeading(
-              context, Icons.shopping_cart_outlined, CartScreen.routeName),
-          buildLeading(context, Icons.share_sharp, "")
+            context,
+            Icons.shopping_cart_outlined,
+            CartScreen.routeName,
+          ),
+          buildLeading(
+            context,
+            Icons.share_sharp,
+            "",
+          ),
         ],
       ),
       drawer: const MainDrawer(),
@@ -215,10 +246,12 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
             ),
             buildmealDetailContainer(
               context,
+              selectedMeal.id,
               selectedMeal.name,
               categoryName.title, //!TODO :add cattegory name.
               "Bucxton",
               "5.0",
+              widget.addToCart,
               "20-30",
               "$priceForTwo",
             ),

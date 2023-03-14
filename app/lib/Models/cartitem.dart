@@ -1,3 +1,5 @@
+import 'menuitem.dart';
+
 class CartItem {
   final String name;
   final double price;
@@ -9,5 +11,5 @@ class CartItem {
     this.quantity = 1,
   });
 
-  get product => null;
+  get product => List<MenuItem>;
 }

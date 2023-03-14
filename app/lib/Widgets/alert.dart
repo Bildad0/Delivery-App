@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../Resources/types.dart';
+import '/Screens/cart.dart';
 
 Widget alertBox(context, IconData icon, String message) {
   return AlertDialog(
@@ -13,5 +14,12 @@ Widget alertBox(context, IconData icon, String message) {
       color: Theme.of(context).primaryColor,
       fontStyle: FontStyle.italic,
     ),
+    actions: [
+      TextButton(
+        onPressed: () =>
+            Navigator.of(context).pushReplacementNamed(CartScreen.routeName),
+        child: const Text("YES"),
+      ),
+    ],
   );
 }

@@ -1,44 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../Models/cartitem.dart';
 
-class Cart extends ChangeNotifier {
-  final List<CartItem> _items = [];
+import '../Resources/cache_helper.dart';
+import '../Widgets/alert.dart';
 
-  List<CartItem> get items => _items;
+class CartScreen extends StatefulWidget {
+  final cart;
+  final Function removeItem;
+  const CartScreen({
+    Key? key,
+    required this.cart,
+    required this.removeItem,
+  }) : super(key: key);
+  static const routeName = "/cart";
 
-  int get itemCount => _items.length;
-
-  double get totalPrice => _items.fold(
-      0, (total, current) => total + current.price * current.quantity);
-
-  void add(CartItem item) {
-    int index = _items.indexWhere((i) => i.name == item.name);
-    if (index != -1) {
-      _items[index].quantity++;
-    } else {
-      _items.add(item);
-    }
-    notifyListeners();
-  }
-
-  void remove(CartItem item) {
-    _items.removeWhere((i) => i.name == item.name);
-    notifyListeners();
-  }
-
-  void clear() {
-    _items.clear();
-    notifyListeners();
-  }
+  @override
+  State<CartScreen> createState() => _CartScreenState();
 }
 
-class CartScreen extends StatelessWidget {
-  const CartScreen({super.key});
-  static const routeName = "/cart";
+class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<Cart>(context);
+    final cart = widget.cart;
+    double totalCost = 0.0;
+
+    for (var item in cart) {
+      totalCost += item.price;
+    }
+
+    if (cart.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          foregroundColor: Colors.red,
+          backgroundColor: Colors.transparent,
+          title: const Text('Cart'),
+        ),
+        body: const Center(
+          child: Text("No item In Cart"),
+        ),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -47,15 +48,25 @@ class CartScreen extends StatelessWidget {
         title: const Text('Cart'),
       ),
       body: ListView.builder(
-        itemCount: cart.itemCount,
+        itemCount: cart.length,
         itemBuilder: (context, index) {
-          final item = cart.items[index];
+          final item = cart[index];
           return ListTile(
             title: Text(item.name),
-            subtitle: Text('Ksh ${item.price} x ${item.quantity}'),
+            subtitle: Text('Ksh ${item.price}'), //!TODO: add quantity
             trailing: IconButton(
               icon: const Icon(Icons.delete),
-              onPressed: () => cart.remove(item),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => alertBox(
+                    context,
+                    Icons.info_outline,
+                    "Do you want to delete ${item.name} from the list?",
+                  ),
+                );
+                widget.removeItem(item);
+              },
             ),
           );
         },
@@ -76,7 +87,7 @@ class CartScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Total: Ksh ${cart.totalPrice}',
+              'Total: Ksh $totalCost',
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -85,6 +96,7 @@ class CartScreen extends StatelessWidget {
             ElevatedButton(
               child: const Text('Checkout'),
               onPressed: () {
+                removeCartDataFromCache();
                 // TODO: Implement checkout logic
               },
             ),
