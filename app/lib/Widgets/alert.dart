@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../Resources/types.dart';
+import '../theme/theme_constants.dart';
 import '/Screens/cart.dart';
 
 Widget alertBox(context, IconData icon, String message) {

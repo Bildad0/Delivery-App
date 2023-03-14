@@ -120,7 +120,7 @@ class _SplashScreenState extends State<SplashScreen> {
             enlargeCenterPage: true,
             initialPage: 0,
             padEnds: true,
-            autoPlayAnimationDuration: const Duration(milliseconds: 500),
+            autoPlayAnimationDuration: const Duration(milliseconds: 200),
           ),
         )
       ],
