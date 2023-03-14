@@ -22,48 +22,80 @@ class _SplashScreenState extends State<SplashScreen> {
   ) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Container(
-          height: 120,
-          width: 120,
-          padding: const EdgeInsets.all(5),
-          margin: const EdgeInsets.all(8.0),
+          height: MediaQuery.of(context).size.height - 60,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(10.0),
-            image: DecorationImage(image: image, scale: 3),
+            image: DecorationImage(image: image, scale: 3, fit: BoxFit.fill),
+          ),
+          child: Container(
+            transform: Matrix4.translationValues(
+                0.0, (MediaQuery.of(context).size.height - 250), 0.0),
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 28,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        description,
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontStyle: FontStyle.italic,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-        Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.all(20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 28,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    description,
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontStyle: FontStyle.italic,
-                      fontSize: 15,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            ElevatedButton(
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: CarouselSlider(
+      items: [
+        buildCarouselPages(
+          const AssetImage('assets/Images/background1.jpg'),
+          "",
+          "",
+        ),
+        buildCarouselPages(
+          const AssetImage('assets/Images/background3.jpg'),
+          "",
+          "",
+        ),
+        buildCarouselPages(
+          const AssetImage('assets/Images/background2.jpg'),
+          "",
+          "",
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          margin: const EdgeInsets.all(10),
+          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+          child: Center(
+            child: ElevatedButton(
               style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
@@ -82,48 +114,20 @@ class _SplashScreenState extends State<SplashScreen> {
                     TextStyle(color: Colors.white, fontFamily: 'PatrickHand'),
               ),
             ),
-          ],
+          ),
         ),
       ],
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: ListView(
-      children: [
-        CarouselSlider(
-          items: [
-            buildCarouselPages(
-              const AssetImage('assets/Images/map.png'),
-              "Discover restaurants near you",
-              "The best restaurants in the world are just next to you",
-            ),
-            buildCarouselPages(
-              const AssetImage('assets/Images/pizza.png'),
-              "A collection of different cuisines",
-              "We have variety of cuisines in our menu you can't miss what you like",
-            ),
-            buildCarouselPages(
-              const AssetImage('assets/Images/deliverybike.png'),
-              "Delivered Quickly at your place",
-              "Our professional riders will get you your meal on time.",
-            ),
-          ],
-          options: CarouselOptions(
-            pauseAutoPlayOnManualNavigate: true,
-            pauseAutoPlayInFiniteScroll: true,
-            autoPlay: true,
-            height: 700, //TODO: get the device hieght - 20 px
-            enableInfiniteScroll: true,
-            enlargeCenterPage: true,
-            initialPage: 0,
-            padEnds: true,
-            autoPlayAnimationDuration: const Duration(milliseconds: 200),
-          ),
-        )
-      ],
+      options: CarouselOptions(
+        pauseAutoPlayOnManualNavigate: true,
+        pauseAutoPlayInFiniteScroll: true,
+        autoPlay: true,
+        autoPlayCurve: Curves.linear,
+        height: MediaQuery.of(context).size.height - 20,
+        enableInfiniteScroll: true,
+        initialPage: 0,
+        padEnds: true,
+        autoPlayAnimationDuration: const Duration(milliseconds: 100),
+      ),
     ));
   }
 }

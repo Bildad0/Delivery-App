@@ -87,6 +87,9 @@ flutter:
     - assets/Images/fried_chicken.jpeg
     - assets/Images/pizza.jpg
     - assets/Images/taco_salad.jpeg
+    - assets/Images/background1.jpg
+    - assets/Images/background2.jpg
+    - assets/Images/background3.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
