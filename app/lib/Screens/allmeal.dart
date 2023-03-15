@@ -2,19 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../Models/menuitem.dart';
 import '../Resources/dummydatat.dart';
-import '../Resources/types.dart';
+import '../theme/theme_constants.dart';
 import 'mealdetails.dart';
 
-class MealScreen extends StatefulWidget {
+class MealScreen extends StatelessWidget {
   static const routeName = "/meals";
   const MealScreen({super.key});
 
-  @override
-  State<StatefulWidget> createState() => _MealScreenState();
-}
+  final List<MenuItem> displayedMeals = DUMMY_MENU_ITEMS;
 
-class _MealScreenState extends State<MealScreen> {
-  late List<MenuItem> displayedMeals = DUMMY_MENU_ITEMS;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +18,7 @@ class _MealScreenState extends State<MealScreen> {
         foregroundColor: headerTextColor,
         backgroundColor: headerBackGround,
         elevation: 0,
+        automaticallyImplyLeading: true,
         title: const Text("Meals"),
       ),
       body: GridView.builder(

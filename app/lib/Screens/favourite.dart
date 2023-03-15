@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import '../Models/menuitem.dart';
 import '../Widgets/leadings.dart';
 import '../Widgets/mealitem.dart';
-import '/Resources/types.dart';
+import '../theme/theme_constants.dart';
 import '/Widgets/main_drawer.dart';
 import 'cart.dart';
 
-class FavoriteScreen extends StatelessWidget {
+class FavoriteScreen extends StatefulWidget {
   final List<MenuItem> favouriteMeals;
 
   const FavoriteScreen({
@@ -17,8 +17,13 @@ class FavoriteScreen extends StatelessWidget {
   static const routeName = "/favorites";
 
   @override
+  State<FavoriteScreen> createState() => _FavoriteScreenState();
+}
+
+class _FavoriteScreenState extends State<FavoriteScreen> {
+  @override
   Widget build(BuildContext context) {
-    if (favouriteMeals.isEmpty) {
+    if (widget.favouriteMeals.isEmpty) {
       return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -38,14 +43,9 @@ class FavoriteScreen extends StatelessWidget {
           ],
         ),
         drawer: const MainDrawer(),
-        body: const Center(
-          child: Text(
-            "You have no favorites yet!, start adding some",
-            style: TextStyle(
-              color: Colors.red,
-              fontStyle: FontStyle.italic,
-            ),
-          ),
+        body: Center(
+          child: Text("You have no favorites yet!, start adding some",
+              style: Theme.of(context).textTheme.bodySmall),
         ),
       );
     }
@@ -71,7 +71,7 @@ class FavoriteScreen extends StatelessWidget {
         drawer: const MainDrawer(),
         body: GridView.builder(
           padding: const EdgeInsets.all(16),
-          itemCount: favouriteMeals.length,
+          itemCount: widget.favouriteMeals.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 1,
@@ -79,7 +79,7 @@ class FavoriteScreen extends StatelessWidget {
             crossAxisSpacing: 16,
           ),
           itemBuilder: (context, index) {
-            final item = favouriteMeals;
+            final item = widget.favouriteMeals;
             return MealItem(
               mealDescription: item[index].description,
               mealId: item[index].id,

@@ -6,8 +6,8 @@ import 'package:intl/intl.dart';
 
 import '../Models/foodcategories.dart';
 import '../Resources/dummydatat.dart';
-import '../Resources/types.dart';
 import '../Widgets/main_drawer.dart';
+import '../theme/theme_constants.dart';
 import '../theme/theme_manager.dart';
 import 'menu.dart';
 
@@ -97,15 +97,10 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.all(16),
-            child: Text(
-              'Featured',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child:
+                Text('Featured', style: Theme.of(context).textTheme.titleLarge),
           ),
           SizedBox(
             height: 200,
@@ -139,12 +134,15 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemBuilder: (ctx, index) {
-                return buildingCtegoryListTile(
-                    ctx, _categories[index].title, _categories[index].id);
-              },
-              itemCount: _categories.length,
+            child: StretchingOverscrollIndicator(
+              axisDirection: AxisDirection.down,
+              child: ListView.builder(
+                itemBuilder: (ctx, index) {
+                  return buildingCtegoryListTile(
+                      ctx, _categories[index].title, _categories[index].id);
+                },
+                itemCount: _categories.length,
+              ),
             ),
           ),
         ],

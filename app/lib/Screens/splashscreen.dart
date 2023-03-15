@@ -22,67 +22,16 @@ class _SplashScreenState extends State<SplashScreen> {
   ) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Container(
-          height: 120,
-          width: 120,
-          padding: const EdgeInsets.all(5),
-          margin: const EdgeInsets.all(8.0),
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(10.0),
-            image: DecorationImage(image: image, scale: 3),
+            image:
+                DecorationImage(image: image, scale: 3, fit: BoxFit.fitWidth),
           ),
-        ),
-        Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.all(20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 28,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    description,
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontStyle: FontStyle.italic,
-                      fontSize: 15,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            ElevatedButton(
-              style: ButtonStyle(
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                    side: const BorderSide(color: Colors.red),
-                  ),
-                ),
-              ),
-              onPressed: (() => {
-                    Navigator.of(context)
-                        .pushReplacementNamed(SignUpScreen.routeName)
-                  }),
-              child: const Text(
-                'Get Stated',
-                style:
-                    TextStyle(color: Colors.white, fontFamily: 'PatrickHand'),
-              ),
-            ),
-          ],
         ),
       ],
     );
@@ -91,39 +40,73 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView(
-      children: [
-        CarouselSlider(
-          items: [
-            buildCarouselPages(
-              const AssetImage('assets/Images/map.png'),
-              "Discover restaurants near you",
-              "The best restaurants in the world are just next to you",
-            ),
-            buildCarouselPages(
-              const AssetImage('assets/Images/pizza.png'),
-              "A collection of different cuisines",
-              "We have variety of cuisines in our menu you can't miss what you like",
-            ),
-            buildCarouselPages(
-              const AssetImage('assets/Images/deliverybike.png'),
-              "Delivered Quickly at your place",
-              "Our professional riders will get you your meal on time.",
-            ),
-          ],
-          options: CarouselOptions(
-            pauseAutoPlayOnManualNavigate: true,
-            pauseAutoPlayInFiniteScroll: true,
-            autoPlay: true,
-            height: 700, //TODO: get the device hieght - 20 px
-            enableInfiniteScroll: true,
-            enlargeCenterPage: true,
-            initialPage: 0,
-            padEnds: true,
-            autoPlayAnimationDuration: const Duration(milliseconds: 500),
+      body: CarouselSlider(
+        items: [
+          buildCarouselPages(
+            const AssetImage('assets/Images/background1.jpg'),
+            "",
+            "",
           ),
-        )
-      ],
-    ));
+          buildCarouselPages(
+            const AssetImage('assets/Images/background3.jpg'),
+            "",
+            "",
+          ),
+          buildCarouselPages(
+            const AssetImage('assets/Images/background2.jpg'),
+            "",
+            "",
+          ),
+        ],
+        options: CarouselOptions(
+          pauseAutoPlayOnManualNavigate: true,
+          pauseAutoPlayInFiniteScroll: true,
+          autoPlay: true,
+          autoPlayCurve: Curves.linear,
+          height: MediaQuery.of(context).size.height,
+          enableInfiniteScroll: true,
+          initialPage: 0,
+          padEnds: true,
+          autoPlayAnimationDuration: const Duration(milliseconds: 100),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: SizedBox(
+        width: 150,
+        child: ElevatedButton(
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0),
+                side: const BorderSide(color: Colors.red),
+              ),
+            ),
+          ),
+          onPressed: (() => {
+                Navigator.of(context)
+                    .pushReplacementNamed(SignUpScreen.routeName)
+              }),
+          child: Container(
+            margin: const EdgeInsets.all(5),
+            child: Row(
+              children: const [
+                Icon(
+                  Icons.login_outlined,
+                  color: Colors.white,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  'Get Stated',
+                  style:
+                      TextStyle(color: Colors.white, fontFamily: 'PatrickHand'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

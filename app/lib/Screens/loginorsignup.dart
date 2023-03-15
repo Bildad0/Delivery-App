@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Resources/types.dart';
+import '../theme/theme_constants.dart';
 import 'home.dart';
 
 class LoginScreen extends StatefulWidget {

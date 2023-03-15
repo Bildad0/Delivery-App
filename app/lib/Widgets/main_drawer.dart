@@ -6,6 +6,7 @@ import '../Resources/types.dart';
 import '../Screens/cart.dart';
 import '../Screens/favourite.dart';
 import '../Screens/orderhistory.dart';
+import '../theme/theme_constants.dart';
 import '/Screens/home.dart';
 
 class MainDrawer extends StatelessWidget {
