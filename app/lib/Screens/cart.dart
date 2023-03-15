@@ -43,9 +43,9 @@ class _CartScreenState extends State<CartScreen> {
     }
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
+        elevation: 3,
         foregroundColor: Colors.red,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         title: const Text('Cart'),
       ),
       body: ListView.builder(

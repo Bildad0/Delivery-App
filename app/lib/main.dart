@@ -11,6 +11,7 @@ import 'Resources/cache_helper.dart';
 import 'Models/menuitem.dart';
 import 'Models/order.dart';
 import 'Resources/dummydatat.dart';
+import 'Resources/scroll_behaviour.dart';
 import 'Screens/allmeal.dart';
 import 'Screens/cart.dart';
 import 'Screens/checkout.dart';
@@ -143,6 +144,7 @@ class _MyAppState extends State<MyApp> {
     List<MenuItem> menu = DUMMY_MENU_ITEMS;
     List<Order> order = DUMMY_ORDER;
     return MaterialApp(
+      scrollBehavior: touchScrollBehavior(),
       debugShowCheckedModeBanner: false,
       title: 'RebDelivery',
       theme: lightTheme,
