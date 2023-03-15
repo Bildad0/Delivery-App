@@ -1,11 +1,12 @@
-import 'package:app/Resources/cache_helper.dart';
 import 'package:flutter/material.dart';
 
+import 'Resources/cache_helper.dart';
 import 'Models/menuitem.dart';
 import 'Models/order.dart';
 import 'Resources/dummydatat.dart';
 import 'Screens/allmeal.dart';
 import 'Screens/cart.dart';
+import 'Screens/checkout.dart';
 import 'Screens/favourite.dart';
 import 'Screens/home.dart';
 import 'Screens/loginorsignup.dart';
@@ -114,6 +115,9 @@ class _MyAppState extends State<MyApp> {
         MealScreen.routeName: (context) => const MealScreen(),
         FavoriteScreen.routeName: (context) => FavoriteScreen(
               favouriteMeals: _favoriteMeals,
+            ),
+        CheckoutScreen.routeName: (context) => CheckoutScreen(
+              items: _cartItem,
             ),
       },
     );

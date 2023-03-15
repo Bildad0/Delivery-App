@@ -43,6 +43,8 @@ dependencies:
   go_router: ^6.2.0
   shared_preferences: ^2.0.18
   intl: ^0.18.0
+  geolocator: ^9.0.2
+  baseflow_plugin_template: ^2.1.1
 
 dev_dependencies:
   flutter_test:
