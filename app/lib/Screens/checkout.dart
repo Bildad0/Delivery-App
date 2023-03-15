@@ -6,9 +6,15 @@ import '../Models/menuitem.dart';
 class CheckoutScreen extends StatefulWidget {
   static const routeName = "/check-out";
   final List<MenuItem> items;
+  final Function getLocation;
+  final String? address;
+  final Position? currentPosition;
   const CheckoutScreen({
     Key? key,
     required this.items,
+    required this.getLocation,
+    required this.address,
+    this.currentPosition,
   }) : super(key: key);
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();
@@ -17,6 +23,8 @@ class CheckoutScreen extends StatefulWidget {
 class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
+    final getCurrentLocation = widget.getLocation;
+    final address = widget.address;
     final cartItems = widget.items;
     final totalAmount = ModalRoute.of(context)?.settings.arguments;
     return Scaffold(
@@ -31,7 +39,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           children: [
             GestureDetector(
               onTap: () {
-                //!TODO impliment geolocation
+                getCurrentLocation();
               },
               child: Card(
                 shape: const StadiumBorder(
@@ -45,7 +53,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 child: SizedBox(
                   height: 40,
                   child: Column(
-                    children: const [Text("Delivered to")],
+                    children: [
+                      Text(address != null
+                          ? 'Addres: $address'
+                          : 'Retrieving location...')
+                    ],
                   ),
                 ),
               ),
