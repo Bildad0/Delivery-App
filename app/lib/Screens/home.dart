@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import '../Models/foodcategories.dart';
 import '../Resources/dummydatat.dart';
 import '../Widgets/main_drawer.dart';
+import '../Widgets/meal_category.dart';
 import '../theme/theme_constants.dart';
 import '../theme/theme_manager.dart';
 import 'menu.dart';
@@ -37,43 +38,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   themeListener() {
     if (mounted) {
-      setState(() {});
+      setState(() {
+        _themeManager.addListener(themeListener);
+      });
     }
-  }
-
-  Widget buildingCtegoryListTile(context, String title, String id) {
-    return ListTile(
-      title: Text(title),
-      leading: const Icon(Icons.category),
-      onTap: () {
-        Navigator.of(context).pushNamed(
-          MenuScreen.routeName,
-          arguments: {
-            'id': id,
-            'title': title,
-          },
-        );
-      },
-    );
   }
 
   @override
   Widget build(BuildContext context) {
-    var greetings = "";
-    DateTime today = DateTime.now();
-    String formatedTime = DateFormat('kk:mm:a').format(today);
-    String amOrPm = formatedTime.substring(6);
-    switch (amOrPm) {
-      case 'AM':
-        greetings = "Good morning";
-        break;
-      case 'PM':
-        greetings = "Good Evening";
-        break;
-      default:
-        greetings = "Good Night";
-        break;
-    }
+    var greetings = "RebDelivery";
     const List<category> _categories = DUMMY_CATEGORIES;
     return Scaffold(
       appBar: AppBar(
@@ -136,10 +109,17 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: StretchingOverscrollIndicator(
               axisDirection: AxisDirection.down,
-              child: ListView.builder(
+              child: GridView.builder(
+                padding: const EdgeInsets.all(16),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 1,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
+                ),
                 itemBuilder: (ctx, index) {
-                  return buildingCtegoryListTile(
-                      ctx, _categories[index].title, _categories[index].id);
+                  return buildingCategoryListTile(ctx, _categories[index].title,
+                      _categories[index].id, _categories[index].imagUrl);
                 },
                 itemCount: _categories.length,
               ),

@@ -77,19 +77,19 @@ const DUMMY_CATEGORIES = [
     id: '0',
     title: 'All',
     color: Colors.blue,
-    imagUrl: '',
+    imagUrl: 'assets/Images/fish_and_chips.jpeg',
   ),
   category(
     id: '1',
     title: 'Snacks',
     color: Colors.blue,
-    imagUrl: '',
+    imagUrl: 'assets/Images/taco_salad.jpeg',
   ),
   category(
     id: '2',
     title: 'Light Meals',
     color: Colors.blue,
-    imagUrl: '',
+    imagUrl: 'assets/Images/pizza.jpg',
   ),
   category(
     id: '3',

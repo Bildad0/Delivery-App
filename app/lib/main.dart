@@ -2,11 +2,11 @@
 
 import 'dart:async';
 
+import 'package:app/Screens/user_location.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:open_settings/open_settings.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'Resources/cache_helper.dart';
 import 'Models/menuitem.dart';
 import 'Models/order.dart';
@@ -110,13 +110,16 @@ class _MyAppState extends State<MyApp> {
 
   void _addToCart(String itemId) {
     final mealToAdd = _availableMeals.firstWhere((menu) => menu.id == itemId);
-    _cartItem.add(mealToAdd);
-    saveCartData(_cartItem);
+    setState(() {
+      _cartItem.add(mealToAdd);
+    });
   }
 
   void _removeFromCart(MenuItem meal) {
     final itemIndex = _cartItem.indexOf(meal);
-    _cartItem.removeAt(itemIndex);
+    setState(() {
+      _cartItem.removeAt(itemIndex);
+    });
   }
 
   void _toggleFavorite(mealId) {
@@ -144,7 +147,7 @@ class _MyAppState extends State<MyApp> {
     List<MenuItem> menu = DUMMY_MENU_ITEMS;
     List<Order> order = DUMMY_ORDER;
     return MaterialApp(
-      scrollBehavior: touchScrollBehavior(),
+      scrollBehavior: TouchScrollBehavior(),
       debugShowCheckedModeBanner: false,
       title: 'RebDelivery',
       theme: lightTheme,
@@ -178,11 +181,15 @@ class _MyAppState extends State<MyApp> {
         MealScreen.routeName: (context) => const MealScreen(),
         FavoriteScreen.routeName: (context) => FavoriteScreen(
               favouriteMeals: _favoriteMeals,
+              cartQuantity: getCart,
             ),
         CheckoutScreen.routeName: (context) => CheckoutScreen(
               items: _cartItem,
               getLocation: _getCurrentLocation,
               address: _address,
+            ),
+        UserLocationMap.routeName: (context) => UserLocationMap(
+              currentPosition: _currentPosition,
             ),
       },
     );

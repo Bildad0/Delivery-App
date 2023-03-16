@@ -23,6 +23,16 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
     final List<Order> orders = DUMMY_ORDER;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios_outlined,
+            size: 20,
+          ),
+        ),
         elevation: 0,
         foregroundColor: headerTextColor,
         backgroundColor: headerBackGround,

@@ -101,7 +101,6 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
             ),
             onPressed: () {
               addToCart(mealId);
-              print("meal added to cart " + mealId);
             },
             child: Container(
               padding: const EdgeInsets.all(5),
@@ -179,7 +178,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String cartQuantity = widget.cartQuantity.toString();
+    String cartQuantity = widget.cartQuantity.call();
     final itemId = ModalRoute.of(context)?.settings.arguments as String;
     final selectedMeal = DUMMY_MENU_ITEMS.firstWhere((meal) {
       return meal.id == itemId;
@@ -216,12 +215,12 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
             context,
             Icons.shopping_cart_outlined,
             CartScreen.routeName,
+            cartQuantity,
           ),
-          buildLeading(
-            context,
-            Icons.share_sharp,
-            "",
-          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.share_sharp),
+          )
         ],
       ),
       drawer: const MainDrawer(),
