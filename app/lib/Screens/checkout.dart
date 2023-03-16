@@ -41,7 +41,7 @@ class CheckoutScreen extends StatelessWidget {
             ElevatedButton(
               child: const Text('Place Order'),
               onPressed: () {
-                // TODO: Implement place order logic
+                
               },
             ),
           ],
