@@ -25,6 +25,16 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
         foregroundColor: headerTextColor,
         backgroundColor: headerBackGround,
         title: Text(""),
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios_outlined,
+            size: 20,
+          ),
+        ),
       ),
     );
   }

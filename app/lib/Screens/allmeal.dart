@@ -18,8 +18,17 @@ class MealScreen extends StatelessWidget {
         foregroundColor: headerTextColor,
         backgroundColor: headerBackGround,
         elevation: 0,
-        automaticallyImplyLeading: true,
         title: const Text("Meals"),
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios_outlined,
+            size: 20,
+          ),
+        ),
       ),
       body: GridView.builder(
         padding: const EdgeInsets.all(16),

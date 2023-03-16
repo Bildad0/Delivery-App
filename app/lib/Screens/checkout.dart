@@ -44,67 +44,80 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios_outlined,
+            size: 20,
+          ),
+        ),
         backgroundColor: Colors.white,
         elevation: 3,
-        title: Column(children: [
-          Card(
-            shape: const StadiumBorder(
-              side: BorderSide(
-                color: Colors.white,
-                width: 1.0,
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Card(
+              shape: const StadiumBorder(
+                side: BorderSide(
+                  color: Colors.white,
+                  width: 1.0,
+                ),
+              ),
+              color: Colors.grey[200],
+              elevation: 0,
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                height: 45,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        getCurrentLocation();
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const Text("Delivery:"),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            address ?? 'Retrieving location...',
+                            style: const TextStyle(color: Colors.red),
+                          ),
+                        ],
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushNamed(UserLocationMap.routeName);
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: const [
+                          Text(
+                            "Change Location",
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios_outlined,
+                            size: 14,
+                            color: Colors.red,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-            color: Colors.grey[200],
-            elevation: 0,
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              height: 50,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      getCurrentLocation();
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Text("Delivery:"),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          address ?? 'Retrieving location...',
-                          style: const TextStyle(color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context)
-                          .pushNamed(UserLocationMap.routeName);
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: const [
-                        Text(
-                          "Change Location",
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios_outlined,
-                          size: 14,
-                          color: Colors.red,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ]),
+          ],
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),

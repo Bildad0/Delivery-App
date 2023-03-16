@@ -35,6 +35,16 @@ class _UserLocationMapState extends State<UserLocationMap> {
     print("from maps=> $center");
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios_outlined,
+            size: 20,
+          ),
+        ),
         foregroundColor: Colors.red[400],
         backgroundColor: Colors.transparent,
         elevation: 0,

@@ -1,5 +1,3 @@
-import 'package:app/Resources/types.dart';
-import 'package:app/Screens/mealdetails.dart';
 import 'package:flutter/material.dart';
 
 import '../Models/menuitem.dart';
@@ -43,6 +41,16 @@ class _MenuScreenState extends State<MenuScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios_outlined,
+            size: 20,
+          ),
+        ),
         backgroundColor: headerBackGround,
         elevation: 0,
         title: Text(
