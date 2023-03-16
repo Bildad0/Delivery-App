@@ -29,8 +29,10 @@ class _SplashScreenState extends State<SplashScreen> {
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
-            image:
-                DecorationImage(image: image, scale: 3, fit: BoxFit.fitWidth),
+            image: DecorationImage(
+              image: image,
+              scale: 1,
+            ),
           ),
         ),
       ],
@@ -40,6 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: CarouselSlider(
         items: [
           buildCarouselPages(
@@ -67,7 +70,7 @@ class _SplashScreenState extends State<SplashScreen> {
           enableInfiniteScroll: true,
           initialPage: 0,
           padEnds: true,
-          autoPlayAnimationDuration: const Duration(milliseconds: 100),
+          autoPlayAnimationDuration: const Duration(milliseconds: 50),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

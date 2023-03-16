@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../Resources/cache_helper.dart';
 import '../Widgets/alert.dart';
+import 'checkout.dart';
 
 class CartScreen extends StatefulWidget {
   final cart;
@@ -42,9 +43,9 @@ class _CartScreenState extends State<CartScreen> {
     }
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
+        elevation: 3,
         foregroundColor: Colors.red,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         title: const Text('Cart'),
       ),
       body: ListView.builder(
@@ -94,10 +95,14 @@ class _CartScreenState extends State<CartScreen> {
               ),
             ),
             ElevatedButton(
-              child: const Text('Checkout'),
+              child: const Text(
+                'Checkout',
+                style: TextStyle(color: Colors.white),
+              ),
               onPressed: () {
                 removeCartDataFromCache();
-                // TODO: Implement checkout logic
+                Navigator.of(context)
+                    .pushNamed(CheckoutScreen.routeName, arguments: totalCost);
               },
             ),
           ],

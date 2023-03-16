@@ -1,4 +1,4 @@
-import 'package:app/Models/menuitem.dart';
+import 'menuitem.dart';
 
 import 'address.dart';
 import 'user.dart';

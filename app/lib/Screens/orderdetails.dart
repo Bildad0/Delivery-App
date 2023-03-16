@@ -24,7 +24,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
         elevation: 0,
         foregroundColor: headerTextColor,
         backgroundColor: headerBackGround,
-        title: Text(""),
+        title: Text("Title here"),
       ),
     );
   }

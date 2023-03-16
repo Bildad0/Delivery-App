@@ -1,11 +1,20 @@
-import 'package:app/Resources/cache_helper.dart';
-import 'package:flutter/material.dart';
+// ignore_for_file: unused_field
 
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:open_settings/open_settings.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'Resources/cache_helper.dart';
 import 'Models/menuitem.dart';
 import 'Models/order.dart';
 import 'Resources/dummydatat.dart';
+import 'Resources/scroll_behaviour.dart';
 import 'Screens/allmeal.dart';
 import 'Screens/cart.dart';
+import 'Screens/checkout.dart';
 import 'Screens/favourite.dart';
 import 'Screens/home.dart';
 import 'Screens/loginorsignup.dart';
@@ -36,6 +45,60 @@ class _MyAppState extends State<MyApp> {
   final List<MenuItem> _availableMeals = DUMMY_MENU_ITEMS;
   final List<MenuItem> _favoriteMeals = [];
   final List<MenuItem> _cartItem = [];
+  LocationPermission? _locationPermission;
+  Position? _currentPosition;
+  String? _address;
+  bool _locationEnabled = false;
+  @override
+  void initState() {
+    super.initState();
+    _checkLocationEnabled();
+  }
+
+  Future<String> _checkLocationPermission() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.deniedForever ||
+        permission == LocationPermission.denied ||
+        permission == LocationPermission.unableToDetermine) {
+      Geolocator.openAppSettings();
+    }
+    setState(() {
+      _locationPermission = permission;
+    });
+    return _getCurrentLocation();
+  }
+
+  Future<void> _checkLocationEnabled() async {
+    bool isLocationEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!isLocationEnabled) {
+      return OpenSettings.openLocationSourceSetting();
+    }
+    setState(() {
+      _locationEnabled = isLocationEnabled;
+    });
+    _checkLocationPermission();
+  }
+
+  Future<String> _getCurrentLocation() async {
+    final position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.bestForNavigation,
+    );
+    setState(() {
+      _currentPosition = position;
+    });
+    print("Turned on and picked $_currentPosition");
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+        _currentPosition!.latitude,
+        _currentPosition!.longitude,
+      );
+      Placemark place = placemarks[0];
+      return _address =
+          "${place.subLocality}, ${place.locality}, ${place.country}";
+    } catch (e) {
+      return _address = "Error getting address";
+    }
+  }
 
   String getCart() {
     final cartSize = _cartItem.length;
@@ -81,6 +144,7 @@ class _MyAppState extends State<MyApp> {
     List<MenuItem> menu = DUMMY_MENU_ITEMS;
     List<Order> order = DUMMY_ORDER;
     return MaterialApp(
+      scrollBehavior: touchScrollBehavior(),
       debugShowCheckedModeBanner: false,
       title: 'RebDelivery',
       theme: lightTheme,
@@ -114,6 +178,11 @@ class _MyAppState extends State<MyApp> {
         MealScreen.routeName: (context) => const MealScreen(),
         FavoriteScreen.routeName: (context) => FavoriteScreen(
               favouriteMeals: _favoriteMeals,
+            ),
+        CheckoutScreen.routeName: (context) => CheckoutScreen(
+              items: _cartItem,
+              getLocation: _getCurrentLocation,
+              address: _address,
             ),
       },
     );
