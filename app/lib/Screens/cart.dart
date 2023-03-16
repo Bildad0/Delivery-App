@@ -63,7 +63,7 @@ class _CartScreenState extends State<CartScreen> {
                   builder: (BuildContext context) => alertBox(
                     context,
                     Icons.info_outline,
-                    "Do you want to delete ${item.name} from the list?",
+                    "Item ${item.name} has been deleted from the list",
                   ),
                 );
                 widget.removeItem(item);

@@ -4,8 +4,9 @@ Widget buildLeading(
   context,
   IconData icon,
   String route,
+  String cartQuantity,
 ) {
-  return Column(
+  return Row(
     children: [
       IconButton(
         onPressed: () {
@@ -14,9 +15,16 @@ Widget buildLeading(
         icon: Icon(icon),
       ),
       Container(
-        height: 2,
-        transform: Matrix4.translationValues(-50.0, -50.0, 0.0),
-        child: const Text("1"),
+        transform: Matrix4.translationValues(-25.0, -10.0, 0.0),
+        child: CircleAvatar(
+          radius: 8,
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.red,
+          child: Text(
+            cartQuantity,
+            style: const TextStyle(fontSize: 10),
+          ),
+        ),
       ),
     ],
   );

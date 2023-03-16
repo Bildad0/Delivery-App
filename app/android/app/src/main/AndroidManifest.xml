@@ -4,6 +4,9 @@
         android:label="RebDelivery"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data android:name="com.google.android.geo.AIzaSyA1OnOMsphkw2q-oP_gOfZ9NiMqCKkBk9k"
+            android:value="AIzaSyA1OnOMsphkw2q-oP_gOfZ9NiMqCKkBk9k" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

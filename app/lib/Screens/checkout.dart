@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:geolocator/geolocator.dart';
 
 import '../Models/menuitem.dart';
+import 'user_location.dart';
 
 class CheckoutScreen extends StatefulWidget {
   static const routeName = "/check-out";
   final List<MenuItem> items;
   final Function getLocation;
   final String? address;
-  final Position? currentPosition;
+
   const CheckoutScreen({
     Key? key,
     required this.items,
     required this.getLocation,
     required this.address,
-    this.currentPosition,
   }) : super(key: key);
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();
@@ -35,7 +34,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         context,
         showTitleActions: true,
         minTime: DateTime.now(),
-        //maxTime: DateTime.now(),
         onChanged: (date) {},
         onConfirm: (date) {
           dateController.text = date.toString().substring(0, 16);
@@ -49,26 +47,26 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         backgroundColor: Colors.white,
         elevation: 3,
         title: Column(children: [
-          GestureDetector(
-            onTap: () {
-              getCurrentLocation();
-            },
-            child: Card(
-              shape: const StadiumBorder(
-                side: BorderSide(
-                  color: Colors.white,
-                  width: 1.0,
-                ),
+          Card(
+            shape: const StadiumBorder(
+              side: BorderSide(
+                color: Colors.white,
+                width: 1.0,
               ),
-              color: Colors.grey[200],
-              elevation: 0,
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                height: 40,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
+            ),
+            color: Colors.grey[200],
+            elevation: 0,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              height: 50,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      getCurrentLocation();
+                    },
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         const Text("Delivery:"),
@@ -81,7 +79,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         ),
                       ],
                     ),
-                    Row(
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushNamed(UserLocationMap.routeName);
+                    },
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: const [
                         Text(
@@ -95,8 +99,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

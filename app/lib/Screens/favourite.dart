@@ -9,10 +9,11 @@ import 'cart.dart';
 
 class FavoriteScreen extends StatefulWidget {
   final List<MenuItem> favouriteMeals;
-
+  final Function cartQuantity;
   const FavoriteScreen({
     Key? key,
     required this.favouriteMeals,
+    required this.cartQuantity,
   }) : super(key: key);
   static const routeName = "/favorites";
 
@@ -23,6 +24,7 @@ class FavoriteScreen extends StatefulWidget {
 class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
+    final cartQuantity = widget.cartQuantity.call();
     if (widget.favouriteMeals.isEmpty) {
       return Scaffold(
         appBar: AppBar(
@@ -34,11 +36,11 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
               context,
               Icons.shopping_cart_outlined,
               CartScreen.routeName,
+              cartQuantity as String,
             ),
-            buildLeading(
-              context,
-              Icons.share_sharp,
-              "",
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.share_sharp),
             )
           ],
         ),
@@ -60,11 +62,11 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
               context,
               Icons.shopping_cart_outlined,
               CartScreen.routeName,
+              cartQuantity,
             ),
-            buildLeading(
-              context,
-              Icons.share_sharp,
-              "",
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.share_sharp),
             )
           ],
         ),
