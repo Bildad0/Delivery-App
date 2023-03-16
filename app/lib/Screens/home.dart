@@ -6,14 +6,20 @@ import 'package:intl/intl.dart';
 
 import '../Models/foodcategories.dart';
 import '../Resources/dummydatat.dart';
+import '../Widgets/cart_icon.dart';
 import '../Widgets/main_drawer.dart';
 import '../Widgets/meal_category.dart';
 import '../theme/theme_constants.dart';
 import '../theme/theme_manager.dart';
+import 'cart.dart';
 import 'menu.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final Function cartQuantity;
+  const HomeScreen({
+    Key? key,
+    required this.cartQuantity,
+  }) : super(key: key);
 
   static const routeName = '/home';
 
@@ -44,22 +50,40 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  Widget customSwitch() {
+    return Switch(
+        value: _themeManager.themeMode == ThemeMode.dark,
+        onChanged: (newValue) {
+          _themeManager.toggleTheme(newValue);
+        }); //!TODO: add this toggle button on settings page for  theme changing.
+  }
+
   @override
   Widget build(BuildContext context) {
     var greetings = "RebDelivery";
+    String cartQuantity = widget.cartQuantity.call();
     const List<category> _categories = DUMMY_CATEGORIES;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: headerBackGround,
         elevation: 0,
         foregroundColor: headerTextColor,
-        title: Text(greetings),
+        title: Text(
+          greetings,
+          style: const TextStyle(
+            color: backGroundColor,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'SawarabiGothic',
+          ),
+        ),
         actions: [
-          Switch(
-              value: _themeManager.themeMode == ThemeMode.dark,
-              onChanged: (newValue) {
-                _themeManager.toggleTheme(newValue);
-              }), //!TODO: add this toggle button on settings page for  theme changing.
+          cartIcon(
+            context,
+            Icons.shopping_cart_outlined,
+            CartScreen.routeName,
+            cartQuantity,
+          ),
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {},
@@ -96,14 +120,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.all(16),
+          Padding(
+            padding: const EdgeInsets.all(16),
             child: Text(
               'Categories',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
           Expanded(

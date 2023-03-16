@@ -156,13 +156,17 @@ class _MyAppState extends State<MyApp> {
       initialRoute: "/",
       onUnknownRoute: (settings) {
         return MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) => HomeScreen(
+            cartQuantity: getCart,
+          ),
         ); //!TODO: add error page here
       },
       routes: {
         '/': (context) => const SplashScreen(),
         SignUpScreen.routeName: (context) => const SignUpScreen(),
-        HomeScreen.routeName: (context) => const HomeScreen(),
+        HomeScreen.routeName: (context) => HomeScreen(
+              cartQuantity: getCart,
+            ),
         LoginScreen.routeName: (context) => const LoginScreen(),
         CartScreen.routeName: (context) => CartScreen(
               cart: _cartItem,

@@ -36,10 +36,7 @@ Widget buildingCategoryListTile(
         const SizedBox(height: 8),
         Text(
           title,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
       ],
     ),

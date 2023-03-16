@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../Models/menuitem.dart';
-import '../Widgets/leadings.dart';
+import '../Widgets/cart_icon.dart';
+
 import '../Widgets/main_drawer.dart';
 import '../Widgets/mealitem.dart';
 import '/Resources/dummydatat.dart';
@@ -211,7 +212,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
               widget.toggleFavorite(selectedMeal.id);
             },
           ),
-          buildLeading(
+          cartIcon(
             context,
             Icons.shopping_cart_outlined,
             CartScreen.routeName,
