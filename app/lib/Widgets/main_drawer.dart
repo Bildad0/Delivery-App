@@ -66,6 +66,10 @@ class _MainDrawerState extends State<MainDrawer> {
       },
       child: Row(
         children: [
+          // const CircleAvatar(
+          //   radius: 32,
+          //   backgroundImage: AssetImage('assets/profile.jpg'),
+          // ),
           Icon(
             icon,
             color: backGroundColor,
@@ -213,6 +217,7 @@ class _MainDrawerState extends State<MainDrawer> {
                             ProfileScreen.routeName,
                             user,
                           ),
+                          const Divider(),
                           buildListTile(
                             context,
                             "Orders",
@@ -221,6 +226,7 @@ class _MainDrawerState extends State<MainDrawer> {
                             OrderHistoryScreen.routeName,
                             user,
                           ),
+                          const Divider(),
                           buildListTile(
                             context,
                             "Favourites",
@@ -229,6 +235,7 @@ class _MainDrawerState extends State<MainDrawer> {
                             FavoriteScreen.routeName,
                             user,
                           ),
+                          const Divider(),
                           buildListTile(
                             context,
                             "Cart",
@@ -238,42 +245,39 @@ class _MainDrawerState extends State<MainDrawer> {
                                 .routeName, //!TODO: Solve the cartscreen error.
                             user,
                           ),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text(
-                          "Settings",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            fontFamily: 'SawarabiGothic',
+                          const Divider(),
+                          buildListTile(
+                            context,
+                            "Settings",
+                            "App settings",
+                            Icons.settings_accessibility_outlined,
+                            "setingpage",
+                            user,
                           ),
-                        ),
-                        Icon(
-                          Icons.settings,
-                          size: 20,
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 200,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: ListView(
-                          children: [
-                            SwitchListTile(
-                              title: const Text("Change theme"),
-                              value: ThemeMode == _themeManager.lightMode,
-                              onChanged: (value) {
-                                _themeManager.toggleTheme(value);
-                              },
+                          const Divider(),
+                          buildListTile(
+                            context,
+                            "Help",
+                            "Help & Support",
+                            Icons.help,
+                            "support page",
+                            user,
+                          ),
+                          const Divider(),
+                          ListTile(
+                            leading: const Icon(
+                              Icons.logout,
+                              color: Colors.red,
                             ),
-                            //!TODO: add SwitchTIle for setting location on.
-                          ],
-                        ),
+                            title: const Text(
+                              'Logout',
+                              style: TextStyle(color: Colors.red),
+                            ),
+                            onTap: () {
+                              // TODO: Implement logout functionality
+                            },
+                          ),
+                        ],
                       ),
                     ),
                   ],

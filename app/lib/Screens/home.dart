@@ -9,7 +9,6 @@ import '../Widgets/cart_icon.dart';
 import '../Widgets/main_drawer.dart';
 import '../Widgets/meal_category.dart';
 import '../theme/theme_constants.dart';
-import '../theme/theme_manager.dart';
 import 'cart.dart';
 
 class HomeScreen extends StatefulWidget {

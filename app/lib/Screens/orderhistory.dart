@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../Resources/dummydatat.dart';
 import '../Resources/types.dart';
 import '../theme/theme_constants.dart';
+import 'home.dart';
 import 'orderdetails.dart';
 
 class OrderHistoryScreen extends StatefulWidget {
@@ -26,7 +27,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
         automaticallyImplyLeading: false,
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(HomeScreen.routeName);
           },
           icon: const Icon(
             Icons.arrow_back_ios_outlined,

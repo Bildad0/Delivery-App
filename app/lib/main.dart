@@ -49,10 +49,15 @@ class _MyAppState extends State<MyApp> {
   Position? _currentPosition;
   String? _address;
   bool _locationEnabled = false;
+
   @override
   void initState() {
     super.initState();
-    _checkLocationEnabled();
+    _checkLocationEnabled().then((value) {
+      setState(() {
+        _locationEnabled == true;
+      });
+    });
   }
 
   Future<String> _checkLocationPermission() async {
@@ -86,7 +91,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _currentPosition = position;
     });
-    print("Turned on and picked $_currentPosition");
+
     try {
       List<Placemark> placemarks = await placemarkFromCoordinates(
         _currentPosition!.latitude,
@@ -195,7 +200,10 @@ class _MyAppState extends State<MyApp> {
         UserLocationMap.routeName: (context) => UserLocationMap(
               currentPosition: _currentPosition,
             ),
-        ProfileScreen.routeName: (context) => const ProfileScreen(),
+        ProfileScreen.routeName: (context) => ProfileScreen(
+              address: _address,
+              isLocationEnabled: _locationEnabled,
+            ),
       },
     );
   }

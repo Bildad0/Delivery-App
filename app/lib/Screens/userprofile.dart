@@ -1,13 +1,20 @@
 import 'package:app/main.dart';
-
-import '/Screens/loginorsignup.dart';
 import 'package:flutter/material.dart';
 
 import '../Models/user.dart';
+import '/Screens/loginorsignup.dart';
+import 'home.dart';
+import 'user_location.dart';
 
 class ProfileScreen extends StatefulWidget {
   static const routeName = "Profile";
-  const ProfileScreen({super.key});
+  bool isLocationEnabled;
+  String? address;
+  ProfileScreen({
+    Key? key,
+    required this.isLocationEnabled,
+    required this.address,
+  }) : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -17,8 +24,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     User user = ModalRoute.of(context)!.settings.arguments as User;
-    bool _isLocationEnabled = true;
-    bool _isNotificationsEnabled = true;
+    String? location = widget.address;
+    bool isLocationEnabled = widget.isLocationEnabled;
+    bool isNotificationsEnabled = true;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -26,7 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(HomeScreen.routeName);
           },
           icon: const Icon(
             Icons.arrow_back_ios_outlined,
@@ -79,11 +87,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const Divider(),
                   SwitchListTile(
-                    value: _isLocationEnabled,
+                    value: isLocationEnabled,
                     title: const Text('Enable location'),
                     onChanged: (value) {
                       setState(() {
-                        _isLocationEnabled = value;
+                        isLocationEnabled = value;
                       });
                     },
                   ),
@@ -91,9 +99,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ListTile(
                     leading: const Icon(Icons.location_on),
                     title: const Text('Delivery address'),
-                    subtitle: const Text('123 Main St'),
+                    subtitle: Text(
+                      location ?? 'Retrieving location...!',
+                      style: const TextStyle(color: Colors.red),
+                    ),
                     onTap: () {
-                      // TODO: Navigate to delivery address editing screen
+                      Navigator.of(context)
+                          .pushNamed(UserLocationMap.routeName);
                     },
                   ),
                 ],
@@ -110,11 +122,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const Divider(),
                   SwitchListTile(
-                    value: _isNotificationsEnabled,
+                    value: isNotificationsEnabled,
                     title: const Text('Enable notifications'),
                     onChanged: (value) {
                       setState(() {
-                        _isNotificationsEnabled = value;
+                        isNotificationsEnabled = value;
                       });
                     },
                   ),
