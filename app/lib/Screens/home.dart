@@ -2,7 +2,6 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../Models/foodcategories.dart';
 import '../Resources/dummydatat.dart';
@@ -12,7 +11,6 @@ import '../Widgets/meal_category.dart';
 import '../theme/theme_constants.dart';
 import '../theme/theme_manager.dart';
 import 'cart.dart';
-import 'menu.dart';
 
 class HomeScreen extends StatefulWidget {
   final Function cartQuantity;
@@ -27,40 +25,10 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-ThemeManager _themeManager = ThemeManager();
-
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  void dispose() {
-    super.dispose();
-    _themeManager.removeListener(themeListener);
-  }
-
-  @override
-  void initState() {
-    _themeManager.addListener(themeListener);
-    super.initState();
-  }
-
-  themeListener() {
-    if (mounted) {
-      setState(() {
-        _themeManager.addListener(themeListener);
-      });
-    }
-  }
-
-  Widget customSwitch() {
-    return Switch(
-        value: _themeManager.themeMode == ThemeMode.dark,
-        onChanged: (newValue) {
-          _themeManager.toggleTheme(newValue);
-        }); //!TODO: add this toggle button on settings page for  theme changing.
-  }
-
-  @override
   Widget build(BuildContext context) {
-    var greetings = "RebDelivery";
+    var appName = "RebDelivery";
     String cartQuantity = widget.cartQuantity.call();
     const List<category> _categories = DUMMY_CATEGORIES;
     return Scaffold(
@@ -68,15 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: headerBackGround,
         elevation: 0,
         foregroundColor: headerTextColor,
-        title: Text(
-          greetings,
-          style: const TextStyle(
-            color: backGroundColor,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'SawarabiGothic',
-          ),
-        ),
+        title: Text(appName, style: Theme.of(context).textTheme.titleLarge),
         actions: [
           cartIcon(
             context,
@@ -84,10 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
             CartScreen.routeName,
             cartQuantity,
           ),
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {},
-          )
         ],
       ),
       drawer: const MainDrawer(),

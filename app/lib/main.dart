@@ -2,12 +2,11 @@
 
 import 'dart:async';
 
-import 'package:app/Screens/user_location.dart';
+import 'Screens/user_location.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:open_settings/open_settings.dart';
-import 'Resources/cache_helper.dart';
 import 'Models/menuitem.dart';
 import 'Models/order.dart';
 import 'Resources/dummydatat.dart';
@@ -23,6 +22,7 @@ import 'Screens/menu.dart';
 import 'Screens/orderdetails.dart';
 import 'Screens/orderhistory.dart';
 import 'Screens/splashscreen.dart';
+import 'Screens/userprofile.dart';
 import 'theme/theme_constants.dart';
 import 'theme/theme_manager.dart';
 
@@ -195,6 +195,7 @@ class _MyAppState extends State<MyApp> {
         UserLocationMap.routeName: (context) => UserLocationMap(
               currentPosition: _currentPosition,
             ),
+        ProfileScreen.routeName: (context) => const ProfileScreen(),
       },
     );
   }

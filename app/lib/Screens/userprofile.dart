@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../Models/user.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
+  static const routeName = "Profile";
+  const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
+    User user = ModalRoute.of(context)!.settings.arguments as User;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
@@ -27,9 +35,10 @@ class ProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              child: const Text('Sign Out'),
+              child:
+                  const Text('Sign Out', style: TextStyle(color: Colors.white)),
               onPressed: () {
-                // TODO: Implement sign out logic
+                // TODO: clear user details from local storage
               },
             ),
           ],

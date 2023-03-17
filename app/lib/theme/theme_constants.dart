@@ -18,14 +18,19 @@ ThemeData lightTheme = ThemeData(
       fontWeight: FontWeight.bold,
       fontFamily: 'SawarabiGothic',
     ),
-    titleLarge:
-        TextStyle(fontStyle: FontStyle.italic, fontFamily: 'PatrickHand'),
+    titleLarge: TextStyle(
+      color: headerTextColor,
+      fontStyle: FontStyle.italic,
+      fontSize: 24,
+      fontFamily: 'PatrickHand',
+    ),
     bodyMedium: TextStyle(
       color: bodyTextColor,
       fontSize: 13,
       fontStyle: FontStyle.italic,
       fontFamily: 'SawarabiGothic',
     ),
+    labelLarge: TextStyle(),
   ),
   appBarTheme: AppBarTheme(
       backgroundColor: Colors.transparent, foregroundColor: Colors.red[800]),
@@ -35,7 +40,7 @@ ThemeData lightTheme = ThemeData(
 
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
-  primaryColor: Colors.white,
+  primaryColor: Colors.black,
   colorScheme: const ColorScheme.dark(),
 );
 
