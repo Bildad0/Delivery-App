@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../Models/menuitem.dart';
-import '../Widgets/leadings.dart';
+
+import '../Widgets/cart_icon.dart';
 import '../Widgets/mealitem.dart';
 import '../theme/theme_constants.dart';
 import '/Widgets/main_drawer.dart';
@@ -32,7 +33,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           backgroundColor: headerBackGround,
           foregroundColor: headerTextColor,
           actions: [
-            buildLeading(
+            cartIcon(
               context,
               Icons.shopping_cart_outlined,
               CartScreen.routeName,
@@ -58,7 +59,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           backgroundColor: headerBackGround,
           foregroundColor: headerTextColor,
           actions: [
-            buildLeading(
+            cartIcon(
               context,
               Icons.shopping_cart_outlined,
               CartScreen.routeName,

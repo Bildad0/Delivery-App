@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget buildLeading(
+Widget cartIcon(
   context,
   IconData icon,
   String route,
@@ -10,7 +10,7 @@ Widget buildLeading(
     children: [
       IconButton(
         onPressed: () {
-          Navigator.of(context).pushReplacementNamed(route);
+          Navigator.of(context).pushNamed(route);
         },
         icon: Icon(icon),
       ),

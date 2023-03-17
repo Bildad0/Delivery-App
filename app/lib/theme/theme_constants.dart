@@ -5,11 +5,27 @@ ThemeData lightTheme = ThemeData(
   primaryColor: Colors.red[800],
   fontFamily: 'SawarabiGothic',
   textTheme: const TextTheme(
-    bodySmall: TextStyle(color: Colors.red, fontFamily: 'SawarabiGothic'),
-    bodyLarge: TextStyle(color: Colors.red, fontFamily: 'Georgia'),
+    bodySmall: TextStyle(
+      fontStyle: FontStyle.italic,
+      fontWeight: FontWeight.bold,
+      color: amountColor,
+      fontSize: 15,
+      fontFamily: 'SawarabiGothic',
+    ),
+    bodyLarge: TextStyle(
+      color: bodyTextColor,
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      fontFamily: 'SawarabiGothic',
+    ),
     titleLarge:
         TextStyle(fontStyle: FontStyle.italic, fontFamily: 'PatrickHand'),
-    bodyMedium: TextStyle(fontFamily: 'Hind'),
+    bodyMedium: TextStyle(
+      color: bodyTextColor,
+      fontSize: 13,
+      fontStyle: FontStyle.italic,
+      fontFamily: 'SawarabiGothic',
+    ),
   ),
   appBarTheme: AppBarTheme(
       backgroundColor: Colors.transparent, foregroundColor: Colors.red[800]),
@@ -28,3 +44,4 @@ const headerTextColor = Colors.red;
 const bodyTextColor = Colors.black;
 const headerBackGround = Colors.transparent;
 const descriptionColor = Colors.grey;
+const amountColor = Colors.greenAccent;

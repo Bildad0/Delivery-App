@@ -43,11 +43,10 @@ class _CartScreenState extends State<CartScreen> {
     }
     return Scaffold(
       appBar: AppBar(
-        elevation: 3,
+        elevation: 0,
         foregroundColor: Colors.red,
         backgroundColor: Colors.white,
         title: const Text('Cart'),
-        automaticallyImplyLeading: false,
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();

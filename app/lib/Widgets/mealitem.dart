@@ -41,26 +41,17 @@ class MealItem extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             mealName,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
           const SizedBox(height: 4),
           Text(
             mealDescription,
-            style: const TextStyle(
-              color: Colors.grey,
-              fontSize: 12,
-            ),
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
           const SizedBox(height: 8),
           Text(
             'Ksh $mealPrice',
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         ],
       ),
