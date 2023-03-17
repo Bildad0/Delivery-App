@@ -35,7 +35,7 @@ class _MainDrawerState extends State<MainDrawer> {
   themeListener() {
     if (mounted) {
       setState(() {
-        _themeManager.toggleTheme;
+        _themeManager.darkMode;
       });
     }
   }
@@ -141,13 +141,11 @@ class _MainDrawerState extends State<MainDrawer> {
       leading: Icon(
         color: headerTextColor,
         icon,
-        size: 25,
       ),
       title: Text(
         title,
         style: const TextStyle(
           fontWeight: FontWeight.normal,
-          fontSize: 18,
           fontFamily: 'SawarabiGothic',
         ),
       ),
@@ -174,110 +172,116 @@ class _MainDrawerState extends State<MainDrawer> {
 
     return Drawer(
       elevation: 0,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          buildTop(
-            context,
-            Icons.person_outlined,
-            user,
-            ProfileScreen.routeName,
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.red.shade200,
+              Colors.white10,
+            ],
+            begin: const FractionalOffset(0.0, 0.0),
+            end: const FractionalOffset(0.0, 1.0),
+            stops: const [0.0, 1.0],
+            tileMode: TileMode.clamp,
           ),
-          //after top
-          Padding(
-            padding: const EdgeInsets.fromLTRB(10, 20, 20, 0),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Navigation",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      fontFamily: 'SawarabiGothic',
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      children: [
-                        buildListTile(
-                          context,
-                          "Profile",
-                          "Profile settings",
-                          Icons.person_outlined,
-                          ProfileScreen.routeName,
-                          user,
-                        ),
-                        buildListTile(
-                          context,
-                          "Orders",
-                          "Order history",
-                          Icons.local_shipping_outlined,
-                          OrderHistoryScreen.routeName,
-                          user,
-                        ),
-                        buildListTile(
-                          context,
-                          "Favourites",
-                          "Favourite meals",
-                          Icons.favorite_outline_outlined,
-                          FavoriteScreen.routeName,
-                          user,
-                        ),
-                        buildListTile(
-                          context,
-                          "Cart",
-                          "Items on cart",
-                          Icons.shopping_cart_outlined,
-                          CartScreen
-                              .routeName, //!TODO: Solve the cartscreen error.
-                          user,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
-                        "Settings",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          fontFamily: 'SawarabiGothic',
-                        ),
-                      ),
-                      Icon(
-                        Icons.settings,
-                        size: 20,
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 200,
-                    child: Padding(
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            buildTop(
+              context,
+              Icons.person_outlined,
+              user,
+              ProfileScreen.routeName,
+            ),
+            //after top
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 20, 20, 0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
                       padding: const EdgeInsets.all(10),
-                      child: ListView(
+                      child: Column(
                         children: [
-                          SwitchListTile(
-                            title: const Text("Change theme"),
-                            value: _themeManager.themeMode == ThemeMode.light,
-                            onChanged: (value) {
-                              _themeManager.toggleTheme(value);
-                            },
+                          buildListTile(
+                            context,
+                            "Profile",
+                            "Profile settings",
+                            Icons.person_outlined,
+                            ProfileScreen.routeName,
+                            user,
                           ),
-                          //!TODO: add SwitchTIle for setting location on.
+                          buildListTile(
+                            context,
+                            "Orders",
+                            "Order history",
+                            Icons.delivery_dining,
+                            OrderHistoryScreen.routeName,
+                            user,
+                          ),
+                          buildListTile(
+                            context,
+                            "Favourites",
+                            "Favourite meals",
+                            Icons.favorite_outline_outlined,
+                            FavoriteScreen.routeName,
+                            user,
+                          ),
+                          buildListTile(
+                            context,
+                            "Cart",
+                            "Items on cart",
+                            Icons.shopping_cart_outlined,
+                            CartScreen
+                                .routeName, //!TODO: Solve the cartscreen error.
+                            user,
+                          ),
                         ],
                       ),
                     ),
-                  ),
-                ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Text(
+                          "Settings",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            fontFamily: 'SawarabiGothic',
+                          ),
+                        ),
+                        Icon(
+                          Icons.settings,
+                          size: 20,
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 200,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: ListView(
+                          children: [
+                            SwitchListTile(
+                              title: const Text("Change theme"),
+                              value: ThemeMode == _themeManager.lightMode,
+                              onChanged: (value) {
+                                _themeManager.toggleTheme(value);
+                              },
+                            ),
+                            //!TODO: add SwitchTIle for setting location on.
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

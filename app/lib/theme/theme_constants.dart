@@ -20,9 +20,9 @@ ThemeData lightTheme = ThemeData(
     ),
     titleLarge: TextStyle(
       color: headerTextColor,
-      fontStyle: FontStyle.italic,
+      fontStyle: FontStyle.normal,
       fontSize: 24,
-      fontFamily: 'PatrickHand',
+      fontFamily: 'SawarabiGothic',
     ),
     bodyMedium: TextStyle(
       color: bodyTextColor,
@@ -49,4 +49,4 @@ const headerTextColor = Colors.red;
 const bodyTextColor = Colors.black;
 const headerBackGround = Colors.transparent;
 const descriptionColor = Colors.grey;
-const amountColor = Colors.greenAccent;
+const amountColor = Colors.black38;

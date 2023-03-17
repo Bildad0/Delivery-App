@@ -152,7 +152,7 @@ class _MyAppState extends State<MyApp> {
       title: 'RebDelivery',
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: _themeManager.themeMode,
+      themeMode: _themeManager.lightThemeMode,
       initialRoute: "/",
       onUnknownRoute: (settings) {
         return MaterialPageRoute(

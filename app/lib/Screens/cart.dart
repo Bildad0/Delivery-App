@@ -27,10 +27,18 @@ class _CartScreenState extends State<CartScreen> {
     for (var item in cart) {
       totalCost += item.price;
     }
-
     if (cart.isEmpty) {
       return Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_outlined,
+              size: 20,
+            ),
+          ),
           elevation: 0,
           foregroundColor: Colors.red,
           backgroundColor: Colors.transparent,
