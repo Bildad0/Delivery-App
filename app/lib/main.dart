@@ -2,12 +2,11 @@
 
 import 'dart:async';
 
-import 'package:app/Screens/user_location.dart';
+import 'Screens/user_location.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:open_settings/open_settings.dart';
-import 'Resources/cache_helper.dart';
 import 'Models/menuitem.dart';
 import 'Models/order.dart';
 import 'Resources/dummydatat.dart';
@@ -23,6 +22,7 @@ import 'Screens/menu.dart';
 import 'Screens/orderdetails.dart';
 import 'Screens/orderhistory.dart';
 import 'Screens/splashscreen.dart';
+import 'Screens/userprofile.dart';
 import 'theme/theme_constants.dart';
 import 'theme/theme_manager.dart';
 
@@ -49,10 +49,15 @@ class _MyAppState extends State<MyApp> {
   Position? _currentPosition;
   String? _address;
   bool _locationEnabled = false;
+
   @override
   void initState() {
     super.initState();
-    _checkLocationEnabled();
+    _checkLocationEnabled().then((value) {
+      setState(() {
+        _locationEnabled == true;
+      });
+    });
   }
 
   Future<String> _checkLocationPermission() async {
@@ -86,7 +91,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _currentPosition = position;
     });
-    print("Turned on and picked $_currentPosition");
+
     try {
       List<Placemark> placemarks = await placemarkFromCoordinates(
         _currentPosition!.latitude,
@@ -152,7 +157,7 @@ class _MyAppState extends State<MyApp> {
       title: 'RebDelivery',
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: _themeManager.themeMode,
+      themeMode: _themeManager.lightThemeMode,
       initialRoute: "/",
       onUnknownRoute: (settings) {
         return MaterialPageRoute(
@@ -194,6 +199,10 @@ class _MyAppState extends State<MyApp> {
             ),
         UserLocationMap.routeName: (context) => UserLocationMap(
               currentPosition: _currentPosition,
+            ),
+        ProfileScreen.routeName: (context) => ProfileScreen(
+              address: _address,
+              isLocationEnabled: _locationEnabled,
             ),
       },
     );

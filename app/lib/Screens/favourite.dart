@@ -29,6 +29,16 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     if (widget.favouriteMeals.isEmpty) {
       return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_outlined,
+              size: 20,
+            ),
+          ),
           elevation: 0,
           backgroundColor: headerBackGround,
           foregroundColor: headerTextColor,
@@ -54,43 +64,53 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     }
 
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: headerBackGround,
-          foregroundColor: headerTextColor,
-          actions: [
-            cartIcon(
-              context,
-              Icons.shopping_cart_outlined,
-              CartScreen.routeName,
-              cartQuantity,
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.share_sharp),
-            )
-          ],
-        ),
-        drawer: const MainDrawer(),
-        body: GridView.builder(
-          padding: const EdgeInsets.all(16),
-          itemCount: widget.favouriteMeals.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 1,
-            mainAxisSpacing: 16,
-            crossAxisSpacing: 16,
-          ),
-          itemBuilder: (context, index) {
-            final item = widget.favouriteMeals;
-            return MealItem(
-              mealDescription: item[index].description,
-              mealId: item[index].id,
-              mealImageUrl: item[index].image,
-              mealName: item[index].name,
-              mealPrice: item[index].price,
-            );
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
           },
-        ));
+          icon: const Icon(
+            Icons.arrow_back_ios_outlined,
+            size: 20,
+          ),
+        ),
+        elevation: 0,
+        backgroundColor: headerBackGround,
+        foregroundColor: headerTextColor,
+        actions: [
+          cartIcon(
+            context,
+            Icons.shopping_cart_outlined,
+            CartScreen.routeName,
+            cartQuantity,
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.share_sharp),
+          )
+        ],
+      ),
+      body: GridView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: widget.favouriteMeals.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 1,
+          mainAxisSpacing: 16,
+          crossAxisSpacing: 16,
+        ),
+        itemBuilder: (context, index) {
+          final item = widget.favouriteMeals;
+          return MealItem(
+            mealDescription: item[index].description,
+            mealId: item[index].id,
+            mealImageUrl: item[index].image,
+            mealName: item[index].name,
+            mealPrice: item[index].price,
+          );
+        },
+      ),
+    );
   }
 }

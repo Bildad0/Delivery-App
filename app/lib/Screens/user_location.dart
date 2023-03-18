@@ -3,7 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class UserLocationMap extends StatefulWidget {
-  static const routeName = "map";
+  static const routeName = "/map";
   final Position? currentPosition;
   const UserLocationMap({
     Key? key,
@@ -32,7 +32,6 @@ class _UserLocationMapState extends State<UserLocationMap> {
       longitude,
     );
 
-    print("from maps=> $center");
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
