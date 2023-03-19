@@ -8,7 +8,7 @@ Future<void> saveCartData(List<MenuItem> cart) async {
   print(prefs.get('CartItem'));
 }
 
-Future getCartData() async {
+Future<List<String>?> getCartData() async {
   final prefs = await SharedPreferences.getInstance();
   return prefs.getStringList('CartItem');
 }

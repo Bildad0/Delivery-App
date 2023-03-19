@@ -24,7 +24,7 @@ Widget buildingCategoryListTile(
         Expanded(
           child: Container(
             decoration: BoxDecoration(
-              border: Border.all(width: 2, color: Colors.grey),
+              border: Border.all(width: 2, color: Colors.white),
               borderRadius: BorderRadius.circular(8),
               image: DecorationImage(
                 image: AssetImage(imageUrl),
@@ -36,7 +36,6 @@ Widget buildingCategoryListTile(
         const SizedBox(height: 8),
         Text(
           title,
-          style: Theme.of(context).textTheme.bodyMedium,
         ),
       ],
     ),
