@@ -1,8 +1,10 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
-import 'package:app/Models/address.dart';
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import '../Models/address.dart';
 import '../Models/foodcategories.dart';
 import '../Models/menuitem.dart';
 import '../Models/order.dart';
@@ -127,7 +129,7 @@ const DUMMY_USER = [
   ),
 ];
 
-//!connect user Address with the zip code because it's the unique component.
+//!Get address from picked up location cordinates.
 
 const DUMMY_ADDRESSES = [
   Address(
@@ -194,3 +196,14 @@ final DUMMY_ORDER = [
     deliveryDate: DateTime.now(),
   ),
 ];
+
+Future<User> getUser() async {
+  final response = await http.get(Uri.parse(
+      "https://console.firebase.google.com/project/delivery-app-1fbbe/firestore/data/~2Fusers"));
+  if (response.statusCode == 200) {
+    print("from dummy data:=> ${response.body}");
+    return User.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('Failed to get user');
+  }
+}

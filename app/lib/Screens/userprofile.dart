@@ -1,8 +1,8 @@
-import 'package:app/main.dart';
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
 import '../Models/user.dart';
-import '/Screens/loginorsignup.dart';
 import 'home.dart';
 import 'user_location.dart';
 

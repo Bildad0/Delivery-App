@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import '../constants.dart';
 
 class UserLocationMap extends StatefulWidget {
   static const routeName = "/map";
@@ -24,6 +27,11 @@ class _UserLocationMapState extends State<UserLocationMap> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final latitude = widget.currentPosition!.latitude;
     final longitude = widget.currentPosition!.longitude;
@@ -31,6 +39,24 @@ class _UserLocationMapState extends State<UserLocationMap> {
       latitude,
       longitude,
     );
+    final LatLng destination = LatLng(latitude - 0.000004, longitude);
+
+    List<LatLng> polylineCoordinates = [];
+
+    void getPolyPoints() async {
+      PolylinePoints polylinePonts = PolylinePoints();
+
+      PolylineResult result = await polylinePonts.getRouteBetweenCoordinates(
+        google_api_key,
+        PointLatLng(center.latitude, center.longitude),
+        PointLatLng(destination.latitude, destination.longitude),
+      );
+
+      if (result.points.isNotEmpty) {
+        result.points.forEach((PointLatLng point) =>
+            polylineCoordinates.add(LatLng(point.latitude, point.longitude)));
+      }
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -57,8 +83,18 @@ class _UserLocationMapState extends State<UserLocationMap> {
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(
           target: center,
-          zoom: 10.0,
+          zoom: 14.5,
         ),
+        markers: {
+          Marker(
+            markerId: const MarkerId("source"),
+            position: center,
+          ),
+          Marker(
+            markerId: const MarkerId("destination"),
+            position: destination,
+          ),
+        },
       ),
     );
   }

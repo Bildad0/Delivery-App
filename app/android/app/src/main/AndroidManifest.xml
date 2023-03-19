@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.app">
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:label="RebDelivery"
         android:name="${applicationName}"
@@ -7,6 +8,7 @@
 
         <meta-data android:name="com.google.android.geo.AIzaSyA1OnOMsphkw2q-oP_gOfZ9NiMqCKkBk9k"
             android:value="AIzaSyA1OnOMsphkw2q-oP_gOfZ9NiMqCKkBk9k" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -33,5 +35,6 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
     </application>
 </manifest>

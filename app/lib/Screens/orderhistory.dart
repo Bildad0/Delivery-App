@@ -1,10 +1,12 @@
 import 'package:app/Models/order.dart';
+import 'package:app/Widgets/alert.dart';
 import 'package:flutter/material.dart';
 
 import '../Resources/dummydatat.dart';
 import '../Resources/types.dart';
 import '../theme/theme_constants.dart';
 import 'home.dart';
+import 'menu.dart';
 import 'orderdetails.dart';
 
 class OrderHistoryScreen extends StatefulWidget {
@@ -22,6 +24,30 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
   @override
   Widget build(BuildContext context) {
     final List<Order> orders = DUMMY_ORDER;
+
+    if (orders.isEmpty) {
+      return Scaffold(
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.red.shade400,
+                Colors.white38,
+              ],
+              begin: const FractionalOffset(0.0, 0.0),
+              end: const FractionalOffset(0.1, 1.0),
+            ),
+          ),
+          child: alertBox(
+            context,
+            Icons.warning_outlined,
+            "You have no penndings, make some orders",
+            "",
+            MenuScreen.routeName,
+          ),
+        ),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
