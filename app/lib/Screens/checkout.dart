@@ -78,7 +78,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          getCurrentLocation();
+                          getCurrentLocation.call();
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -161,28 +161,30 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 ],
               ),
             ),
-            const SizedBox(height: 16),
+            const Divider(),
             Expanded(
-              child: ListView.builder(
-                itemCount: cartItems.length,
-                itemBuilder: (context, index) {
-                  final cartItem = cartItems[index];
-                  return ListTile(
-                    leading: CircleAvatar(
-                      foregroundColor: Colors.orange,
-                      backgroundColor: Colors.transparent,
-                      child: Text(
-                        "${index + 1}",
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+              child: Card(
+                child: ListView.builder(
+                  itemCount: cartItems.length,
+                  itemBuilder: (context, index) {
+                    final cartItem = cartItems[index];
+                    return ListTile(
+                      leading: CircleAvatar(
+                        foregroundColor: Colors.orange,
+                        backgroundColor: Colors.transparent,
+                        child: Text(
+                          "${index + 1}",
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
-                    ),
-                    title: Text(cartItem.name),
-                    trailing: Text('Ksh ${cartItem.price}'),
-                  );
-                },
+                      title: Text(cartItem.name),
+                      trailing: Text('Ksh ${cartItem.price}'),
+                    );
+                  },
+                ),
               ),
             ),
-            const SizedBox(height: 16),
+            const Divider(),
             Container(
               color: Colors.transparent,
               height: 250,

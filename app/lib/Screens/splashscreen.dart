@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import '../Resources/dummydatat.dart';
+import '../Widgets/card_slider.dart';
 import 'loginorsignup.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -45,20 +47,20 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.white,
       body: CarouselSlider(
         items: [
-          buildCarouselPages(
+          cardSlider(
+            context,
             const AssetImage('assets/Images/background1.jpg'),
-            "",
-            "",
+            '',
           ),
-          buildCarouselPages(
+          cardSlider(
+            context,
             const AssetImage('assets/Images/background3.jpg'),
             "",
-            "",
           ),
-          buildCarouselPages(
+          cardSlider(
+            context,
             const AssetImage('assets/Images/background2.jpg'),
-            "",
-            "",
+            '',
           ),
         ],
         options: CarouselOptions(
@@ -86,6 +88,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
           onPressed: (() => {
+                getUser(),
                 Navigator.of(context)
                     .pushReplacementNamed(SignUpScreen.routeName)
               }),
@@ -94,7 +97,7 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Row(
               children: const [
                 Icon(
-                  Icons.login_outlined,
+                  Icons.food_bank_outlined,
                   color: Colors.white,
                 ),
                 SizedBox(

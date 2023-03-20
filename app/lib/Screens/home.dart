@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../Models/foodcategories.dart';
 import '../Resources/dummydatat.dart';
+import '../Widgets/card_slider.dart';
 import '../Widgets/cart_icon.dart';
 import '../Widgets/main_drawer.dart';
 import '../Widgets/meal_category.dart';
@@ -35,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: headerBackGround,
         elevation: 0,
         foregroundColor: headerTextColor,
-        title: Text(appName, style: Theme.of(context).textTheme.titleLarge),
+        title: Text(appName),
         actions: [
           cartIcon(
             context,
@@ -52,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: const EdgeInsets.all(16),
             child:
-                Text('Featured', style: Theme.of(context).textTheme.titleLarge),
+                Text('Featured', style: Theme.of(context).textTheme.bodyLarge),
           ),
           SizedBox(
             height: 200,
@@ -63,15 +64,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 aspectRatio: 16 / 9,
               ),
               items: [
-                Image.network(
-                    'https://anestisxasapotaverna.gr/wp-content/uploads/2021/12/ARTICLE-1.jpg',
-                    fit: BoxFit.fill),
-                Image.network(
-                    'https://anestisxasapotaverna.gr/wp-content/uploads/2021/12/ARTICLE-3-1536x1024.jpg',
-                    fit: BoxFit.fill),
-                Image.network(
-                    'https://anestisxasapotaverna.gr/wp-content/uploads/2021/12/ARTICLE-2.jpg',
-                    fit: BoxFit.fill),
+                cardSlider(
+                  context,
+                  const NetworkImage(
+                      'https://anestisxasapotaverna.gr/wp-content/uploads/2021/12/ARTICLE-1.jpg'),
+                  'Drinks',
+                ),
+                cardSlider(
+                    context,
+                    const NetworkImage(
+                        'https://anestisxasapotaverna.gr/wp-content/uploads/2021/12/ARTICLE-3-1536x1024.jpg'),
+                    'Wines'),
+                cardSlider(
+                  context,
+                  const NetworkImage(
+                      'https://anestisxasapotaverna.gr/wp-content/uploads/2021/12/ARTICLE-2.jpg'),
+                  "Cocktails",
+                )
               ],
             ),
           ),
@@ -79,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.all(16),
             child: Text(
               'Categories',
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
           ),
           Expanded(

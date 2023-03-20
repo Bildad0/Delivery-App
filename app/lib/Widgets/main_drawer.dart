@@ -5,10 +5,13 @@ import '../Models/user.dart';
 import '../Resources/dummydatat.dart';
 import '../Screens/cart.dart';
 import '../Screens/favourite.dart';
+import '../Screens/home.dart';
+import '../Screens/loginorsignup.dart';
 import '../Screens/orderhistory.dart';
 import '../Screens/userprofile.dart';
 import '../theme/theme_constants.dart';
 import '../theme/theme_manager.dart';
+import 'alert.dart';
 
 class MainDrawer extends StatefulWidget {
   const MainDrawer({super.key});
@@ -274,7 +277,14 @@ class _MainDrawerState extends State<MainDrawer> {
                               style: TextStyle(color: Colors.red),
                             ),
                             onTap: () {
-                              // TODO: Implement logout functionality
+                              alertBox(
+                                context,
+                                Icons.warning_outlined,
+                                "Are you sure to logout",
+                                HomeScreen.routeName,
+                                LoginScreen.routeName,
+                              );
+                              //!TODO: clear user local storage
                             },
                           ),
                         ],

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
-  primaryColor: Colors.red[800],
+  primaryColor: Colors.red,
   fontFamily: 'SawarabiGothic',
   textTheme: const TextTheme(
     bodySmall: TextStyle(
@@ -32,8 +32,8 @@ ThemeData lightTheme = ThemeData(
     ),
     labelLarge: TextStyle(),
   ),
-  appBarTheme: AppBarTheme(
-      backgroundColor: Colors.transparent, foregroundColor: Colors.red[800]),
+  appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.transparent, foregroundColor: Colors.red),
   colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red)
       .copyWith(background: Colors.blueAccent, onPrimary: Colors.red),
 );

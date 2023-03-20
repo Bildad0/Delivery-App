@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../Models/menuitem.dart';
 
+import '../Widgets/alert.dart';
 import '../Widgets/cart_icon.dart';
 import '../Widgets/mealitem.dart';
 import '../theme/theme_constants.dart';
-import '/Widgets/main_drawer.dart';
+import 'allmeal.dart';
 import 'cart.dart';
+import 'home.dart';
 
 class FavoriteScreen extends StatefulWidget {
   final List<MenuItem> favouriteMeals;
@@ -28,37 +30,24 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     final cartQuantity = widget.cartQuantity.call();
     if (widget.favouriteMeals.isEmpty) {
       return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          leading: IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios_outlined,
-              size: 20,
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.red.shade400,
+                Colors.white38,
+              ],
+              begin: const FractionalOffset(0.0, 0.0),
+              end: const FractionalOffset(0.1, 1.0),
             ),
           ),
-          elevation: 0,
-          backgroundColor: headerBackGround,
-          foregroundColor: headerTextColor,
-          actions: [
-            cartIcon(
-              context,
-              Icons.shopping_cart_outlined,
-              CartScreen.routeName,
-              cartQuantity as String,
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.share_sharp),
-            )
-          ],
-        ),
-        drawer: const MainDrawer(),
-        body: Center(
-          child: Text("You have no favorites yet!, start adding some",
-              style: Theme.of(context).textTheme.bodySmall),
+          child: alertBox(
+            context,
+            Icons.info_outlined,
+            "You have no favourites yet! Start adding some",
+            HomeScreen.routeName,
+            MealScreen.routeName,
+          ),
         ),
       );
     }
