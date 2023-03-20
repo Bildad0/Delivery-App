@@ -78,11 +78,11 @@ class _HomeScreenState extends State<HomeScreen> {
             label: "Track Order",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.gif),
+            icon: Icon(Icons.card_giftcard),
             label: "Rewards",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
+            icon: Icon(Icons.chat_bubble_outline_rounded),
             label: "Chat",
           ),
         ],

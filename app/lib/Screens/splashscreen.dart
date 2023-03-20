@@ -1,7 +1,5 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import '../Resources/dummydatat.dart';
-import '../Widgets/card_slider.dart';
 import 'loginorsignup.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,30 +15,6 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
   }
 
-  Widget buildCarouselPages(
-    AssetImage image,
-    String title,
-    String description,
-  ) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            image: DecorationImage(
-              image: image,
-              scale: 1,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,9 +23,10 @@ class _SplashScreenState extends State<SplashScreen> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/Images/background3.jpg'),
-                fit: BoxFit.fill)),
+          image: DecorationImage(
+              image: AssetImage('assets/Images/background3.jpg'),
+              fit: BoxFit.fill),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: SizedBox(
