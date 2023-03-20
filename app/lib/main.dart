@@ -1,13 +1,13 @@
 // ignore_for_file: unused_field
 
 import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'Screens/user_location.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:open_settings/open_settings.dart';
+
 import 'Models/menuitem.dart';
 import 'Models/order.dart';
 import 'Resources/dummydatat.dart';
@@ -23,7 +23,9 @@ import 'Screens/menu.dart';
 import 'Screens/orderdetails.dart';
 import 'Screens/orderhistory.dart';
 import 'Screens/splashscreen.dart';
+import 'Screens/user_location.dart';
 import 'Screens/userprofile.dart';
+import 'firebase_options.dart';
 import 'theme/theme_constants.dart';
 import 'theme/theme_manager.dart';
 
@@ -58,9 +60,24 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     _checkLocationEnabled().then((value) {
       setState(() {
+        _themeManager.addListener(themeListener);
         _locationEnabled == true;
       });
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _themeManager.removeListener(themeListener);
+  }
+
+  themeListener() {
+    if (mounted) {
+      setState(() {
+        _themeManager.darkMode;
+      });
+    }
   }
 
   Future<String> _checkLocationPermission() async {
@@ -123,7 +140,7 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  void _removeFromCart(MenuItem meal) {
+  _removeFromCart(MenuItem meal) {
     final itemIndex = _cartItem.indexOf(meal);
     setState(() {
       _cartItem.removeAt(itemIndex);

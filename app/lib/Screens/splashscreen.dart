@@ -45,35 +45,13 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: CarouselSlider(
-        items: [
-          cardSlider(
-            context,
-            const AssetImage('assets/Images/background1.jpg'),
-            '',
-          ),
-          cardSlider(
-            context,
-            const AssetImage('assets/Images/background3.jpg'),
-            "",
-          ),
-          cardSlider(
-            context,
-            const AssetImage('assets/Images/background2.jpg'),
-            '',
-          ),
-        ],
-        options: CarouselOptions(
-          pauseAutoPlayOnManualNavigate: true,
-          pauseAutoPlayInFiniteScroll: true,
-          autoPlay: true,
-          autoPlayCurve: Curves.linear,
-          height: MediaQuery.of(context).size.height,
-          enableInfiniteScroll: true,
-          initialPage: 0,
-          padEnds: true,
-          autoPlayAnimationDuration: const Duration(milliseconds: 50),
-        ),
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/Images/background3.jpg'),
+                fit: BoxFit.fill)),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: SizedBox(
