@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../Resources/cache_helper.dart';
-import '../Widgets/alert.dart';
 import '../Widgets/cart_item_list.dart';
 import '../Widgets/payment_methods.dart';
-import 'allmeal.dart';
 import 'checkout.dart';
-import 'home.dart';
 
 class CartScreen extends StatefulWidget {
   final cart;
@@ -31,29 +28,7 @@ class _CartScreenState extends State<CartScreen> {
     for (var item in cart) {
       totalCost += item.price;
     }
-    if (cart.isEmpty) {
-      return Scaffold(
-        body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.red.shade400,
-                Colors.white38,
-              ],
-              begin: const FractionalOffset(0.0, 0.0),
-              end: const FractionalOffset(0.1, 1.0),
-            ),
-          ),
-          child: alertBox(
-            context,
-            Icons.info_outlined,
-            "Nothing on cart start shopping",
-            HomeScreen.routeName,
-            MealScreen.routeName,
-          ),
-        ),
-      );
-    }
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

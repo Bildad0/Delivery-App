@@ -11,6 +11,9 @@ import '../Widgets/main_drawer.dart';
 import '../Widgets/meal_category.dart';
 import '../theme/theme_constants.dart';
 import 'cart.dart';
+import 'chat_page.dart';
+import 'rewards.dart';
+import 'track_order.dart';
 
 class HomeScreen extends StatefulWidget {
   final Function cartQuantity;
@@ -26,17 +29,31 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int selectedPageIndex = 0;
+
+  void selectedPage(int index) {
+    setState(() {
+      selectedPageIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    var appName = "RebDelivery";
+    final List<Map<String, Object>> _pages = [
+      {"page": const HomePage(), "title": "RebDelivery"},
+      {"page": const TrackOrder(), "title": "Track Order"},
+      {"page": const RewardsPage(), "title": "Rewards"},
+      {"page": const ChatPage(), "title": "Agent"}
+    ];
+
     String cartQuantity = widget.cartQuantity.call();
-    const List<category> _categories = DUMMY_CATEGORIES;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: headerBackGround,
         elevation: 0,
         foregroundColor: headerTextColor,
-        title: Text(appName),
+        title: Text(_pages[selectedPageIndex]['title'] as String),
         actions: [
           cartIcon(
             context,
@@ -47,71 +64,111 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       drawer: const MainDrawer(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child:
-                Text('Featured', style: Theme.of(context).textTheme.bodyLarge),
+      body: _pages[selectedPageIndex]['page'] as Widget,
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 0,
+        currentIndex: selectedPageIndex,
+        onTap: selectedPage,
+        backgroundColor: Colors.white,
+        unselectedItemColor: Colors.grey,
+        selectedItemColor: Colors.red,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            label: "Home",
           ),
-          SizedBox(
-            height: 200,
-            child: CarouselSlider(
-              options: CarouselOptions(
-                autoPlay: true,
-                enlargeCenterPage: true,
-                aspectRatio: 16 / 9,
-              ),
-              items: [
-                cardSlider(
-                  context,
-                  const NetworkImage(
-                      'https://anestisxasapotaverna.gr/wp-content/uploads/2021/12/ARTICLE-1.jpg'),
-                  'Drinks',
-                ),
-                cardSlider(
-                    context,
-                    const NetworkImage(
-                        'https://anestisxasapotaverna.gr/wp-content/uploads/2021/12/ARTICLE-3-1536x1024.jpg'),
-                    'Wines'),
-                cardSlider(
-                  context,
-                  const NetworkImage(
-                      'https://anestisxasapotaverna.gr/wp-content/uploads/2021/12/ARTICLE-2.jpg'),
-                  "Cocktails",
-                )
-              ],
-            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.location_on),
+            label: "Track Order",
           ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Text(
-              'Categories',
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.card_giftcard),
+            label: "Rewards",
           ),
-          Expanded(
-            child: StretchingOverscrollIndicator(
-              axisDirection: AxisDirection.down,
-              child: GridView.builder(
-                padding: const EdgeInsets.all(16),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 1,
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
-                ),
-                itemBuilder: (ctx, index) {
-                  return buildingCategoryListTile(ctx, _categories[index].title,
-                      _categories[index].id, _categories[index].imagUrl);
-                },
-                itemCount: _categories.length,
-              ),
-            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat_bubble_outline_rounded),
+            label: "Chat",
           ),
         ],
       ),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    const List<category> _categories = DUMMY_CATEGORIES;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: Text('Featured', style: Theme.of(context).textTheme.bodyLarge),
+        ),
+        SizedBox(
+          height: 200,
+          child: CarouselSlider(
+            options: CarouselOptions(
+              autoPlay: true,
+              enlargeCenterPage: true,
+              aspectRatio: 16 / 9,
+            ),
+            items: [
+              cardSlider(
+                context,
+                const NetworkImage(
+                    'https://anestisxasapotaverna.gr/wp-content/uploads/2021/12/ARTICLE-1.jpg'),
+                'Drinks',
+              ),
+              cardSlider(
+                  context,
+                  const NetworkImage(
+                      'https://anestisxasapotaverna.gr/wp-content/uploads/2021/12/ARTICLE-3-1536x1024.jpg'),
+                  'Wines'),
+              cardSlider(
+                context,
+                const NetworkImage(
+                    'https://anestisxasapotaverna.gr/wp-content/uploads/2021/12/ARTICLE-2.jpg'),
+                "Cocktails",
+              )
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: Text(
+            'Categories',
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+        ),
+        Expanded(
+          child: StretchingOverscrollIndicator(
+            axisDirection: AxisDirection.down,
+            child: GridView.builder(
+              padding: const EdgeInsets.all(16),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 1,
+                mainAxisSpacing: 16,
+                crossAxisSpacing: 16,
+              ),
+              itemBuilder: (ctx, index) {
+                return buildingCategoryListTile(ctx, _categories[index].title,
+                    _categories[index].id, _categories[index].imagUrl);
+              },
+              itemCount: _categories.length,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

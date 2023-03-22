@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../Screens/allmeal.dart';
+import '../Screens/home.dart';
+import 'alert.dart';
+
 Widget cartIcon(
   context,
   IconData icon,
@@ -10,7 +14,20 @@ Widget cartIcon(
     children: [
       IconButton(
         onPressed: () {
-          Navigator.of(context).pushNamed(route);
+          if (cartQuantity == '0') {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => alertBox(
+                context,
+                Icons.info_outlined,
+                "Nothing on cart start shopping",
+                HomeScreen.routeName,
+                MealScreen.routeName,
+              ),
+            );
+          } else {
+            Navigator.of(context).pushNamed(route);
+          }
         },
         icon: Icon(icon),
       ),

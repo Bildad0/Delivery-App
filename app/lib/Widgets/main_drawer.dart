@@ -8,9 +8,9 @@ import '../Screens/favourite.dart';
 import '../Screens/home.dart';
 import '../Screens/loginorsignup.dart';
 import '../Screens/orderhistory.dart';
+import '../Screens/settings.dart';
 import '../Screens/userprofile.dart';
 import '../theme/theme_constants.dart';
-import '../theme/theme_manager.dart';
 import 'alert.dart';
 
 class MainDrawer extends StatefulWidget {
@@ -20,29 +20,7 @@ class MainDrawer extends StatefulWidget {
   State<MainDrawer> createState() => _MainDrawerState();
 }
 
-ThemeManager _themeManager = ThemeManager();
-
 class _MainDrawerState extends State<MainDrawer> {
-  @override
-  void dispose() {
-    super.dispose();
-    _themeManager.removeListener(themeListener);
-  }
-
-  @override
-  void initState() {
-    _themeManager.addListener(themeListener);
-    super.initState();
-  }
-
-  themeListener() {
-    if (mounted) {
-      setState(() {
-        _themeManager.darkMode;
-      });
-    }
-  }
-
   Widget userProfile(context, IconData icon, User user, String route) {
     String greeting = "";
     final now = DateTime.now();
@@ -254,7 +232,7 @@ class _MainDrawerState extends State<MainDrawer> {
                             "Settings",
                             "App settings",
                             Icons.settings_accessibility_outlined,
-                            "setingpage",
+                            SettingsPage.routeName,
                             user,
                           ),
                           const Divider(),
@@ -277,12 +255,15 @@ class _MainDrawerState extends State<MainDrawer> {
                               style: TextStyle(color: Colors.red),
                             ),
                             onTap: () {
-                              alertBox(
-                                context,
-                                Icons.warning_outlined,
-                                "Are you sure to logout",
-                                HomeScreen.routeName,
-                                LoginScreen.routeName,
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) => alertBox(
+                                  context,
+                                  Icons.warning_outlined,
+                                  "Are you sure to logout",
+                                  HomeScreen.routeName,
+                                  LoginScreen.routeName,
+                                ),
                               );
                               //!TODO: clear user local storage
                             },
