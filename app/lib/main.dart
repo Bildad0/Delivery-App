@@ -22,6 +22,7 @@ import 'Screens/mealdetails.dart';
 import 'Screens/menu.dart';
 import 'Screens/orderdetails.dart';
 import 'Screens/orderhistory.dart';
+import 'Screens/settings.dart';
 import 'Screens/splashscreen.dart';
 import 'Screens/user_location.dart';
 import 'Screens/userprofile.dart';
@@ -224,6 +225,7 @@ class _MyAppState extends State<MyApp> {
               address: _address,
               isLocationEnabled: _locationEnabled,
             ),
+        SettingsPage.routeName: (context) => const SettingsPage(),
       },
     );
   }

@@ -11,6 +11,8 @@ import '../Widgets/main_drawer.dart';
 import '../Widgets/meal_category.dart';
 import '../theme/theme_constants.dart';
 import 'cart.dart';
+import 'chat_page.dart';
+import 'rewards.dart';
 import 'track_order.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -40,6 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
     final List<Map<String, Object>> _pages = [
       {"page": const HomePage(), "title": "RebDelivery"},
       {"page": const TrackOrder(), "title": "Track Order"},
+      {"page": const RewardsPage(), "title": "Rewards"},
+      {"page": const ChatPage(), "title": "Agent"}
     ];
 
     String cartQuantity = widget.cartQuantity.call();

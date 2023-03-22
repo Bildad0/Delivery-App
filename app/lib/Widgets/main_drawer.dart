@@ -8,9 +8,9 @@ import '../Screens/favourite.dart';
 import '../Screens/home.dart';
 import '../Screens/loginorsignup.dart';
 import '../Screens/orderhistory.dart';
+import '../Screens/settings.dart';
 import '../Screens/userprofile.dart';
 import '../theme/theme_constants.dart';
-import '../theme/theme_manager.dart';
 import 'alert.dart';
 
 class MainDrawer extends StatefulWidget {
@@ -232,7 +232,7 @@ class _MainDrawerState extends State<MainDrawer> {
                             "Settings",
                             "App settings",
                             Icons.settings_accessibility_outlined,
-                            "setingpage",
+                            SettingsPage.routeName,
                             user,
                           ),
                           const Divider(),

@@ -135,7 +135,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     leading: const Icon(Icons.notifications_active),
                     title: const Text('Notification preferences'),
                     onTap: () {
-                      // TODO: Navigate to notification preferences screen
+                      //!TODO: Navigate to notification preferences screen
                     },
                   ),
                 ],
