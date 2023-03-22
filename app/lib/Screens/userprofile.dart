@@ -21,6 +21,24 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  Widget editingInfoForm(User user) {
+    return Card(
+      child: Column(
+        children: [
+          const TextField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+            ),
+          ),
+          TextButton(
+            child: const Text("Save"),
+            onPressed: () {},
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     User user = ModalRoute.of(context)!.settings.arguments as User;
@@ -62,7 +80,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     title: const Text("Email"),
                     subtitle: Text(user.email),
                     onTap: () {
-                      //!TODO: Add edit email widget
+                      editingInfoForm(user);
                     },
                   ),
                   const Divider(),
@@ -70,7 +88,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     leading: const Icon(Icons.lock),
                     title: const Text("Password"),
                     onTap: () {
-                      //!TODO: Add edit password widget
+                      editingInfoForm(user);
                     },
                   ),
                 ],
