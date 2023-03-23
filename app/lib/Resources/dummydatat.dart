@@ -109,7 +109,7 @@ const DUMMY_CATEGORIES = [
     id: '5',
     title: 'Drinks',
     color: Colors.blue,
-    imagUrl: '',
+    imagUrl: 'assets/Images/hotel_drinks.jpeg',
   ),
   category(
     id: '6',
