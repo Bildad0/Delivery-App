@@ -1,14 +1,11 @@
 // ignore_for_file: constant_identifier_names, non_constant_identifier_names
 
-import 'dart:convert';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import '../Models/address.dart';
 import '../Models/foodcategories.dart';
 import '../Models/menuitem.dart';
 import '../Models/order.dart';
-import '../Models/user.dart';
 
 const DUMMY_MENU_ITEMS = [
   MenuItem(
@@ -119,15 +116,7 @@ const DUMMY_CATEGORIES = [
   ),
 ];
 
-const DUMMY_USER = [
-  User(
-    id: "1",
-    name: "Bildad",
-    email: "bildadowuor@gmail.com",
-    phone: "0700524820",
-    address: ["123", "231"],
-  ),
-];
+const DUMMY_USER = [];
 
 //!Get address from picked up location cordinates.
 
@@ -140,70 +129,40 @@ const DUMMY_ADDRESSES = [
   ),
 ];
 
-final DUMMY_ORDER = [
-  Order(
-    user: DUMMY_USER[0],
-    deliveryAddress: DUMMY_ADDRESSES[0],
-    items: [
-      const MenuItem(
-        id: "3",
-        name: 'Fried Chicken',
-        description: 'Crispy fried chicken with your choice of sides',
-        price: 300,
-        image: 'assets/Images/fried_chicken.jpeg',
-        category: [
-          "3",
-          "5",
-          "0",
-        ],
-      ),
-      const MenuItem(
-        id: "4",
-        name: 'Taco Salad',
-        description: 'A healthy and delicious taco salad',
-        price: 750,
-        image: 'assets/Images/taco_salad.jpeg',
-        category: [
-          "2",
-          "0",
-          "4",
-        ],
-      ),
-      const MenuItem(
-        id: "5",
-        name: 'Fish and Chips',
-        description: 'Fresh fish served with crispy chips',
-        price: 1100,
-        image: 'assets/Images/fish_and_chips.jpeg',
-        category: [
-          "5",
-          "6",
-          "1",
-          "0",
-        ],
-      ),
-    ],
-    totalCost: 4000,
-    orderDate: DateTime.now(),
-    deliveryDate: DateTime.now(),
-  ),
-  Order(
-    user: DUMMY_USER[0],
-    deliveryAddress: DUMMY_ADDRESSES[0],
-    items: [],
-    totalCost: 4000,
-    orderDate: DateTime.now(),
-    deliveryDate: DateTime.now(),
-  ),
-];
+final DUMMY_ORDER = [];
 
-Future<User> getUser() async {
-  final response = await http.get(Uri.parse(
-      "https://console.firebase.google.com/project/delivery-app-1fbbe/firestore/data/~2Fusers"));
-  if (response.statusCode == 200) {
-    print("from dummy data:=> ${response.body}");
-    return User.fromJson(jsonDecode(response.body));
-  } else {
-    throw Exception('Failed to get user');
+Future<Object?> createUser(String emailAddress, String password) async {
+  try {
+    final credential =
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: emailAddress,
+      password: password,
+    );
+    print("$credential");
+    return credential;
+  } on FirebaseAuthException catch (e) {
+    if (e.code == 'weak-password') {
+      print('The password provided is too weak.');
+    } else if (e.code == 'email-already-in-use') {
+      print('The account already exists for that email.');
+    }
+  } catch (e) {
+    print(e);
   }
+  return null;
+}
+
+Future<Object?> signInUser(String emailAddress, String password) async {
+  try {
+    final credential = await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: emailAddress, password: password);
+    print(credential);
+    return credential.user;
+  } on FirebaseAuthException catch (e) {
+    return e.message;
+  }
+}
+
+void sigOut() async {
+  await FirebaseAuth.instance.signOut();
 }

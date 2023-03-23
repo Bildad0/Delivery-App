@@ -14,6 +14,7 @@ import 'cart.dart';
 import 'chat_page.dart';
 import 'rewards.dart';
 import 'track_order.dart';
+import 'userprofile.dart';
 
 class HomeScreen extends StatefulWidget {
   final Function cartQuantity;
@@ -39,10 +40,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = ModalRoute.of(context)!.settings.arguments as Object;
     final List<Map<String, Object>> _pages = [
       {"page": const HomePage(), "title": "RebDelivery"},
       {"page": const TrackOrder(), "title": "Track Order"},
-      {"page": const RewardsPage(), "title": "Rewards"},
       {"page": const ChatPage(), "title": "Agent"}
     ];
 
@@ -63,7 +64,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      drawer: const MainDrawer(),
+      drawer: MainDrawer(
+        user: user,
+      ),
       body: _pages[selectedPageIndex]['page'] as Widget,
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0,
@@ -82,12 +85,8 @@ class _HomeScreenState extends State<HomeScreen> {
             label: "Track Order",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.card_giftcard),
-            label: "Rewards",
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.chat_bubble_outline_rounded),
-            label: "Chat",
+            label: "Talk to Us",
           ),
         ],
       ),

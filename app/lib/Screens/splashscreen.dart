@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../Resources/dummydatat.dart';
 import 'loginorsignup.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -41,7 +40,6 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
           onPressed: (() => {
-                getUser(),
                 Navigator.of(context)
                     .pushReplacementNamed(SignUpScreen.routeName)
               }),

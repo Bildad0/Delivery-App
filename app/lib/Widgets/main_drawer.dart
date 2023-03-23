@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../Models/user.dart';
-import '../Resources/dummydatat.dart';
 import '../Screens/cart.dart';
 import '../Screens/favourite.dart';
 import '../Screens/home.dart';
@@ -14,7 +13,8 @@ import '../theme/theme_constants.dart';
 import 'alert.dart';
 
 class MainDrawer extends StatefulWidget {
-  const MainDrawer({super.key});
+  final user;
+  const MainDrawer({super.key, this.user});
 
   @override
   State<MainDrawer> createState() => _MainDrawerState();
@@ -150,11 +150,9 @@ class _MainDrawerState extends State<MainDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    List<User> users = DUMMY_USER;
-    String id = '1'; //!TODO: get userId from localstorage
-
-    final user = users.where((user) => user.id == id).first;
-
+    User user = ModalRoute.of(context)!.settings.arguments as User;
+    String id = user.id;
+    print("From main Drawer=> $id");
     return Drawer(
       elevation: 0,
       child: Container(

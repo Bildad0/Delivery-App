@@ -1,5 +1,9 @@
+import 'package:app/Widgets/alert.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../Resources/auth_service.dart';
+import '../Resources/dummydatat.dart';
 import '../theme/theme_constants.dart';
 import 'home.dart';
 
@@ -114,6 +118,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+
+  String? get _errorText {
+    final mailtext = _emailController.text;
+    final passtext = _passwordController.text;
+
+    if (mailtext.isEmpty && passtext.isEmpty) {
+      return 'can\'t be empty';
+    }
+    if (passtext.length < 6) {
+      return 'Too short';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -136,27 +154,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
               TextField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
+                  errorText: _errorText,
                   labelText: "Email",
-                  border: UnderlineInputBorder(),
+                  border: const UnderlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16.0),
               TextField(
                 controller: _passwordController,
                 obscureText: true,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
+                  errorText: _errorText,
                   labelText: "Password",
-                  border: UnderlineInputBorder(),
+                  border: const UnderlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16.0),
               TextField(
                 controller: _confirmPasswordController,
                 obscureText: true,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
+                  errorText: _errorText,
                   labelText: "Confirm Password",
-                  border: UnderlineInputBorder(),
+                  border: const UnderlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 16.0),
@@ -171,9 +192,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   padding: const MaterialStatePropertyAll(EdgeInsets.all(10)),
                   elevation: const MaterialStatePropertyAll(0),
                 ),
-                onPressed: () {
-                  Navigator.of(context)
-                      .pushReplacementNamed(HomeScreen.routeName);
+                onPressed: () async {
+                  await context
+                      .read<AuthService>()
+                      .signIn(
+                        email: _emailController.text.trim(),
+                        password: _passwordController.text.trim(),
+                      )
+                      .then(
+                        (user) => {
+                          if (user != null)
+                            {
+                              Navigator.of(context).pushReplacementNamed(
+                                HomeScreen.routeName,
+                                arguments: user,
+                              ),
+                            },
+                          showDialog(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (BuildContext context) {
+                                return alertBox(
+                                  context,
+                                  Icons.warning,
+                                  "Error creating user",
+                                  SignUpScreen.routeName,
+                                  SignUpScreen.routeName,
+                                );
+                              })
+                        },
+                      );
                 },
                 child: const Text(
                   "Sign Up",
