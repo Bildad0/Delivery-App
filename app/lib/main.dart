@@ -2,14 +2,17 @@
 
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:open_settings/open_settings.dart';
+import 'package:provider/provider.dart';
 
 import 'Models/menuitem.dart';
 import 'Models/order.dart';
+import 'Resources/auth_service.dart';
 import 'Resources/dummydatat.dart';
 import 'Resources/scroll_behaviour.dart';
 import 'Screens/allmeal.dart';
@@ -33,8 +36,9 @@ import 'theme/theme_manager.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+    options: DefaultFirebaseOptions.android,
   );
+
   runApp(const MyApp());
 }
 
@@ -168,10 +172,9 @@ class _MyAppState extends State<MyApp> {
     return _favoriteMeals.any((meal) => meal.id == id);
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget routeWidget() {
     List<MenuItem> menu = DUMMY_MENU_ITEMS;
-    List<Order> order = DUMMY_ORDER;
+    List<Order> order = [];
     return MaterialApp(
       scrollBehavior: TouchScrollBehavior(),
       debugShowCheckedModeBanner: false,
@@ -188,7 +191,9 @@ class _MyAppState extends State<MyApp> {
         ); //!TODO: add error page here
       },
       routes: {
-        '/': (context) => const SplashScreen(),
+        '/': (context) => HomeScreen(
+              cartQuantity: getCart,
+            ),
         SignUpScreen.routeName: (context) => const SignUpScreen(),
         HomeScreen.routeName: (context) => HomeScreen(
               cartQuantity: getCart,
@@ -228,5 +233,24 @@ class _MyAppState extends State<MyApp> {
         SettingsPage.routeName: (context) => const SettingsPage(),
       },
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User?>();
+    return MultiProvider(
+      providers: [
+        Provider<AuthService>(
+          create: (_) => AuthService(FirebaseAuth.instance),
+        ),
+        StreamProvider(
+          create: (context) => context.read<AuthService>().authStateChanges,
+          initialData: null,
+        ),
+      ],
+      child: firebaseUser != null ? const SplashScreen() : routeWidget(),
+    );
+
+    // return
   }
 }

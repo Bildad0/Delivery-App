@@ -23,7 +23,7 @@ class OrderHistoryScreen extends StatefulWidget {
 class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
   @override
   Widget build(BuildContext context) {
-    final List<Order> orders = DUMMY_ORDER;
+    final List<Order> orders = [];
 
     if (orders.isEmpty) {
       return Scaffold(

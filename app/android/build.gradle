@@ -6,6 +6,9 @@ buildscript {
     }
 
     dependencies {
+        implementation platform('com.google.firebase:firebase-bom:31.2.1')
+           implementation 'com.google.firebase:firebase-auth'
+             implementation 'com.google.android.gms:play-services-auth'
         classpath 'com.android.tools.build:gradle:7.2.0'
         // START: FlutterFire Configuration
         classpath 'com.google.gms:google-services:4.3.10'
@@ -25,9 +28,7 @@ rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
-subprojects {
-    project.evaluationDependsOn(':app')
-}
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir
