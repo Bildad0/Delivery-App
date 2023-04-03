@@ -9,7 +9,6 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:open_settings/open_settings.dart';
 import 'package:provider/provider.dart';
-
 import 'Models/menuitem.dart';
 import 'Models/order.dart';
 import 'Resources/auth_service.dart';
